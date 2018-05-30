@@ -5,80 +5,28 @@ language: cpp
 
 os: linux
 
-compiler:
-    - gcc
-    - clang
+compiler: gcc
 
 env:
-    matrix:
-        - CONFIG=Debug
-        - CONFIG=Release
+    global:
+        secure: "bkWZMD6pP3f+WEfTjlSI6cig2uEKzogBq9mcC088pBpMk19eiWJOjtwxjoX/N1tlHBv4oxP5to3FfbCiqAQJtOMfpx5u5CbzpUK4w6WC/uK2n2G/CfmyOprMA3rQqfAGormCCVwVidWoZeDkXl43hPWGoJdA2n6TwDUNmKl9VwIZVrlwmgCdAd6YTAed5/kpNR32a2Jes/YtpbVvtiAsWoqCHkiDDk2g02LyRDzxI8pP0Qt/r6ebbyOeAoMeOId0b0kex4I+JSLO0cbf7OYQApxkAOShvlec4dZo1Yrdr3R05tuET6J4teOfd5ZndvLSUmbAxwoPkdBJpfIBToDA8KZVBku2UyDbUFAazz7/7zf3BMiE9tG73gplO4xlno67wHToEVcl9xkNrR5w6/prleXaElQU6tBKQDVOLoTRBkjmHfGFG7yEPXpEZRJl8x/ahKX9CAy0D3+0E4Y1oAVQyDc7XsayVQUPP5HbKvRLvAKG4Rf0x+qsyQKjwR73fyWRVIkcLzy37NewHdVjEj5gfr1bNnPfrAKhyq+pnpRg6KVYrs8AOATh0cEv+WL6w5lH05kkQxY5q6tlOCbbRyN+euCOY9CzaZ+Qmal6Kr9Gw3GvxDXcEpEJF/LaHjUJVYSdHHQS3bIl46s78QUlFUZX5Z1YazZYyWySx93egIYR1aQ="
 
 addons:
+    coverity_scan:
+        project:
+            name: "rakhimov/nit"
+        notification_email: "ol.rakhimov@gmail.com"
+        build_command_prepend: "cmake -DCMAKE_VERBOSE_MAKEFILE=ON .."
+        build_command: "make -j 2"
+        branch_pattern: "coverity-scan"
     apt:
         packages:
             - libboost-all-dev
 
-jobs:
-    include:
-        - stage: lint
-          compiler: clang
-          env: CONFIG=Lint CLANG_VERSION=6.0
-          addons:
-              apt:
-                  packages:
-                      - clang-format-6.0
-                  sources:
-                      - ubuntu-toolchain-r-test
-                      - llvm-toolchain-trusty-6.0
-          install:
-              - git clone https://github.com/Sarcasm/run-clang-format
-          script:
-              - .travis/lint.sh
-        - stage: test
-          os: osx
-          compiler: clang
-          env: CONFIG=Release
-        - stage: test
-          compiler: gcc
-          env: CONFIG=Coverage
-          addons:
-              apt:
-                  packages:
-                      - libboost-all-dev
-                      - lcov
-          install:
-              - pip install --user codecov
-          script:
-              - cd build
-              - cmake .. -DCMAKE_BUILD_TYPE=Debug -DWITH_COVERAGE=ON
-              - make -j 2
-              - make test
-              - cd ..
-              - .travis/submit_codecov.sh
-        - stage: test
-          compiler: gcc
-          env: CONFIG=Memcheck
-          addons:
-              apt:
-                  packages:
-                      - libboost-all-dev
-                      - valgrind
-          script:
-              - cd build
-              - cmake .. -DCMAKE_BUILD_TYPE=Debug
-              - make -j 2
-              - find bin/ -name '*_tests' | xargs -n 1 valgrind --tool=memcheck --leak-check=full --show-leak-kinds=definite --errors-for-leak-kinds=definite
-
-stages:
-    - lint
-    - test
-
 before_script:
     - mkdir build
+    - cd build
 
 script:
-    - cd build
-    - cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE="${CONFIG}" ..
-    - make -j 2
-    - ctest --verbose
+    - echo "Done"
+    - cat cov-int/build-log.txt
