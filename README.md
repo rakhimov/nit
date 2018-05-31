@@ -1,7 +1,12 @@
-PokerStove
-==========
+Nit
+===
 
 [![OpenHUB Metrics](https://www.openhub.net/p/pokerstove/widgets/project_thin_badge.gif)](https://www.openhub.net/p/pokerstove)
+
+Nit is a PokerStove fork aimed at rejuvenating the project.
+The name "nit" is chosen because it is short (like "git")
+and is a derogatory (like "git") poker term for hyper-tight-passive players
+who only play premium starting hands.
 
 PokerStove is a highly hand optimized C++ poker hand evaluation library.  The Win32 Hold'em
 GUI was first released in 2002, and has been available as freeware since
