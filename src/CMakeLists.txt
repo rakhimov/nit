@@ -6,10 +6,10 @@ try_compile(HAVE_BUILTIN_BITOPS
 # Set up the configure file.
 configure_file(config.h.in config.h)
 
-include_directories(lib/)
-add_subdirectory(lib/pokerstove/peval)
-add_subdirectory(lib/pokerstove/penum)
-add_subdirectory(lib/pokerstove/util)
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
+add_subdirectory(pokerstove/peval)
+add_subdirectory(pokerstove/penum)
+add_subdirectory(pokerstove/util)
 add_subdirectory(programs/ps-colex)
 add_subdirectory(programs/ps-eval)
 add_subdirectory(programs/ps-lut)
