@@ -1,6 +1,7 @@
 Nit
 ===
 
+[![Build Status](https://travis-ci.org/rakhimov/nit.svg?branch=master)](https://travis-ci.org/rakhimov/nit)
 [![OpenHUB Metrics](https://www.openhub.net/p/pokerstove/widgets/project_thin_badge.gif)](https://www.openhub.net/p/pokerstove)
 
 Nit is a PokerStove fork aimed at rejuvenating the project.
