@@ -10,7 +10,7 @@ namespace po = boost::program_options;
 using namespace std;
 
 int main(int argc, char** argv) {
-  po::options_description desc("ps-eval, a poker hand evaluator\n");
+  po::options_description desc("nit-eval, a poker hand evaluator");
 
   // clang-format off
   desc.add_options()

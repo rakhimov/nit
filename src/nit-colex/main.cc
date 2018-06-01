@@ -38,8 +38,8 @@ int main(int argc, char** argv) {
     // set up the program options, handle the help case, and extract the
     // values
     po::options_description desc(
-        "pscolex, a utility which prints all combinations\n"
-        "of poker hands, using canonical suits, or only ranks\n");
+        "nit-colex, a utility which prints all combinations "
+        "of poker hands, using canonical suits, or only ranks");
 
     // clang-format off
     desc.add_options()

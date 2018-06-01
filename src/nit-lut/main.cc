@@ -18,9 +18,9 @@ using namespace pokerstove;
 
 int main(int argc, char** argv) {
   try {
-    // set up the program options, handle the help case, and extract the
-    // values
-    po::options_description desc("create a lookup table for poker hands\n");
+    // set up the program options,
+    // handle the help case, and extract the values
+    po::options_description desc("creates a lookup table for poker hands");
     // clang-format off
     desc.add_options()
         ("help,?", "produce help message")
