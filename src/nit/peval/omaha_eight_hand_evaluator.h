@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
- * $Id: OmahaEightHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
 #ifndef NIT_PEVAL_OMAHA_EIGHT_HAND_EVALUATOR_H_
 #define NIT_PEVAL_OMAHA_EIGHT_HAND_EVALUATOR_H_

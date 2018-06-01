@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
- * $Id: Suit.h 2649 2012-06-30 04:53:24Z prock $
  */
 #ifndef NIT_PEVAL_SUIT_H_
 #define NIT_PEVAL_SUIT_H_

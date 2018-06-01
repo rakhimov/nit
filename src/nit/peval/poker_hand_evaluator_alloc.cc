@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
- * $Id: PokerHandEvaluator_Alloc.cpp 2649 2012-06-30 04:53:24Z prock $
  */
 #include <stdexcept>
 

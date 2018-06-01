@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
- * $Id: Rank.h 2649 2012-06-30 04:53:24Z prock $
  */
 #ifndef NIT_PEVAL_RANK_H_
 #define NIT_PEVAL_RANK_H_

@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
- * $Id$
  */
 #ifndef NIT_PENUM_PARTITION_ENUMERATOR_H_
 #define NIT_PENUM_PARTITION_ENUMERATOR_H_

@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
- * $Id: CardSet.cpp 2649 2012-06-30 04:53:24Z prock $
  */
 #include "card_set.h"
 

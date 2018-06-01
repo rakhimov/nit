@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
- * $Id$
  */
 #ifndef NIT_PENUM_ODOMETER_H_
 #define NIT_PENUM_ODOMETER_H_

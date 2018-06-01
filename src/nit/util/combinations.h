@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
- * $Id: combinations.h 2655 2012-06-30 04:58:10Z prock $
  */
 #ifndef NIT_UTIL_COMBINATIONS_H_
 #define NIT_UTIL_COMBINATIONS_H_
