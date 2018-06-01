@@ -9,7 +9,7 @@
 
 #include <boost/format.hpp>
 
-#include <pokerstove/util/lastbit.h>
+#include <nit/util/lastbit.h>
 
 #include "card.h"
 #include "poker_evaluation_tables.h"

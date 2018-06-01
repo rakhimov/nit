@@ -8,7 +8,7 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include <pokerstove/peval/poker_hand_evaluator.h>
+#include <nit/peval/poker_hand_evaluator.h>
 
 #include "card_distribution.h"
 

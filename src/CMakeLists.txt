@@ -7,8 +7,8 @@ try_compile(HAVE_BUILTIN_BITOPS
 configure_file(config.h.in config.h)
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
-add_subdirectory(pokerstove/peval)
-add_subdirectory(pokerstove/penum)
+add_subdirectory(nit/peval)
+add_subdirectory(nit/penum)
 add_subdirectory(ps-colex)
 add_subdirectory(ps-eval)
 add_subdirectory(ps-lut)

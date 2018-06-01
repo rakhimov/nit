@@ -1,4 +1,4 @@
-include_directories("${PROJECT_SOURCE_DIR}/src/pokerstove/peval/")
+include_directories("${PROJECT_SOURCE_DIR}/src/nit/peval/")
 
 set(PEVAL_TEST_SRC
   card_set_generators_test.cc

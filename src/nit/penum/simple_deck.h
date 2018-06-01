@@ -11,11 +11,11 @@
 
 #include <boost/array.hpp>
 
-#include <pokerstove/peval/card.h>
-#include <pokerstove/peval/card_set.h>
-#include <pokerstove/peval/rank.h>  // NUM_RANK
-#include <pokerstove/peval/suit.h>  // NUM_SUIT
-#include <pokerstove/util/lastbit.h>
+#include <nit/peval/card.h>
+#include <nit/peval/card_set.h>
+#include <nit/peval/rank.h>  // NUM_RANK
+#include <nit/peval/suit.h>  // NUM_SUIT
+#include <nit/util/lastbit.h>
 
 namespace pokerstove {
 

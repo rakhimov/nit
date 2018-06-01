@@ -12,8 +12,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/math/special_functions/binomial.hpp>
 
-#include <pokerstove/peval/card.h>
-#include <pokerstove/util/combinations.h>
+#include <nit/peval/card.h>
+#include <nit/util/combinations.h>
 
 #define boost_foreach BOOST_FOREACH
 

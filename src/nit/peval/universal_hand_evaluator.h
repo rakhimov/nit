@@ -20,7 +20,7 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include <pokerstove/util/combinations.h>
+#include <nit/util/combinations.h>
 
 #include "card.h"
 #include "card_set.h"

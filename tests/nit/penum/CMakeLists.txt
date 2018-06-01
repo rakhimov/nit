@@ -1,4 +1,4 @@
-include_directories("${PROJECT_SOURCE_DIR}/src/pokerstove/penum/")
+include_directories("${PROJECT_SOURCE_DIR}/src/nit/penum/")
 
 set(PENUM_TEST_SRC
   partition_enumerator_test.cc

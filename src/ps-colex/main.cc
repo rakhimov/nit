@@ -6,9 +6,9 @@
 #include <boost/program_options.hpp>
 #include <boost/shared_ptr.hpp>
 
-#include <pokerstove/peval/card.h>
-#include <pokerstove/peval/card_set.h>
-#include <pokerstove/util/combinations.h>
+#include <nit/peval/card.h>
+#include <nit/peval/card_set.h>
+#include <nit/util/combinations.h>
 
 using namespace std;
 namespace po = boost::program_options;

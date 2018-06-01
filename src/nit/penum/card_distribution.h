@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-#include <pokerstove/peval/card_set.h>
+#include <nit/peval/card_set.h>
 
 namespace pokerstove {
 /**

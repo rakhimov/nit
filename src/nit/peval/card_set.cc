@@ -19,7 +19,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/math/special_functions/binomial.hpp>
 
-#include <pokerstove/util/combinations.h>
+#include <nit/util/combinations.h>
 
 #include "card.h"
 #include "poker_evaluation.h"

@@ -1,4 +1,4 @@
-include_directories("${PROJECT_SOURCE_DIR}/src/pokerstove/util/")
+include_directories("${PROJECT_SOURCE_DIR}/src/nit/util/")
 
 set(UTIL_TEST_SRC
   lastbit_test.cc

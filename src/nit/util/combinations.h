@@ -9,8 +9,8 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include <pokerstove/util/lastbit.h>
-#include <pokerstove/util/utypes.h>
+#include <nit/util/lastbit.h>
+#include <nit/util/utypes.h>
 
 namespace pokerstove {
 /**

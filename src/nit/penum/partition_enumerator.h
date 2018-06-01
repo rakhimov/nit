@@ -11,7 +11,7 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include <pokerstove/util/combinations.h>
+#include <nit/util/combinations.h>
 
 namespace pokerstove {
 // see http://cplusplus.com/reference/algorithm/set_difference/

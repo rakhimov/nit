@@ -6,11 +6,11 @@
 #include <boost/program_options.hpp>
 #include <boost/shared_ptr.hpp>
 
-#include <pokerstove/peval/card.h>
-#include <pokerstove/peval/card_set.h>
-#include <pokerstove/peval/card_set_generators.h>
-#include <pokerstove/peval/poker_hand_evaluator.h>
-#include <pokerstove/util/combinations.h>
+#include <nit/peval/card.h>
+#include <nit/peval/card_set.h>
+#include <nit/peval/card_set_generators.h>
+#include <nit/peval/poker_hand_evaluator.h>
+#include <nit/util/combinations.h>
 
 using namespace std;
 namespace po = boost::program_options;

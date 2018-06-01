@@ -5,7 +5,7 @@
 
 //#include <config.h>
 
-#include <pokerstove/util/utypes.h>
+#include <nit/util/utypes.h>
 
 #ifdef HAVE_BUILTIN_BITOPS
 

@@ -3,7 +3,7 @@
 
 #include <boost/program_options.hpp>
 
-#include <pokerstove/penum/showdown_enumerator.h>
+#include <nit/penum/showdown_enumerator.h>
 
 using namespace pokerstove;
 namespace po = boost::program_options;

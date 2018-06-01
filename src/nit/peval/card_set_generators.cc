@@ -3,7 +3,7 @@
  */
 #include "card_set_generators.h"
 
-#include <pokerstove/util/combinations.h>
+#include <nit/util/combinations.h>
 
 #include "card.h"
 
