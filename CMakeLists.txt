@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 project(pokerstove)
 
+option(WITH_COVERAGE "Instrument for coverage analysis" OFF)
+
 # TODO: Discover C++11 support.
 # TODO: This flags only works for GCC compatible compilers (Clang, Intel).
 #
@@ -11,6 +13,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
 # TODO: Remove the depricated register keywords
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-register")
+
+if(WITH_COVERAGE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
+endif()
 
 # Set up gtest. This must be set up before any subdirectories are
 # added which will use gtest.
