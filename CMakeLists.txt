@@ -11,9 +11,6 @@ option(WITH_COVERAGE "Instrument for coverage analysis" OFF)
 #       but since all of them require C++11, the flag is set globally.
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
-# TODO: Remove the depricated register keywords
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-register")
-
 if(WITH_COVERAGE)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
 endif()
