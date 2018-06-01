@@ -1,12 +1,12 @@
 #include "poker_hand_evaluator.h"
 
-#include <gtest/gtest.h>
+#include <catch.hpp>
 
-TEST(PokerHandEvaluator, OmahaHigh) {
+TEST_CASE("OmahaHigh", "[PokerHandEvaluator]") {
   using namespace pokerstove;
 
   boost::shared_ptr<PokerHandEvaluator> evaluator =
       PokerHandEvaluator::alloc("O");
-  EXPECT_EQ(true, evaluator->usesSuits());
-  EXPECT_EQ(5, evaluator->boardSize());
+  CHECK(evaluator->usesSuits());
+  CHECK(evaluator->boardSize() == 5);
 }

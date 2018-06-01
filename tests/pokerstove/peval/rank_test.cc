@@ -1,40 +1,42 @@
 #include "rank.h"
 
-#include <gtest/gtest.h>
+#include <cstring>
+
+#include <catch.hpp>
 
 using namespace pokerstove;
 
 const char* ranks = "23456789TJQKA";
 const char* low_ranks = "23456789tjqka";
 
-TEST(Rank, ConstructorChars) {
+TEST_CASE("Rank.ConstructorChars", "[Rank]") {
   char rankstr[] = "?";
 
   // test the valid char range
-  for (int i = 0; i < strlen(ranks); i++) {
+  for (int i = 0; i < std::strlen(ranks); i++) {
     Rank r(ranks[i]);
     rankstr[0] = ranks[i];
-    EXPECT_STREQ(rankstr, r.str().c_str());
+    CHECK(r.str() == rankstr);
   }
 }
 
-TEST(Rank, ConstructorInts) {
+TEST_CASE("Rank.ConstructorInts", "[Rank]") {
   char rankstr[] = "?";
 
   // test the valid int range
   for (int i = 0; i <= 12; i++) {
     Rank r(i);
     rankstr[0] = ranks[i];
-    EXPECT_STREQ(rankstr, r.str().c_str());
+    CHECK(r.str() == rankstr);
   }
 }
 
-TEST(Rank, ConstructorErrs) {
+TEST_CASE("Rank.ConstructorErrs", "[Rank]") {
   char rankstr[] = "?";
 
   // test the valid int range
   for (int i = 13; i < '2'; i++) {
     Rank r(i);
-    EXPECT_STREQ(rankstr, r.str().c_str());
+    CHECK(r.str() == rankstr);
   }
 }

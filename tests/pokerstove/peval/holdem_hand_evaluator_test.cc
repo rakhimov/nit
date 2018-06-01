@@ -2,23 +2,23 @@
 
 #include <iostream>
 
-#include <gtest/gtest.h>
+#include <catch.hpp>
 
 using namespace pokerstove;
 using namespace std;
 
-TEST(HoldemHandEvaluator, Construct) {
+TEST_CASE("Construct Holdem", "[HoldemHandEvaluator]") {
   HoldemHandEvaluator eval;
-  EXPECT_EQ(true, eval.usesSuits());
-  EXPECT_EQ(5, eval.boardSize());
+  CHECK(eval.usesSuits() == true);
+  CHECK(eval.boardSize() == 5);
 }
 
-TEST(HoldemHandEvaluator, RankEval) {
+TEST_CASE("RankEval Holdem", "[HoldemHandEvaluator]") {
   HoldemHandEvaluator heval;
   CardSet hand("2c3c");
   CardSet board("2c3c4c");
   PokerEvaluation eval = heval.evaluateRanks(hand, board);
-  EXPECT_EQ(TWO_PAIR, eval.type());
-  EXPECT_EQ(Rank("3"), eval.majorRank());
-  EXPECT_EQ(Rank("2"), eval.minorRank());
+  CHECK(eval.type() == TWO_PAIR);
+  CHECK(eval.majorRank() == Rank("3"));
+  CHECK(eval.minorRank() == Rank("2"));
 }

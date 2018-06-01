@@ -1,39 +1,39 @@
 #include "card_set.h"
 
-#include <gtest/gtest.h>
+#include <catch.hpp>
 
-TEST(CardSetTest, StringConstructorToString) {
+TEST_CASE("StringConstructorToString", "[CardSetTest]") {
   using namespace pokerstove;
 
-  EXPECT_EQ("Ac", CardSet("Ac").str());
-  EXPECT_EQ("As", CardSet("As").str());
-  EXPECT_EQ("Qh", CardSet("qh").str());
-  EXPECT_EQ("Td", CardSet("Td").str());
-  EXPECT_EQ("Td", CardSet("td").str());
+  CHECK(CardSet("Ac").str() == "Ac");
+  CHECK(CardSet("As").str() == "As");
+  CHECK(CardSet("qh").str() == "Qh");
+  CHECK(CardSet("Td").str() == "Td");
+  CHECK(CardSet("td").str() == "Td");
   // EXPECT_THROW(CardSet("10d"));
   // EXPECT_THROW(CardSet("AcAc"));
 }
 
-TEST(CardSetTest, StringConstructorSize) {
+TEST_CASE("StringConstructorSize", "[CardSetTest]") {
   using namespace pokerstove;
 
-  EXPECT_EQ(1, CardSet("Ac").size());
-  EXPECT_EQ(1, CardSet("qh").size());
-  EXPECT_EQ(13, CardSet("2h3h4h5h6h7h8h9hThJhQhKhAh").size());
+  CHECK(CardSet("Ac").size() == 1);
+  CHECK(CardSet("qh").size() == 1);
+  CHECK(CardSet("2h3h4h5h6h7h8h9hThJhQhKhAh").size() == 13);
 
   // duplicate cards rolls back all parsing
-  EXPECT_EQ(0, CardSet("2h2h").size());
+  CHECK(CardSet("2h2h").size() == 0);
 }
 
-TEST(CardSetTest, Canonize) {
+TEST_CASE("Canonize", "[CardSetTest]") {
   using namespace pokerstove;
 
-  EXPECT_EQ(CardSet("2c3c"), CardSet("2c3c").canonize());
-  EXPECT_EQ(CardSet("2c3c"), CardSet("2s3s").canonize());
-  EXPECT_EQ(CardSet("4c3d2h"), CardSet("2s3h4c").canonize());
+  CHECK(CardSet("2c3c").canonize() == CardSet("2c3c"));
+  CHECK(CardSet("2s3s").canonize() == CardSet("2c3c"));
+  CHECK(CardSet("2s3h4c").canonize() == CardSet("4c3d2h"));
 }
 
-TEST(CardSetTest, CanonizeRanks) {
+TEST_CASE("CanonizeRanks", "[CardSetTest]") {
   using namespace pokerstove;
 
   const CardSet AceCanon1("Ac");
@@ -42,37 +42,37 @@ TEST(CardSetTest, CanonizeRanks) {
   const CardSet AceCanon4("AcAdAhAs");
 
   // all combinations of one
-  EXPECT_EQ(AceCanon1, CardSet("Ac").canonizeRanks());
-  EXPECT_EQ(AceCanon1, CardSet("Ad").canonizeRanks());
-  EXPECT_EQ(AceCanon1, CardSet("Ah").canonizeRanks());
-  EXPECT_EQ(AceCanon1, CardSet("As").canonizeRanks());
+  CHECK(CardSet("Ac").canonizeRanks() == AceCanon1);
+  CHECK(CardSet("Ad").canonizeRanks() == AceCanon1);
+  CHECK(CardSet("Ah").canonizeRanks() == AceCanon1);
+  CHECK(CardSet("As").canonizeRanks() == AceCanon1);
 
   // all combinations of two
-  EXPECT_EQ(AceCanon2, CardSet("AcAd").canonizeRanks());
-  EXPECT_EQ(AceCanon2, CardSet("AcAh").canonizeRanks());
-  EXPECT_EQ(AceCanon2, CardSet("AcAs").canonizeRanks());
-  EXPECT_EQ(AceCanon2, CardSet("AdAh").canonizeRanks());
-  EXPECT_EQ(AceCanon2, CardSet("AdAs").canonizeRanks());
-  EXPECT_EQ(AceCanon2, CardSet("AhAs").canonizeRanks());
+  CHECK(CardSet("AcAd").canonizeRanks() == AceCanon2);
+  CHECK(CardSet("AcAh").canonizeRanks() == AceCanon2);
+  CHECK(CardSet("AcAs").canonizeRanks() == AceCanon2);
+  CHECK(CardSet("AdAh").canonizeRanks() == AceCanon2);
+  CHECK(CardSet("AdAs").canonizeRanks() == AceCanon2);
+  CHECK(CardSet("AhAs").canonizeRanks() == AceCanon2);
 
   // all combinations of three
-  EXPECT_EQ(AceCanon3, CardSet("AcAdAh").canonizeRanks());
-  EXPECT_EQ(AceCanon3, CardSet("AcAdAs").canonizeRanks());
-  EXPECT_EQ(AceCanon3, CardSet("AcAhAs").canonizeRanks());
-  EXPECT_EQ(AceCanon3, CardSet("AdAhAs").canonizeRanks());
+  CHECK(CardSet("AcAdAh").canonizeRanks() == AceCanon3);
+  CHECK(CardSet("AcAdAs").canonizeRanks() == AceCanon3);
+  CHECK(CardSet("AcAhAs").canonizeRanks() == AceCanon3);
+  CHECK(CardSet("AdAhAs").canonizeRanks() == AceCanon3);
 
   // the one combination of four
-  EXPECT_EQ(AceCanon4, CardSet("AcAdAhAs").canonizeRanks());
+  CHECK(CardSet("AcAdAhAs").canonizeRanks() == AceCanon4);
 
   // some multi card exampes
-  EXPECT_EQ(CardSet("Ac2c3c4c5c"), CardSet("Ac2d3h4d5s").canonizeRanks());
-  EXPECT_EQ(CardSet("AcAd2c3c4c5c"), CardSet("Ac2d3h4d5sAh").canonizeRanks());
-  EXPECT_EQ(CardSet("AcAd2c3c4c5c"), CardSet("Ac2d3h4d5sAh").canonizeRanks());
+  CHECK(CardSet("Ac2d3h4d5s").canonizeRanks() == CardSet("Ac2c3c4c5c"));
+  CHECK(CardSet("Ac2d3h4d5sAh").canonizeRanks() == CardSet("AcAd2c3c4c5c"));
+  CHECK(CardSet("Ac2d3h4d5sAh").canonizeRanks() == CardSet("AcAd2c3c4c5c"));
 }
 
-TEST(CardSetTest, fill) {
+TEST_CASE("fill", "[CardSetTest]") {
   using namespace pokerstove;
   CardSet all;
   all.fill();
-  EXPECT_EQ(STANDARD_DECK_SIZE, all.size());
+  CHECK(all.size() == STANDARD_DECK_SIZE);
 }

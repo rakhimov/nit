@@ -1,23 +1,23 @@
 #include "card_set_generators.h"
 
-#include <gtest/gtest.h>
+#include <catch.hpp>
 
 using namespace pokerstove;
 
-TEST(CardSetGeneratorsTest, CardSetSizes) {
-  EXPECT_EQ(52, pokerstove::createCardSet(1).size());
-  EXPECT_EQ(1326, pokerstove::createCardSet(2).size());
-  EXPECT_EQ(22100, pokerstove::createCardSet(3).size());
+TEST_CASE("CardSetSizes", "[CardSetGeneratorsTest]") {
+  CHECK(pokerstove::createCardSet(1).size() == 52);
+  CHECK(pokerstove::createCardSet(2).size() == 1326);
+  CHECK(pokerstove::createCardSet(3).size() == 22100);
 }
 
-TEST(CardSetGeneratorsTest, CanonSetSizes) {
-  EXPECT_EQ(13, pokerstove::createCardSet(1, Card::SUIT_CANONICAL).size());
-  EXPECT_EQ(169, pokerstove::createCardSet(2, Card::SUIT_CANONICAL).size());
-  EXPECT_EQ(1755, pokerstove::createCardSet(3, Card::SUIT_CANONICAL).size());
+TEST_CASE("CanonSetSizes", "[CardSetGeneratorsTest]") {
+  CHECK(pokerstove::createCardSet(1, Card::SUIT_CANONICAL).size() == 13);
+  CHECK(pokerstove::createCardSet(2, Card::SUIT_CANONICAL).size() == 169);
+  CHECK(pokerstove::createCardSet(3, Card::SUIT_CANONICAL).size() == 1755);
 }
 
-TEST(CardSetGeneratorsTest, RankSetSizes) {
-  EXPECT_EQ(13, pokerstove::createCardSet(1, Card::RANK).size());
-  EXPECT_EQ(91, pokerstove::createCardSet(2, Card::RANK).size());
-  EXPECT_EQ(455, pokerstove::createCardSet(3, Card::RANK).size());
+TEST_CASE("RankSetSizes", "[CardSetGeneratorsTest]") {
+  CHECK(pokerstove::createCardSet(1, Card::RANK).size() == 13);
+  CHECK(pokerstove::createCardSet(2, Card::RANK).size() == 91);
+  CHECK(pokerstove::createCardSet(3, Card::RANK).size() == 455);
 }

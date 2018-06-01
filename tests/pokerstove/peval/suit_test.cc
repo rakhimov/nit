@@ -1,39 +1,41 @@
 #include "suit.h"
 
-#include <gtest/gtest.h>
+#include <cstring>
+
+#include <catch.hpp>
 
 using namespace pokerstove;
 
 const char* suits = "cdhsCDHS";
 
-TEST(Suit, ConstructorChars) {
+TEST_CASE("Suit.ConstructorChars", "[Suit]") {
   char suitstr[] = "?";
 
   // test the valid char range
-  for (int i = 0; i < strlen(suits); i++) {
+  for (int i = 0; i < std::strlen(suits); i++) {
     Suit s(suits[i]);
     suitstr[0] = suits[i];
-    EXPECT_STRCASEEQ(suitstr, s.str().c_str());
+    CHECK_THAT(s.str(), Catch::Equals(suitstr, Catch::CaseSensitive::No));
   }
 }
 
-TEST(Suit, ConstructorInts) {
+TEST_CASE("Suit.ConstructorInts", "[Suit]") {
   char suitstr[] = "?";
 
   // test the valid int range
   for (int i = 0; i <= 3; i++) {
     Suit s(i);
     suitstr[0] = suits[i];
-    EXPECT_STREQ(suitstr, s.str().c_str());
+    CHECK(s.str() == suitstr);
   }
 }
 
-TEST(Suit, ConstructorErrs) {
+TEST_CASE("Suit.ConstructorErrs", "[Suit]") {
   char suitstr[] = "?";
 
   // test the invalid int range
   for (int i = 4; i < 'C'; i++) {
     Suit s(i);
-    EXPECT_STREQ(suitstr, s.str().c_str());
+    CHECK(s.str() == suitstr);
   }
 }
