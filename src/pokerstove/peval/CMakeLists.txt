@@ -1,18 +1,31 @@
 cmake_minimum_required(VERSION 2.8)
 find_package (Threads)
 
-# build the test 
-file(GLOB test_sources *_test.cc)
-add_executable(peval_tests ${test_sources})
+# build the test
+set(PEVAL_TEST_SRC
+  card_set_generators_test.cc
+  card_set_test.cc
+  holdem_hand_evaluator_test.cc
+  omaha_high_hand_evaluator_test.cc
+  poker_hand_evaluator_test.cc
+  rank_test.cc
+  suit_test.cc
+  )
+add_executable(peval_tests ${PEVAL_TEST_SRC})
 target_link_libraries(peval_tests peval gtest gtest_main ${CMAKE_THREAD_LIBS_INIT})
 
-# build the library sources from all sources, removing the test sources
-file(GLOB lib_sources *.cc)
-foreach(source_file ${test_sources})
-  list(REMOVE_ITEM lib_sources ${source_file})
-endforeach()
-
 # peval library
-add_library(peval ${lib_sources})
+set(PEVAL_SRC
+  card.cc
+  card_set.cc
+  card_set_generators.cc
+  poker_evaluation.cc
+  poker_hand.cc
+  poker_hand_evaluator_alloc.cc
+  poker_hand_evaluator.cc
+  rank.cc
+  suit.cc
+  )
+add_library(peval ${PEVAL_SRC})
 
 add_test(TestPeval ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/peval_tests)

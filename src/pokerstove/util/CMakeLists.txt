@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 
 # build the test
-file(GLOB test_sources *_test.cc)
-add_executable(util_tests ${test_sources})
+set(UTIL_TEST_SRC
+  lastbit_test.cc
+  )
+add_executable(util_tests ${UTIL_TEST_SRC})
 target_link_libraries(util_tests peval gtest gtest_main)
 
 # there are no libraries, only headers
