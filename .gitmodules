@@ -1,6 +1,3 @@
-[submodule "src/ext/googletest"]
-	path = deps/googletest
-	url = https://github.com/google/googletest
 [submodule "deps/catch2"]
 	path = deps/catch2
 	url = https://github.com/catchorg/Catch2
