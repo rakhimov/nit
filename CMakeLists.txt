@@ -4,6 +4,8 @@ project(nit CXX)
 
 option(WITH_COVERAGE "Instrument for coverage analysis" OFF)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)  # Needed for Clang Tooling.
+
 # TODO: Discover C++11 support.
 # TODO: This flags only works for GCC compatible compilers (Clang, Intel).
 #
