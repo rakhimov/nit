@@ -4,53 +4,52 @@ Nit
 [![Build Status](https://travis-ci.org/rakhimov/nit.svg?branch=master)](https://travis-ci.org/rakhimov/nit)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/15886/badge.svg)](https://scan.coverity.com/projects/rakhimov-nit)
 [![codecov](https://codecov.io/gh/rakhimov/nit/branch/master/graph/badge.svg)](https://codecov.io/gh/rakhimov/nit)
-[![OpenHUB Metrics](https://www.openhub.net/p/pokerstove/widgets/project_thin_badge.gif)](https://www.openhub.net/p/pokerstove)
 
 Nit is a PokerStove fork aimed at rejuvenating the project.
 The name "nit" is chosen because it is short (like "git")
 and is a derogatory (like "git") poker term for hyper-tight-passive players
 who only play premium starting hands.
 
-PokerStove is a highly hand optimized C++ poker hand evaluation library.  The Win32 Hold'em
-GUI was first released in 2002, and has been available as freeware since
-it's first release.
+PokerStove is a highly hand optimized C++ poker hand evaluation library.
+The Win32 Hold'em GUI was first released in 2002,
+and has been available as freeware since it's first release.
 
-The core libraries of pokerstove are being open sourced.  The project is
-currently in the process of reviewing and publishing the code.  As code is
-reviewed and code sanitized further commits will be added.
+The core libraries of pokerstove are being open sourced.
+The project is currently in the process of reviewing and publishing the code.
+As code is reviewed and code sanitized further commits will be added.
 
 ## Libraries
 
 ### peval
 
-This is a c++ poker hand evaluation library.  The main design goals of the library
-are generality, extensibility, and ease of use.  There are evaluators for fourteen
-variants of poker.  Additionally, there are various card manipulation and query tools built
-into the CardSet class.
+This is a c++ poker hand evaluation library.
+The main design goals of the library are generality, extensibility, and ease of use.
+There are evaluators for fourteen variants of poker.
+Additionally, there are various card manipulation and query tools
+built into the CardSet class.
 
 ## Programs
 
-### ps-eval
+### nit-eval
 
-A tool for poker hand evaluation.  It demonstrates how to use the peval library, and to create
-evaluators for the different variants of poker.
+A tool for poker hand evaluation.
+It demonstrates how to use the peval library,
+and to create evaluators for the different variants of poker.
 
-### ps-colex
+### nit-colex
 
 A utility for viewing colexicographical index for sets of cards.
 
 ## Building
 
-The pokerstove libraries come with build scripts for cmake.  This
-should allow you to build it on any platform with minimal
-tweaking.  This project has been successfully build under linux/g++,
-windows/vc2010 and OSX/XCode so far.
+The nit comes with build scripts for cmake.
+This should allow you to build it on any platform with minimal tweaking.
 
-In order to build the libraries you'll need the following
-installed on your platform of choice:
+In order to build the libraries,
+you'll need the following installed on your platform of choice:
 
 * boost, version 1.46 or higher
-* cmake, version 2.4 or higher
+* cmake, version 2.8 or higher
 
 ### Linux
 
@@ -58,87 +57,20 @@ To install the dependencies with apt get:
 
     apt-get install libboost-all-dev cmake
 
-To build under linux using cmake, create a build directory,
-invoke cmake on the programs directory, then build.
+To build under linux using cmake,
+create a build directory,
+invoke cmake in the build directory, then build.
 
-    git clone https://github.com/andrewprock/pokerstove.git
-    mkdir pokerstove/build
-    cd pokerstove/build
+    git clone --recursive https://github.com/rakhimov/nit
+    mkdir nit/build
+    cd nit/build
     cmake -DCMAKE_BUILD_TYPE=Release ..
     make
 
-You should then be able to execute the simple command line
-example:
+### macOS
 
-    ~/cmake/programs$ ./programs/ps-eval/ps-eval
-    Allowed options:
-      -? [ --help ]          produce help message
-      -g [ --game ] arg (=h) game to use for evaluation
-      -b [ --board ] arg     community cards for he/o/o8
-      -h [ --hand ] arg      a hand for evaluation
-      -q [ --quiet ]         produce no output
+To install the dependencies with [homebrew](http://brew.sh/):
 
-       For the --game option, one of the follwing games may be
-       specified.
-         h     hold'em
-         o     omaha/8
-         O     omaha high
-         r     razz
-         s     stud
-         e     stud/8
-         q     stud high/low no qualifier
-         d     draw high
-         l     lowball (A-5)
-         k     Kansas City lowball (2-7)
-         t     triple draw lowball (2-7)
-         T     triple draw lowball (A-5)
-         b     badugi
-         3     three-card poker
+    brew install cmake boost
 
-       examples:
-           ps-eval acas
-           ps-eval AcAs Kh4d --board 5c8s9h
-           ps-eval AcAs Kh4d --board 5c8s9h
-           ps-eval --game l 7c5c4c3c2c
-           ps-eval --game k 7c5c4c3c2c
-           ps-eval --game kansas-city-lowball 7c5c4c3c2c
-
-
-### Windows
-
-Getting boost to work under windows can be a bit of a challenge.
-One of the easier ways is to install precompiled librares.  There
-is a batch of them available at sourceforge. If you're working
-with Visual Studio 2010, you will probably need the 32 bit
-libraries.  [boost precomplied libraries]
-(http://sourceforge.net/projects/boost/files/boost-binaries/1.53.0/)
-
-Under windows, the cmake gui can be used to construct solution
-and project files for Visual Studio 2010.  To do this, browse
-source to locate the programs directory git/pokerstove/programs.
-Then create a build dir for the project.  At the bottom of the
-gui click Configure, then Generate.  You may have to edit the
-git/pokerstove/programs/CMakeLists.txt to point cmake to your
-installation of boost.
-
-Once you've done that, you should be able to select
-
-    Menu->Build->Build Solution
-
-to build the sample program.
-
-
-### OSX
-
-In order to build under Max OSX, you'll need to install XCode,
-git, cmake, macports, and boost.  The first four can be installed
-in the conventional manner, with XCode coming form the App Store, cmake,
-git and macports downloaded from the web.  The macports package is a
-typical unix package management utility and is required to install boost.
-Once you've installed and selfupdate'd macports, you can install boost:
-
-    sudo port install boost -no_static
-
-From there you can run the cmake gui as in windows.  This will create
-an XCode project which should compile the sample utility. Alternatively,
-follow the command  line `cmake` instructions in the [Linux section](#linux).
+The building instructions are the same as for [Linux](#linux)
