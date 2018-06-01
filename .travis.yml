@@ -49,4 +49,4 @@ script:
     - cd build
     - cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE="${CONFIG}" ..
     - make -j 2
-    - make test
+    - ctest --verbose
