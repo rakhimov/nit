@@ -2,12 +2,12 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: PokerEvaluationTables.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef POKERSTOVE_PEVAL_POKER_EVALUATION_TABLES_H_
-#define POKERSTOVE_PEVAL_POKER_EVALUATION_TABLES_H_
+#ifndef NIT_PEVAL_POKER_EVALUATION_TABLES_H_
+#define NIT_PEVAL_POKER_EVALUATION_TABLES_H_
 
 #include <boost/cstdint.hpp>
 
-namespace pokerstove {
+namespace nit {
 
 /* the tables defined in this file:
  *
@@ -27564,6 +27564,6 @@ const int bottomRankMask[] = {
     1,     //  10000000 00000000 00000000 00000000
 };
 
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PEVAL_POKER_EVALUATION_TABLES_H_
+#endif  // NIT_PEVAL_POKER_EVALUATION_TABLES_H_

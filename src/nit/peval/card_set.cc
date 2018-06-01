@@ -29,8 +29,8 @@
 
 using namespace std;
 using namespace boost;
-using namespace pokerstove;
-using namespace pokerstove;
+using namespace nit;
+using namespace nit;
 
 // some suit mask macros
 #define SMASK(n) (static_cast<int>(_cardmask >> (n)*Rank::NUM_RANK) & 0x1FFF)
@@ -1216,12 +1216,12 @@ size_t CardSet::rankColex() const {
   return ret;
 }
 
-std::ostream& operator<<(std::ostream& sout, const pokerstove::CardSet& e) {
+std::ostream& operator<<(std::ostream& sout, const nit::CardSet& e) {
   sout << e.str();
   return sout;
 }
 
-vector<int> pokerstove::findSuitPermutation(const CardSet& source,
+vector<int> nit::findSuitPermutation(const CardSet& source,
                                             const CardSet& dest) {
   vector<int> rot(4, -1);
   vector<int> taken(4, 0);
@@ -1242,7 +1242,7 @@ vector<int> pokerstove::findSuitPermutation(const CardSet& source,
   return rot;
 }
 
-CardSet pokerstove::canonizeToBoard(const CardSet& board, const CardSet& hand) {
+CardSet nit::canonizeToBoard(const CardSet& board, const CardSet& hand) {
   CardSet cboard = board.canonize();
   vector<int> perms = findSuitPermutation(board, cboard);
   CardSet chand = hand.rotateSuits(perms[0], perms[1], perms[2], perms[3]);

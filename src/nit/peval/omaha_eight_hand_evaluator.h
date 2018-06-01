@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: OmahaEightHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef POKERSTOVE_PEVAL_OMAHA_EIGHT_HAND_EVALUATOR_H_
-#define POKERSTOVE_PEVAL_OMAHA_EIGHT_HAND_EVALUATOR_H_
+#ifndef NIT_PEVAL_OMAHA_EIGHT_HAND_EVALUATOR_H_
+#define NIT_PEVAL_OMAHA_EIGHT_HAND_EVALUATOR_H_
 
 #include <boost/math/special_functions/binomial.hpp>
 
@@ -30,7 +30,7 @@ inline int unflipAce(int ranks) {
   return (ranks >> 1) | ((ranks & 0x01) << 12);
 }
 
-namespace pokerstove {
+namespace nit {
 /**
  * A specialized hand evaluator for hold'em.  Not as slow.
  */
@@ -198,6 +198,6 @@ class OmahaEightHandEvaluator : public PokerHandEvaluator {
   virtual size_t evaluationSize() const { return 2; }
 };
 
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PEVAL_OMAHA_EIGHT_HAND_EVALUATOR_H_
+#endif  // NIT_PEVAL_OMAHA_EIGHT_HAND_EVALUATOR_H_

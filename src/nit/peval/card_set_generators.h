@@ -1,15 +1,15 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  */
-#ifndef POKERSTOVE_PEVAL_CARD_SET_GENERATORS_H_
-#define POKERSTOVE_PEVAL_CARD_SET_GENERATORS_H_
+#ifndef NIT_PEVAL_CARD_SET_GENERATORS_H_
+#define NIT_PEVAL_CARD_SET_GENERATORS_H_
 
 #include <set>
 
 #include "card.h"
 #include "card_set.h"
 
-namespace pokerstove {
+namespace nit {
 
 /**
  * Create the set of all card sets where the size of each rank set has
@@ -34,6 +34,6 @@ namespace pokerstove {
  */
 std::set<CardSet> createCardSet(size_t numCards,
                                 Card::Grouping grouping = Card::RANK_SUIT);
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PEVAL_CARD_SET_GENERATORS_H_
+#endif  // NIT_PEVAL_CARD_SET_GENERATORS_H_

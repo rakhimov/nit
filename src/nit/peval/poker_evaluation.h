@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: PokerEvaluation.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef POKERSTOVE_PEVAL_POKER_EVALUATION_H_
-#define POKERSTOVE_PEVAL_POKER_EVALUATION_H_
+#ifndef NIT_PEVAL_POKER_EVALUATION_H_
+#define NIT_PEVAL_POKER_EVALUATION_H_
 
 #include <climits>
 
@@ -13,7 +13,7 @@
 
 #include "rank.h"
 
-namespace pokerstove {
+namespace nit {
 class PokerHandEvaluator;
 class PokerHand;
 
@@ -206,12 +206,12 @@ class PokerEvaluation {
 // typedef to support refactoring
 typedef PokerEvaluation Evaluation;
 
-}  // namespace pokerstove
+}  // namespace nit
 
 //
 // Extraction operators.
 //
 std::ostream& operator<<(std::ostream& sout,
-                         const pokerstove::PokerEvaluation& e);
+                         const nit::PokerEvaluation& e);
 
-#endif  // POKERSTOVE_PEVAL_POKER_EVALUATION_H_
+#endif  // NIT_PEVAL_POKER_EVALUATION_H_

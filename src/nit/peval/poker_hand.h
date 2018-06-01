@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: PokerHand.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef POKERSTOVE_PEVAL_POKER_HAND_H_
-#define POKERSTOVE_PEVAL_POKER_HAND_H_
+#ifndef NIT_PEVAL_POKER_HAND_H_
+#define NIT_PEVAL_POKER_HAND_H_
 
 #include <boost/array.hpp>
 
@@ -15,7 +15,7 @@
 /*! \namespace
  * A namespace to wrap up all of the poker evaluation code.
  */
-namespace pokerstove {
+namespace nit {
 // we might possibly template the size here for performance
 // reasons, although if performance is an issue, it's probably
 // better to use a CardSet
@@ -142,6 +142,6 @@ class PokerHand {
   uint8_t _ncards;
 };
 
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PEVAL_POKER_HAND_H_
+#endif  // NIT_PEVAL_POKER_HAND_H_

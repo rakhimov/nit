@@ -3,7 +3,7 @@
 #include <catch.hpp>
 
 TEST_CASE("OmahaHigh", "[PokerHandEvaluator]") {
-  using namespace pokerstove;
+  using namespace nit;
 
   boost::shared_ptr<PokerHandEvaluator> evaluator =
       PokerHandEvaluator::alloc("O");

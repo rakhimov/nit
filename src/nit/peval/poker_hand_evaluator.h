@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: PokerHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef POKERSTOVE_PEVAL_POKER_HAND_EVALUATOR_H_
-#define POKERSTOVE_PEVAL_POKER_HAND_EVALUATOR_H_
+#ifndef NIT_PEVAL_POKER_HAND_EVALUATOR_H_
+#define NIT_PEVAL_POKER_HAND_EVALUATOR_H_
 
 #include <string>
 #include <vector>
@@ -16,7 +16,7 @@
 
 const unsigned int BOARD_SIZE = 5;
 
-namespace pokerstove {
+namespace nit {
 /**
  * What is actually stored in the equity result is up to the evalutor
  * being used.  Usually it is either wins/ties, or m1/m2
@@ -153,7 +153,7 @@ class PokerHandEvaluator {
    * evaluateHand is implemented.
    */
   void evaluateShowdown(const std::vector<CardSet>& hands,
-                        const pokerstove::CardSet& board,
+                        const nit::CardSet& board,
                         std::vector<PokerHandEvaluation>& evals,
                         std::vector<EquityResult>& result,
                         double weight = 1.0) const;
@@ -176,6 +176,6 @@ class PokerHandEvaluator {
 // for planned refactoring
 typedef PokerHandEvaluator GameEvaluator;
 
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PEVAL_POKER_HAND_EVALUATOR_H_
+#endif  // NIT_PEVAL_POKER_HAND_EVALUATOR_H_

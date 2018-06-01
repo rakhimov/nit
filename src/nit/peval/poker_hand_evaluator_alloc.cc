@@ -19,7 +19,7 @@
 //#include "three_card_poker_hand_evaluator.h"
 
 using namespace std;
-using namespace pokerstove;
+using namespace nit;
 
 boost::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc(
     const string& strid) {

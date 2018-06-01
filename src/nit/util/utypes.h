@@ -1,5 +1,5 @@
-#ifndef POKERSTOVE_UTIL_UTYPES_H_
-#define POKERSTOVE_UTIL_UTYPES_H_
+#ifndef NIT_UTIL_UTYPES_H_
+#define NIT_UTIL_UTYPES_H_
 
 #include <string>
 
@@ -66,4 +66,4 @@ int countbits(T x) {
 
 std::string makeCommaNumStr(int64_t n);
 
-#endif  // POKERSTOVE_UTIL_UTYPES_H_
+#endif  // NIT_UTIL_UTYPES_H_

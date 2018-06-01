@@ -12,7 +12,7 @@
 #include "card.h"
 
 using namespace std;
-using namespace pokerstove;
+using namespace nit;
 
 Suit::display Suit::__suitStringType = SUIT_ASCII;
 

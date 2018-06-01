@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id$
  */
-#ifndef POKERSTOVE_PENUM_CARD_DISTRIBUTION_H_
-#define POKERSTOVE_PENUM_CARD_DISTRIBUTION_H_
+#ifndef NIT_PENUM_CARD_DISTRIBUTION_H_
+#define NIT_PENUM_CARD_DISTRIBUTION_H_
 
 #include <map>
 #include <string>
@@ -11,7 +11,7 @@
 
 #include <nit/peval/card_set.h>
 
-namespace pokerstove {
+namespace nit {
 /**
  * Card distribution, a set of hands object which may have zero or more
  * cards set in each, along with associated weights.
@@ -90,6 +90,6 @@ class CardDistribution {
   std::vector<CardSet> _handList;
   std::map<CardSet, double> _weights;
 };
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PENUM_CARD_DISTRIBUTION_H_
+#endif  // NIT_PENUM_CARD_DISTRIBUTION_H_

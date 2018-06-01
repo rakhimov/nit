@@ -9,9 +9,9 @@
 #include "rank.h"
 #include "suit.h"
 
-using pokerstove::Card;
-using pokerstove::Rank;
-using pokerstove::Suit;
+using nit::Card;
+using nit::Rank;
+using nit::Suit;
 
 Card::Card() : _card(0) {}
 

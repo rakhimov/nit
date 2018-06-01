@@ -14,7 +14,7 @@
 
 using namespace std;
 namespace po = boost::program_options;
-using namespace pokerstove;
+using namespace nit;
 
 int main(int argc, char** argv) {
   try {

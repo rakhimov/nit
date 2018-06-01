@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: UniversalHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef POKERSTOVE_PEVAL_UNIVERSAL_HAND_EVALUATOR_H_
-#define POKERSTOVE_PEVAL_UNIVERSAL_HAND_EVALUATOR_H_
+#ifndef NIT_PEVAL_UNIVERSAL_HAND_EVALUATOR_H_
+#define NIT_PEVAL_UNIVERSAL_HAND_EVALUATOR_H_
 
 // This is a rule based hand evaluator which can be used to construct
 // evalutors for most kinds of poker evaluation types.  Because it is
@@ -26,7 +26,7 @@
 #include "card_set.h"
 #include "poker_hand_evaluator.h"
 
-namespace pokerstove {
+namespace nit {
 typedef PokerEvaluation (CardSet::*evalFunction)() const;
 
 /**
@@ -155,7 +155,7 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
     }
 
     std::vector<Card> clist = cards.cards();
-    pokerstove::combinations cc(static_cast<uint>(clist.size()),
+    nit::combinations cc(static_cast<uint>(clist.size()),
                                 static_cast<uint>(subsetsize));
     do {
       CardSet cand;
@@ -179,6 +179,6 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
   int _evalsperhand;
 };
 
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PEVAL_UNIVERSAL_HAND_EVALUATOR_H_
+#endif  // NIT_PEVAL_UNIVERSAL_HAND_EVALUATOR_H_

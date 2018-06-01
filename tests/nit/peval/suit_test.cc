@@ -4,7 +4,7 @@
 
 #include <catch.hpp>
 
-using namespace pokerstove;
+using namespace nit;
 
 const char* suits = "cdhsCDHS";
 

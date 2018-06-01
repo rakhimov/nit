@@ -12,7 +12,7 @@
 
 using namespace std;
 namespace po = boost::program_options;
-using namespace pokerstove;
+using namespace nit;
 
 #if 0
 std::set<CardSet>

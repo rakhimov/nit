@@ -6,7 +6,7 @@
 
 #include <catch.hpp>
 
-using namespace pokerstove;
+using namespace nit;
 using namespace std;
 
 TEST_CASE("chinese_settings", "[PartitionEnumerator]") {

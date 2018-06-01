@@ -8,7 +8,7 @@
 
 using namespace std;
 using namespace boost;
-using namespace pokerstove;
+using namespace nit;
 
 PokerHandEvaluator::PokerHandEvaluator()
     : _subclassID("abstract-base-class"), _useSuits(true) {}

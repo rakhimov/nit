@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id$
  */
-#ifndef POKERSTOVE_PENUM_PARTITION_ENUMERATOR_H_
-#define POKERSTOVE_PENUM_PARTITION_ENUMERATOR_H_
+#ifndef NIT_PENUM_PARTITION_ENUMERATOR_H_
+#define NIT_PENUM_PARTITION_ENUMERATOR_H_
 
 #include <cstdint>
 
@@ -13,7 +13,7 @@
 
 #include <nit/util/combinations.h>
 
-namespace pokerstove {
+namespace nit {
 // see http://cplusplus.com/reference/algorithm/set_difference/
 // for original version.
 // this version is shifted a bit as we use first1+first2 instead of first1
@@ -195,6 +195,6 @@ class PartitionEnumerator2 {
     makeMask(n);
   }
 };
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PENUM_PARTITION_ENUMERATOR_H_
+#endif  // NIT_PENUM_PARTITION_ENUMERATOR_H_

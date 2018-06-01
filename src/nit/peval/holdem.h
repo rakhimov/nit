@@ -2,10 +2,10 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: Holdem.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef POKERSTOVE_PEVAL_HOLDEM_H_
-#define POKERSTOVE_PEVAL_HOLDEM_H_
+#ifndef NIT_PEVAL_HOLDEM_H_
+#define NIT_PEVAL_HOLDEM_H_
 
-namespace pokerstove {
+namespace nit {
 
 // Facts about holdem.
 const unsigned int PREFLOP = 0;
@@ -18,6 +18,6 @@ const unsigned int NUM_TURN_CARDS = 4;
 const unsigned int NUM_RIVER_CARDS = 5;
 const unsigned int NUM_HOLDEM_POCKET = 2;
 const unsigned int NUM_HOLDEM_ROUNDS = 4;
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PEVAL_HOLDEM_H_
+#endif  // NIT_PEVAL_HOLDEM_H_

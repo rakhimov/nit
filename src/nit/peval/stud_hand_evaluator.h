@@ -2,12 +2,12 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: StudHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef POKERSTOVE_PEVAL_STUD_HAND_EVALUATOR_H_
-#define POKERSTOVE_PEVAL_STUD_HAND_EVALUATOR_H_
+#ifndef NIT_PEVAL_STUD_HAND_EVALUATOR_H_
+#define NIT_PEVAL_STUD_HAND_EVALUATOR_H_
 
 #include "poker_hand_evaluator.h"
 
-namespace pokerstove {
+namespace nit {
 /**
  * A specialized hand evaluator for hold'em.  Not as slow.
  */
@@ -34,6 +34,6 @@ class StudHandEvaluator : public PokerHandEvaluator {
   virtual size_t evaluationSize() const { return 1; }
 };
 
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PEVAL_STUD_HAND_EVALUATOR_H_
+#endif  // NIT_PEVAL_STUD_HAND_EVALUATOR_H_

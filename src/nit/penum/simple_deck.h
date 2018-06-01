@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id$
  */
-#ifndef POKERSTOVE_PENUM_SIMPLE_DECK_H_
-#define POKERSTOVE_PENUM_SIMPLE_DECK_H_
+#ifndef NIT_PENUM_SIMPLE_DECK_H_
+#define NIT_PENUM_SIMPLE_DECK_H_
 
 #include <algorithm>
 #include <functional>
@@ -17,13 +17,13 @@
 #include <nit/peval/suit.h>  // NUM_SUIT
 #include <nit/util/lastbit.h>
 
-namespace pokerstove {
+namespace nit {
 
 /**
  * used for removing cards from the deck
  */
-struct isLive : public std::binary_function<pokerstove::CardSet,
-                                            pokerstove::CardSet, bool> {
+struct isLive : public std::binary_function<nit::CardSet,
+                                            nit::CardSet, bool> {
   bool operator()(const CardSet& c, const CardSet& dead) const {
     return !dead.contains(c);
   }
@@ -69,10 +69,10 @@ class SimpleDeck {
     return ret;
   }
 
-  pokerstove::CardSet deal(size_t ncards) {
+  nit::CardSet deal(size_t ncards) {
     // TODO: fix and test this code, edge cases clearly at risk here
     if (ncards == 0)
-      return pokerstove::CardSet();
+      return nit::CardSet();
     _current -= static_cast<uint>(ncards);
     CardSet* pcur = &_deck[_current];
     const CardSet* pend = pcur + ncards;
@@ -82,8 +82,8 @@ class SimpleDeck {
     return cards;
   }
 
-  pokerstove::CardSet dead() const {
-    pokerstove::CardSet cs;
+  nit::CardSet dead() const {
+    nit::CardSet cs;
     for (size_t i = _current; i < STANDARD_DECK_SIZE; i++)
       cs.insert(_deck[i]);
     return cs;
@@ -92,7 +92,7 @@ class SimpleDeck {
   /**
    * Move all cards which are not live to the end of the deck
    */
-  void remove(const pokerstove::CardSet& cards) {
+  void remove(const nit::CardSet& cards) {
     int decr = CardSet(cards | dead()).size();
     stable_partition(_deck.begin(), _deck.end(), bind2nd(isLive(), cards));
     _current = STANDARD_DECK_SIZE - decr;
@@ -146,6 +146,6 @@ class SimpleDeck {
   size_t _current;
 };
 
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PENUM_SIMPLE_DECK_H_
+#endif  // NIT_PENUM_SIMPLE_DECK_H_

@@ -18,7 +18,7 @@
 #define boost_foreach BOOST_FOREACH
 
 using namespace std;
-using namespace pokerstove;
+using namespace nit;
 
 CardDistribution::CardDistribution() : _handList(1, CardSet()), _weights() {
   _weights[CardSet()] = 1.0;

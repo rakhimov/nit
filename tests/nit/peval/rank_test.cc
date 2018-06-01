@@ -4,7 +4,7 @@
 
 #include <catch.hpp>
 
-using namespace pokerstove;
+using namespace nit;
 
 const char* ranks = "23456789TJQKA";
 const char* low_ranks = "23456789tjqka";

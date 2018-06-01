@@ -5,7 +5,7 @@
 
 #include <nit/penum/showdown_enumerator.h>
 
-using namespace pokerstove;
+using namespace nit;
 namespace po = boost::program_options;
 using namespace std;
 

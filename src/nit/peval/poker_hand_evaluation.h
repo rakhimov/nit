@@ -2,15 +2,15 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: PokerHandEvaluation.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef POKERSTOVE_PEVAL_POKER_HAND_EVALUATION_H_
-#define POKERSTOVE_PEVAL_POKER_HAND_EVALUATION_H_
+#ifndef NIT_PEVAL_POKER_HAND_EVALUATION_H_
+#define NIT_PEVAL_POKER_HAND_EVALUATION_H_
 
 #include <iostream>
 #include <stdexcept>
 
 #include "poker_evaluation.h"
 
-namespace pokerstove {
+namespace nit {
 /**
  * A class which allows multiple evaluations to be bundled.
  */
@@ -98,6 +98,6 @@ inline double shares(const PokerHandEvaluation& hero,
   return -1.0;
 }
 
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PEVAL_POKER_HAND_EVALUATION_H_
+#endif  // NIT_PEVAL_POKER_HAND_EVALUATION_H_

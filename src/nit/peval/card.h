@@ -2,14 +2,14 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: Card.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef POKERSTOVE_PEVAL_CARD_H_
-#define POKERSTOVE_PEVAL_CARD_H_
+#ifndef NIT_PEVAL_CARD_H_
+#define NIT_PEVAL_CARD_H_
 
 #include <string>
 
 #include <boost/cstdint.hpp>
 
-namespace pokerstove {
+namespace nit {
 // forward declarations,
 class Suit;
 class Rank;
@@ -83,6 +83,6 @@ class Card {
 
   uint8_t _card;
 };
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PEVAL_CARD_H_
+#endif  // NIT_PEVAL_CARD_H_

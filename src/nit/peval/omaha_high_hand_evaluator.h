@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: OmahaHighHandEvaluator.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef POKERSTOVE_PEVAL_OMAHA_HIGH_HAND_EVALUATOR_H_
-#define POKERSTOVE_PEVAL_OMAHA_HIGH_HAND_EVALUATOR_H_
+#ifndef NIT_PEVAL_OMAHA_HIGH_HAND_EVALUATOR_H_
+#define NIT_PEVAL_OMAHA_HIGH_HAND_EVALUATOR_H_
 
 #include <boost/math/special_functions/binomial.hpp>
 
@@ -11,7 +11,7 @@
 #include "poker_evaluation_tables.h"
 #include "poker_hand_evaluator.h"
 
-namespace pokerstove {
+namespace nit {
 /**
  * A specialized hand evaluator for omaha.  Not as slow.
  */
@@ -137,6 +137,6 @@ class OmahaHighHandEvaluator : public PokerHandEvaluator {
   virtual size_t evaluationSize() const { return 1; }
 };
 
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PEVAL_OMAHA_HIGH_HAND_EVALUATOR_H_
+#endif  // NIT_PEVAL_OMAHA_HIGH_HAND_EVALUATOR_H_

@@ -7,7 +7,7 @@
 
 #include "card.h"
 
-namespace pokerstove {
+namespace nit {
 
 std::set<CardSet> createCardSet(size_t numCards, Card::Grouping grouping) {
   std::set<CardSet> ret;
@@ -33,4 +33,4 @@ std::set<CardSet> createCardSet(size_t numCards, Card::Grouping grouping) {
   return ret;
 }
 
-}  // namespace pokerstove
+}  // namespace nit

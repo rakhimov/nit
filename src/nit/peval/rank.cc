@@ -7,7 +7,7 @@
 #include <stdexcept>
 
 using namespace std;
-using namespace pokerstove;
+using namespace nit;
 
 Rank::Rank(const string& c) { fromString(c); }
 

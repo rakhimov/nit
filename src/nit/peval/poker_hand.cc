@@ -15,7 +15,7 @@
 #include "poker_evaluation_tables.h"
 
 using namespace std;
-using namespace pokerstove;
+using namespace nit;
 
 PokerHand::PokerHand() { clear(); }
 

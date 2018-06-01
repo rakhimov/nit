@@ -2,14 +2,14 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: Rank.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef POKERSTOVE_PEVAL_RANK_H_
-#define POKERSTOVE_PEVAL_RANK_H_
+#ifndef NIT_PEVAL_RANK_H_
+#define NIT_PEVAL_RANK_H_
 
 #include <string>
 
 #include <boost/cstdint.hpp>
 
-namespace pokerstove {
+namespace nit {
 /**
  * A rank class.  We take great care to manage the type to limit the
  * values of Ranks that can be created.  There is some leakage in
@@ -148,6 +148,6 @@ class Rank {
   static const int RANK_ACE = 12;
 };
 
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PEVAL_RANK_H_
+#endif  // NIT_PEVAL_RANK_H_

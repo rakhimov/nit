@@ -1,8 +1,8 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  */
-#ifndef POKERSTOVE_PENUM_SHOWDOWN_ENUMERATOR_H_
-#define POKERSTOVE_PENUM_SHOWDOWN_ENUMERATOR_H_
+#ifndef NIT_PENUM_SHOWDOWN_ENUMERATOR_H_
+#define NIT_PENUM_SHOWDOWN_ENUMERATOR_H_
 
 #include <vector>
 
@@ -12,7 +12,7 @@
 
 #include "card_distribution.h"
 
-namespace pokerstove {
+namespace nit {
 class ShowdownEnumerator {
  public:
   ShowdownEnumerator();
@@ -24,6 +24,6 @@ class ShowdownEnumerator {
       const std::vector<CardDistribution>& dists, const CardSet& board,
       boost::shared_ptr<PokerHandEvaluator> peval) const;
 };
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PENUM_SHOWDOWN_ENUMERATOR_H_
+#endif  // NIT_PENUM_SHOWDOWN_ENUMERATOR_H_

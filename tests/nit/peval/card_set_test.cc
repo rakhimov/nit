@@ -3,7 +3,7 @@
 #include <catch.hpp>
 
 TEST_CASE("StringConstructorToString", "[CardSetTest]") {
-  using namespace pokerstove;
+  using namespace nit;
 
   CHECK(CardSet("Ac").str() == "Ac");
   CHECK(CardSet("As").str() == "As");
@@ -15,7 +15,7 @@ TEST_CASE("StringConstructorToString", "[CardSetTest]") {
 }
 
 TEST_CASE("StringConstructorSize", "[CardSetTest]") {
-  using namespace pokerstove;
+  using namespace nit;
 
   CHECK(CardSet("Ac").size() == 1);
   CHECK(CardSet("qh").size() == 1);
@@ -26,7 +26,7 @@ TEST_CASE("StringConstructorSize", "[CardSetTest]") {
 }
 
 TEST_CASE("Canonize", "[CardSetTest]") {
-  using namespace pokerstove;
+  using namespace nit;
 
   CHECK(CardSet("2c3c").canonize() == CardSet("2c3c"));
   CHECK(CardSet("2s3s").canonize() == CardSet("2c3c"));
@@ -34,7 +34,7 @@ TEST_CASE("Canonize", "[CardSetTest]") {
 }
 
 TEST_CASE("CanonizeRanks", "[CardSetTest]") {
-  using namespace pokerstove;
+  using namespace nit;
 
   const CardSet AceCanon1("Ac");
   const CardSet AceCanon2("AcAd");
@@ -71,7 +71,7 @@ TEST_CASE("CanonizeRanks", "[CardSetTest]") {
 }
 
 TEST_CASE("fill", "[CardSetTest]") {
-  using namespace pokerstove;
+  using namespace nit;
   CardSet all;
   all.fill();
   CHECK(all.size() == STANDARD_DECK_SIZE);

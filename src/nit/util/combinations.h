@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: combinations.h 2655 2012-06-30 04:58:10Z prock $
  */
-#ifndef POKERSTOVE_UTIL_COMBINATIONS_H_
-#define POKERSTOVE_UTIL_COMBINATIONS_H_
+#ifndef NIT_UTIL_COMBINATIONS_H_
+#define NIT_UTIL_COMBINATIONS_H_
 
 #include <algorithm>
 
@@ -12,7 +12,7 @@
 #include <nit/util/lastbit.h>
 #include <nit/util/utypes.h>
 
-namespace pokerstove {
+namespace nit {
 /**
  * Generates the set of all N choose K combinations of K
  * indices less than N.
@@ -154,6 +154,6 @@ class Combinations {
   unsigned int comb_[N];
 };
 
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_UTIL_COMBINATIONS_H_
+#endif  // NIT_UTIL_COMBINATIONS_H_

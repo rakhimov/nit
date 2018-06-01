@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id: CardSet.h 2649 2012-06-30 04:53:24Z prock $
  */
-#ifndef POKERSTOVE_PEVAL_CARD_SET_H_
-#define POKERSTOVE_PEVAL_CARD_SET_H_
+#ifndef NIT_PEVAL_CARD_SET_H_
+#define NIT_PEVAL_CARD_SET_H_
 
 #include <iosfwd>
 #include <string>
@@ -14,7 +14,7 @@
 #include "rank.h"
 #include "suit.h"
 
-namespace pokerstove {
+namespace nit {
 // forward declares
 class Card;
 class PokerEvaluation;
@@ -210,6 +210,6 @@ CardSet canonizeToBoard(const CardSet& board, const CardSet& hand);
 
 std::vector<int> findSuitPermutation(const CardSet& source,
                                      const CardSet& dest);
-}  // namespace pokerstove
+}  // namespace nit
 
-#endif  // POKERSTOVE_PEVAL_CARD_SET_H_
+#endif  // NIT_PEVAL_CARD_SET_H_

@@ -2,8 +2,8 @@
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  * $Id$
  */
-#ifndef POKERSTOVE_PENUM_ODOMETER_H_
-#define POKERSTOVE_PENUM_ODOMETER_H_
+#ifndef NIT_PENUM_ODOMETER_H_
+#define NIT_PENUM_ODOMETER_H_
 
 #include <algorithm>
 #include <string>
@@ -81,4 +81,4 @@ class Odometer {
   std::vector<int> _odom;
 };
 
-#endif  // POKERSTOVE_PENUM_ODOMETER_H_
+#endif  // NIT_PENUM_ODOMETER_H_
