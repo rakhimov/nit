@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 2.8)
-
 # build the test
 set(UTIL_TEST_SRC
   lastbit_test.cc
