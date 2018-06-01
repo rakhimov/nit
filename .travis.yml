@@ -24,6 +24,23 @@ matrix:
         - os: osx
           compiler: clang
           env: CONFIG=Release
+        - os: linux
+          compiler: gcc
+          env: CONFIG=Coverage
+          addons:
+              apt:
+                  packages:
+                      - libboost-all-dev
+                      - lcov
+          install:
+              - pip install --user codecov
+          script:
+              - cd build
+              - cmake .. -DCMAKE_BUILD_TYPE=Debug -DWITH_COVERAGE=ON
+              - make -j 2
+              - make test
+              - cd ..
+              - .travis/submit_codecov.sh
 
 before_script:
     - mkdir build
