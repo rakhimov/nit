@@ -3,6 +3,7 @@ Nit
 
 [![Build Status](https://travis-ci.org/rakhimov/nit.svg?branch=master)](https://travis-ci.org/rakhimov/nit)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/15886/badge.svg)](https://scan.coverity.com/projects/rakhimov-nit)
+[![codecov](https://codecov.io/gh/rakhimov/nit/branch/master/graph/badge.svg)](https://codecov.io/gh/rakhimov/nit)
 [![OpenHUB Metrics](https://www.openhub.net/p/pokerstove/widgets/project_thin_badge.gif)](https://www.openhub.net/p/pokerstove)
 
 Nit is a PokerStove fork aimed at rejuvenating the project.
