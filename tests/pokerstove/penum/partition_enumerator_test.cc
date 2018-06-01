@@ -2,14 +2,14 @@
 
 #include <iostream>
 
-#include <gtest/gtest.h>
+#define CATCH_CONFIG_MAIN
+
+#include <catch.hpp>
 
 using namespace pokerstove;
 using namespace std;
 
-TEST(PartitionEnumerator, tautology) { EXPECT_EQ(1, 1); }
-
-TEST(PartitionEnumerator, chinese_settings) {
+TEST_CASE("chinese_settings", "[PartitionEnumerator]") {
   // compute the number of ways to set a chinese poker hand
   std::vector<size_t> partitions(3);
   partitions[0] = 3;
@@ -21,10 +21,10 @@ TEST(PartitionEnumerator, chinese_settings) {
   do {
     visits += 1;
   } while (walker.next());
-  EXPECT_EQ(72072, visits);
+  CHECK(visits == 72072);
 }
 
-TEST(PartitionEnumerator, DISABLED_slow_all_ofcp_draws) {
+TEST_CASE("slow_all_ofcp_draws", "[.PartitionEnumerator]") {
   // ofcp = open face chinese poker
   // compute the number of possible draw sets in open face chinese poker
   // This amounts to enumerating over all 47c8 sets.  This is set to
@@ -39,10 +39,10 @@ TEST(PartitionEnumerator, DISABLED_slow_all_ofcp_draws) {
       cout << visits << endl;
     visits += 1;
   } while (walker.next());
-  EXPECT_EQ(314457495, visits);  // 314,457,495
+  CHECK(visits == 314457495);  // 314,457,495
 }
 
-TEST(PartitionEnumerator, some_ofcp_draws) {
+TEST_CASE("some_ofcp_draws", "[PartitionEnumerator]") {
   // ofcp = open face chinese poker
   // Iterate over all possible settings with 36 cards left, player has
   // three hands with open cards, 1, 2, 2 slots respectively.
@@ -56,10 +56,10 @@ TEST(PartitionEnumerator, some_ofcp_draws) {
   do {
     visits += 1;
   } while (walker.next());
-  EXPECT_EQ(11309760, visits);  // 11,309,760
+  CHECK(visits == 11309760);  // 11,309,760
 }
 
-TEST(PartitionEnumerator, end_game_ofcp_draws_A) {
+TEST_CASE("end_game_ofcp_draws_A", "[PartitionEnumerator]") {
   // ofcp = open face chinese poker
   // Iterate over all end game scenarios.
   // Player A: one hand with two open cards.
@@ -76,5 +76,5 @@ TEST(PartitionEnumerator, end_game_ofcp_draws_A) {
   do {
     visits += 1;
   } while (walker.next());
-  EXPECT_EQ(328860, visits);  // 328,860
+  CHECK(visits == 328860);  // 328,860
 }
