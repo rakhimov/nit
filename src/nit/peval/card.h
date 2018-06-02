@@ -9,6 +9,7 @@
 #include <boost/cstdint.hpp>
 
 namespace nit {
+
 // forward declarations,
 class Suit;
 class Rank;
@@ -82,6 +83,7 @@ class Card {
 
   uint8_t _card;
 };
+
 }  // namespace nit
 
 #endif  // NIT_PEVAL_CARD_H_

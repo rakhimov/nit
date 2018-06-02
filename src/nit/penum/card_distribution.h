@@ -11,6 +11,7 @@
 #include <nit/peval/card_set.h>
 
 namespace nit {
+
 /**
  * Card distribution, a set of hands object which may have zero or more
  * cards set in each, along with associated weights.
@@ -89,6 +90,7 @@ class CardDistribution {
   std::vector<CardSet> _handList;
   std::map<CardSet, double> _weights;
 };
+
 }  // namespace nit
 
 #endif  // NIT_PENUM_CARD_DISTRIBUTION_H_

@@ -11,6 +11,7 @@
 #include "poker_hand_evaluator.h"
 
 namespace nit {
+
 /**
  * A specialized hand evaluator for omaha.  Not as slow.
  */

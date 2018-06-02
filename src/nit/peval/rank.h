@@ -9,6 +9,7 @@
 #include <boost/cstdint.hpp>
 
 namespace nit {
+
 /**
  * A rank class.  We take great care to manage the type to limit the
  * values of Ranks that can be created.  There is some leakage in

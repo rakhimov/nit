@@ -26,6 +26,7 @@
 #include "poker_hand_evaluator.h"
 
 namespace nit {
+
 typedef PokerEvaluation (CardSet::*evalFunction)() const;
 
 /**

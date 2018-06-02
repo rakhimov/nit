@@ -10,6 +10,8 @@
 #include "poker_evaluation_tables.h"
 #include "poker_hand_evaluator.h"
 
+namespace nit {
+
 inline int bottomRanks(int x, int n) {
   int ret = 0;
   for (int i = 0; i < n; i++) {
@@ -29,7 +31,6 @@ inline int unflipAce(int ranks) {
   return (ranks >> 1) | ((ranks & 0x01) << 12);
 }
 
-namespace nit {
 /**
  * A specialized hand evaluator for hold'em.  Not as slow.
  */

@@ -10,6 +10,7 @@
 #include "poker_evaluation.h"
 
 namespace nit {
+
 /**
  * A class which allows multiple evaluations to be bundled.
  */

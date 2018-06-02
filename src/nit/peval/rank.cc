@@ -6,7 +6,8 @@
 #include <stdexcept>
 
 using namespace std;
-using namespace nit;
+
+namespace nit {
 
 Rank::Rank(const string& c) { fromString(c); }
 
@@ -99,3 +100,5 @@ bool Rank::isRankChar(char c) {
     return true;
   return false;
 }
+
+}  // namespace nit

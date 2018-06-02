@@ -7,7 +7,8 @@
 
 using namespace std;
 using namespace boost;
-using namespace nit;
+
+namespace nit {
 
 PokerHandEvaluator::PokerHandEvaluator()
     : _subclassID("abstract-base-class"), _useSuits(true) {}
@@ -82,3 +83,5 @@ void PokerHandEvaluator::evaluateShowdown(const vector<CardSet>& hands,
   }
   // display (hands, board, result);
 }
+
+}  // namespace nit

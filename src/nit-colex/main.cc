@@ -12,7 +12,6 @@
 
 using namespace std;
 namespace po = boost::program_options;
-using namespace nit;
 
 #if 0
 std::set<CardSet>
@@ -66,13 +65,13 @@ int main(int argc, char** argv) {
     // extract the options
     size_t num_cards = vm["num-cards"].as<size_t>();
 
-    set<CardSet> canonicalHands;
+    set<nit::CardSet> canonicalHands;
     map<string, size_t> rankHands;
-    combinations cards(52, num_cards);
+    nit::combinations cards(52, num_cards);
     do {
-      CardSet hand;
+      nit::CardSet hand;
       for (size_t i = 0; i < num_cards; i++) {
-        hand.insert(Card(cards[i]));
+        hand.insert(nit::Card(cards[i]));
       }
       canonicalHands.insert(hand.canonize());
       rankHands[hand.rankstr()] = hand.rankColex();

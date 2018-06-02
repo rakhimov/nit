@@ -13,6 +13,7 @@
 #include <nit/util/combinations.h>
 
 namespace nit {
+
 // see http://cplusplus.com/reference/algorithm/set_difference/
 // for original version.
 // this version is shifted a bit as we use first1+first2 instead of first1
@@ -194,6 +195,7 @@ class PartitionEnumerator2 {
     makeMask(n);
   }
 };
+
 }  // namespace nit
 
 #endif  // NIT_PENUM_PARTITION_ENUMERATOR_H_

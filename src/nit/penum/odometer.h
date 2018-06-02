@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+namespace nit {
+
 /** This is a simple odomter class.  It runs each index from [0..max] where
  * the max of the ith index is the ith element in the extents vector passed
  * to the init function.  For example if the extent vector is: <2,4,3> the
@@ -79,5 +81,7 @@ class Odometer {
   std::vector<int> _extents;
   std::vector<int> _odom;
 };
+
+}  // namespace nit
 
 #endif  // NIT_PENUM_ODOMETER_H_

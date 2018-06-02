@@ -6,8 +6,10 @@
 
 #include <catch.hpp>
 
-using namespace nit;
 using namespace std;
+
+namespace nit {
+namespace test {
 
 TEST_CASE("chinese_settings", "[PartitionEnumerator]") {
   // compute the number of ways to set a chinese poker hand
@@ -78,3 +80,6 @@ TEST_CASE("end_game_ofcp_draws_A", "[PartitionEnumerator]") {
   } while (walker.next());
   CHECK(visits == 328860);  // 328,860
 }
+
+}  // namespace test
+}  // namespace nit

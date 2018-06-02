@@ -16,6 +16,7 @@
 const unsigned int BOARD_SIZE = 5;
 
 namespace nit {
+
 /**
  * What is actually stored in the equity result is up to the evalutor
  * being used.  Usually it is either wins/ties, or m1/m2

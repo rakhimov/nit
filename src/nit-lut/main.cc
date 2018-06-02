@@ -14,7 +14,6 @@
 
 using namespace std;
 namespace po = boost::program_options;
-using namespace nit;
 
 int main(int argc, char** argv) {
   try {
@@ -54,17 +53,17 @@ int main(int argc, char** argv) {
 
     bool ranks = vm.count("ranks") > 0;
     // make the sets
-    Card::Grouping grouping = Card::SUIT_CANONICAL;
+    nit::Card::Grouping grouping = nit::Card::SUIT_CANONICAL;
     if (ranks)
-      grouping = Card::RANK;
-    set<CardSet> pockets = createCardSet(pocketCount, grouping);
-    set<CardSet> boards = createCardSet(boardCount, grouping);
+      grouping = nit::Card::RANK;
+    set<nit::CardSet> pockets = nit::createCardSet(pocketCount, grouping);
+    set<nit::CardSet> boards = nit::createCardSet(boardCount, grouping);
 
-    auto evaluator = PokerHandEvaluator::alloc(game);
+    auto evaluator = nit::PokerHandEvaluator::alloc(game);
     for (auto pit = pockets.begin(); pit != pockets.end(); pit++)
       for (auto bit = boards.begin(); bit != boards.end(); bit++) {
         if (ranks) {
-          PokerEvaluation eval = evaluator->evaluateRanks(*pit, *bit);
+          nit::PokerEvaluation eval = evaluator->evaluateRanks(*pit, *bit);
           // cout << boost::format("%s, %s\n") % pit->rankstr() %
           // bit->rankstr();
 
@@ -81,7 +80,7 @@ int main(int argc, char** argv) {
           bit->canonize(*pit);
           if (pit->intersects(*bit))
             continue;
-          PokerHandEvaluation eval = evaluator->evaluate(*pit, *bit);
+          nit::PokerHandEvaluation eval = evaluator->evaluate(*pit, *bit);
           // clang-format off
           cout << boost::format("%s, %s: [%4d,%4d] -> %s [%9d]\n") %
                       pit->str() %

@@ -13,6 +13,7 @@
 #include "card_distribution.h"
 
 namespace nit {
+
 class ShowdownEnumerator {
  public:
   ShowdownEnumerator();
@@ -24,6 +25,7 @@ class ShowdownEnumerator {
       const std::vector<CardDistribution>& dists, const CardSet& board,
       boost::shared_ptr<PokerHandEvaluator> peval) const;
 };
+
 }  // namespace nit
 
 #endif  // NIT_PENUM_SHOWDOWN_ENUMERATOR_H_

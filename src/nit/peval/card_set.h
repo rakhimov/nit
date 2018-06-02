@@ -14,6 +14,7 @@
 #include "suit.h"
 
 namespace nit {
+
 // forward declares
 class Card;
 class PokerEvaluation;
@@ -209,6 +210,7 @@ CardSet canonizeToBoard(const CardSet& board, const CardSet& hand);
 
 std::vector<int> findSuitPermutation(const CardSet& source,
                                      const CardSet& dest);
+
 }  // namespace nit
 
 #endif  // NIT_PEVAL_CARD_SET_H_

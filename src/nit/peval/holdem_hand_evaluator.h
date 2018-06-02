@@ -8,6 +8,7 @@
 #include "poker_hand_evaluator.h"
 
 namespace nit {
+
 /**
  * A specialized hand evaluator for hold'em.  Not as slow.
  */

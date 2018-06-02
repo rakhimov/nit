@@ -18,7 +18,8 @@
 #define boost_foreach BOOST_FOREACH
 
 using namespace std;
-using namespace nit;
+
+namespace nit {
 
 CardDistribution::CardDistribution() : _handList(1, CardSet()), _weights() {
   _weights[CardSet()] = 1.0;
@@ -168,3 +169,5 @@ double CardDistribution::weight() const {
   boost_foreach(w, _weights) { total += w.second; }
   return total;
 }
+
+}  // namespace nit

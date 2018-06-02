@@ -14,7 +14,8 @@
 #include "poker_evaluation_tables.h"
 
 using namespace std;
-using namespace nit;
+
+namespace nit {
 
 // some useful consts that don't need to be exposd
 const int MAJOR_MASK = 0xF << MAJOR_SHIFT;
@@ -475,6 +476,8 @@ void PokerEvaluation::generateBottomRankMask() {
   }
   cout << "};\n";
 }
+
+}  // namespace nit
 
 std::ostream& operator<<(std::ostream& sout,
                          const nit::PokerEvaluation& e) {

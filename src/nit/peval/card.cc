@@ -8,9 +8,7 @@
 #include "rank.h"
 #include "suit.h"
 
-using nit::Card;
-using nit::Rank;
-using nit::Suit;
+namespace nit {
 
 Card::Card() : _card(0) {}
 
@@ -52,3 +50,5 @@ bool Card::operator<(const Card& r) const {
     return _card / Rank::NUM_RANK < r._card / Rank::NUM_RANK;
   return _card % Rank::NUM_RANK < r._card % Rank::NUM_RANK;
 }
+
+}  // namespace nit

@@ -4,8 +4,10 @@
 
 #include <catch.hpp>
 
-using namespace nit;
 using namespace std;
+
+namespace nit {
+namespace test {
 
 TEST_CASE("Construct Holdem", "[HoldemHandEvaluator]") {
   HoldemHandEvaluator eval;
@@ -22,3 +24,6 @@ TEST_CASE("RankEval Holdem", "[HoldemHandEvaluator]") {
   CHECK(eval.majorRank() == Rank("3"));
   CHECK(eval.minorRank() == Rank("2"));
 }
+
+}  // namespace test
+}  // namespace nit

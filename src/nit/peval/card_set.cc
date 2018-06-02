@@ -28,8 +28,8 @@
 
 using namespace std;
 using namespace boost;
-using namespace nit;
-using namespace nit;
+
+namespace nit {
 
 // some suit mask macros
 #define SMASK(n) (static_cast<int>(_cardmask >> (n)*Rank::NUM_RANK) & 0x1FFF)
@@ -1215,13 +1215,12 @@ size_t CardSet::rankColex() const {
   return ret;
 }
 
-std::ostream& operator<<(std::ostream& sout, const nit::CardSet& e) {
+std::ostream& operator<<(std::ostream& sout, const CardSet& e) {
   sout << e.str();
   return sout;
 }
 
-vector<int> nit::findSuitPermutation(const CardSet& source,
-                                            const CardSet& dest) {
+vector<int> findSuitPermutation(const CardSet& source, const CardSet& dest) {
   vector<int> rot(4, -1);
   vector<int> taken(4, 0);
 
@@ -1241,7 +1240,7 @@ vector<int> nit::findSuitPermutation(const CardSet& source,
   return rot;
 }
 
-CardSet nit::canonizeToBoard(const CardSet& board, const CardSet& hand) {
+CardSet canonizeToBoard(const CardSet& board, const CardSet& hand) {
   CardSet cboard = board.canonize();
   vector<int> perms = findSuitPermutation(board, cboard);
   CardSet chand = hand.rotateSuits(perms[0], perms[1], perms[2], perms[3]);
@@ -1271,3 +1270,5 @@ size_t CardSet::colex() const {
   }
   return value;
 }
+
+}  // namespace nit

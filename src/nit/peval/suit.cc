@@ -11,7 +11,8 @@
 #include "card.h"
 
 using namespace std;
-using namespace nit;
+
+namespace nit {
 
 Suit::display Suit::__suitStringType = SUIT_ASCII;
 
@@ -248,3 +249,5 @@ bool Suit::isSuitChar(char c) {
   };
   return false;
 }
+
+}  // namespace nit

@@ -5,7 +5,6 @@
 
 #include <nit/penum/showdown_enumerator.h>
 
-using namespace nit;
 namespace po = boost::program_options;
 using namespace std;
 
@@ -49,9 +48,9 @@ int main(int argc, char** argv) {
   bool quiet = vm.count("quiet") > 0;
 
   // allocate evaluator and create card distributions
-  boost::shared_ptr<PokerHandEvaluator> evaluator =
-      PokerHandEvaluator::alloc(game);
-  vector<CardDistribution> handDists;
+  boost::shared_ptr<nit::PokerHandEvaluator> evaluator =
+      nit::PokerHandEvaluator::alloc(game);
+  vector<nit::CardDistribution> handDists;
   for (const string& hand : hands) {
     handDists.emplace_back();
     handDists.back().parse(hand);
@@ -64,12 +63,12 @@ int main(int argc, char** argv) {
   }
 
   // calcuate the results and print them
-  ShowdownEnumerator showdown;
-  vector<EquityResult> results =
-      showdown.calculateEquity(handDists, CardSet(board), evaluator);
+  nit::ShowdownEnumerator showdown;
+  vector<nit::EquityResult> results =
+      showdown.calculateEquity(handDists, nit::CardSet(board), evaluator);
 
   double total = 0.0;
-  for (const EquityResult& result : results) {
+  for (const nit::EquityResult& result : results) {
     total += result.winShares + result.tieShares;
   }
 

@@ -2,7 +2,8 @@
 
 #include <catch.hpp>
 
-using namespace nit;
+namespace nit {
+namespace test {
 
 TEST_CASE("CardSetSizes", "[CardSetGeneratorsTest]") {
   CHECK(nit::createCardSet(1).size() == 52);
@@ -21,3 +22,6 @@ TEST_CASE("RankSetSizes", "[CardSetGeneratorsTest]") {
   CHECK(nit::createCardSet(2, Card::RANK).size() == 91);
   CHECK(nit::createCardSet(3, Card::RANK).size() == 455);
 }
+
+}  // namespace test
+}  // namespace nit

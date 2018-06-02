@@ -11,10 +11,8 @@
 
 #define MUTABLE
 
-/*! \namespace
- * A namespace to wrap up all of the poker evaluation code.
- */
 namespace nit {
+
 // we might possibly template the size here for performance
 // reasons, although if performance is an issue, it's probably
 // better to use a CardSet

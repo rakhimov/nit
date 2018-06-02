@@ -14,7 +14,8 @@
 #include "poker_evaluation_tables.h"
 
 using namespace std;
-using namespace nit;
+
+namespace nit {
 
 PokerHand::PokerHand() { clear(); }
 
@@ -237,3 +238,5 @@ vector<Card> PokerHand::cards() const {
     out.push_back(_cards[i]);
   return out;
 }
+
+}  // namespace nit

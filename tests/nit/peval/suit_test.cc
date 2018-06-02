@@ -4,7 +4,8 @@
 
 #include <catch.hpp>
 
-using namespace nit;
+namespace nit {
+namespace test {
 
 const char* suits = "cdhsCDHS";
 
@@ -39,3 +40,6 @@ TEST_CASE("Suit.ConstructorErrs", "[Suit]") {
     CHECK(s.str() == suitstr);
   }
 }
+
+}  // namespace test
+}  // namespace nit

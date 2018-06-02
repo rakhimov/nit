@@ -13,6 +13,7 @@
 #include "rank.h"
 
 namespace nit {
+
 class PokerHandEvaluator;
 class PokerHand;
 

@@ -4,7 +4,8 @@
 
 #include <catch.hpp>
 
-using namespace nit;
+namespace nit {
+namespace test {
 
 const char* ranks = "23456789TJQKA";
 const char* low_ranks = "23456789tjqka";
@@ -40,3 +41,6 @@ TEST_CASE("Rank.ConstructorErrs", "[Rank]") {
     CHECK(r.str() == rankstr);
   }
 }
+
+}  // namespace test
+}  // namespace nit
