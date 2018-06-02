@@ -1,10 +1,6 @@
 #include "omaha_high_hand_evaluator.h"
 
-#include <iostream>
-
 #include <catch.hpp>
-
-using namespace std;
 
 namespace nit {
 namespace test {

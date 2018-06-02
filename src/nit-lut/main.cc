@@ -1,6 +1,6 @@
 #include <iostream>
+#include <set>
 #include <string>
-#include <vector>
 
 #include <boost/format.hpp>
 #include <boost/program_options.hpp>
@@ -12,7 +12,6 @@
 #include <nit/peval/poker_hand_evaluator.h>
 #include <nit/util/combinations.h>
 
-using namespace std;
 namespace po = boost::program_options;
 
 int main(int argc, char** argv) {
@@ -27,7 +26,7 @@ int main(int argc, char** argv) {
          "number of pocket cards to use")
         ("board-count,b", po::value<size_t>()->default_value(3),
          "number of board cards to use")
-        ("game,g", po::value<string>()->default_value("O"),
+        ("game,g", po::value<std::string>()->default_value("O"),
          "game to use for evaluation")
         ("ranks", "print the set of rank values");
     // clang-format on
@@ -42,22 +41,22 @@ int main(int argc, char** argv) {
 
     // check for help
     if (vm.count("help") || argc == 1) {
-      cout << desc << endl;
+      std::cout << desc << std::endl;
       return 1;
     }
 
     // extract the options
     size_t pocketCount = vm["pocket-count"].as<size_t>();
     size_t boardCount = vm["board-count"].as<size_t>();
-    string game = vm["game"].as<string>();
+    std::string game = vm["game"].as<std::string>();
 
     bool ranks = vm.count("ranks") > 0;
     // make the sets
     nit::Card::Grouping grouping = nit::Card::SUIT_CANONICAL;
     if (ranks)
       grouping = nit::Card::RANK;
-    set<nit::CardSet> pockets = nit::createCardSet(pocketCount, grouping);
-    set<nit::CardSet> boards = nit::createCardSet(boardCount, grouping);
+    std::set<nit::CardSet> pockets = nit::createCardSet(pocketCount, grouping);
+    std::set<nit::CardSet> boards = nit::createCardSet(boardCount, grouping);
 
     auto evaluator = nit::PokerHandEvaluator::alloc(game);
     for (auto pit = pockets.begin(); pit != pockets.end(); pit++)
@@ -68,13 +67,13 @@ int main(int argc, char** argv) {
           // bit->rankstr();
 
           // clang-format off
-          cout << boost::format("%s, %s: [%4d,%4d] -> %s [%9d]\n") %
-                      pit->str() %
-                      bit->str() %
-                      pit->rankColex() %
-                      bit->rankColex() %
-                      eval.str() %
-                      eval.code();
+          std::cout << boost::format("%s, %s: [%4d,%4d] -> %s [%9d]\n") %
+                           pit->str() %
+                           bit->str() %
+                           pit->rankColex() %
+                           bit->rankColex() %
+                           eval.str() %
+                           eval.code();
           // clang-format on
         } else {
           bit->canonize(*pit);
@@ -82,21 +81,21 @@ int main(int argc, char** argv) {
             continue;
           nit::PokerHandEvaluation eval = evaluator->evaluate(*pit, *bit);
           // clang-format off
-          cout << boost::format("%s, %s: [%4d,%4d] -> %s [%9d]\n") %
-                      pit->str() %
-                      bit->str() %
-                      pit->colex() %
-                      bit->colex() %
-                      eval.str() %
-                      eval.high().code();
+          std::cout << boost::format("%s, %s: [%4d,%4d] -> %s [%9d]\n") %
+                           pit->str() %
+                           bit->str() %
+                           pit->colex() %
+                           bit->colex() %
+                           eval.str() %
+                           eval.high().code();
           // clang-format on
         }
       }
   } catch (std::exception& e) {
-    cerr << "-- caught exception--\n" << e.what() << "\n";
+    std::cerr << "-- caught exception--\n" << e.what() << "\n";
     return 1;
   } catch (...) {
-    cerr << "Exception of unknown type!\n";
+    std::cerr << "Exception of unknown type!\n";
     return 1;
   }
   return 0;

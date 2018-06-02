@@ -10,8 +10,6 @@
 
 #include "card.h"
 
-using namespace std;
-
 namespace nit {
 
 Suit::display Suit::__suitStringType = SUIT_ASCII;
@@ -20,7 +18,7 @@ void Suit::setSuitStringType(Suit::display s) { __suitStringType = s; }
 
 Suit::display Suit::getSuitStringType() { return __suitStringType; }
 
-string Suit::decodeSuitANSI_EXT(int c) const {
+std::string Suit::decodeSuitANSI_EXT(int c) const {
   if (c < 0)
     return "x";
 
@@ -41,7 +39,7 @@ string Suit::decodeSuitANSI_EXT(int c) const {
   return "?";
 }
 
-string Suit::decodeSuitUnicode(int c) const {
+std::string Suit::decodeSuitUnicode(int c) const {
   if (c < 0)
     return "x";
 
@@ -64,7 +62,7 @@ string Suit::decodeSuitUnicode(int c) const {
   return "?";
 }
 
-string Suit::decodeSuitASCII(int c) const {
+std::string Suit::decodeSuitASCII(int c) const {
   if (c < 0)
     return "x";
 
@@ -83,7 +81,7 @@ string Suit::decodeSuitASCII(int c) const {
   return "?";
 }
 
-string Suit::decodeSuitASCII_EXT(int card) const {
+std::string Suit::decodeSuitASCII_EXT(int card) const {
   if (card < 0)
     return "x";
 
@@ -105,12 +103,12 @@ string Suit::decodeSuitASCII_EXT(int card) const {
       c = '?';
   }
 
-  string buf =
+  std::string buf =
       (boost::format("%c") % c).str();  // boost::format may be overkill
   return buf;
 }
 
-string Suit::decodeSuitHTML(int c) const {
+std::string Suit::decodeSuitHTML(int c) const {
   switch (c) {
     case 0:
       return "&clubs;";
@@ -125,8 +123,8 @@ string Suit::decodeSuitHTML(int c) const {
   }
 }
 
-string Suit::decodeSuit4ColorHTML(int c) const {
-  string suit = "<font ";
+std::string Suit::decodeSuit4ColorHTML(int c) const {
+  std::string suit = "<font ";
 
   switch (c) {
     case 0:
@@ -151,8 +149,8 @@ string Suit::decodeSuit4ColorHTML(int c) const {
   return suit;
 }
 
-string Suit::decodeSuit2ColorHTML(int c) const {
-  string suit = "<font ";
+std::string Suit::decodeSuit2ColorHTML(int c) const {
+  std::string suit = "<font ";
 
   switch (c) {
     case 1:
@@ -174,7 +172,7 @@ string Suit::decodeSuit2ColorHTML(int c) const {
   return suit;
 }
 
-string Suit::decodeSuit(int c) const {
+std::string Suit::decodeSuit(int c) const {
   switch (__suitStringType) {
     case SUIT_ASCII:
       return decodeSuitASCII(c);
@@ -219,7 +217,7 @@ int Suit::suit_code(char c) {
     case 'S':
       return Suit::SpadeVal();
   };
-  throw std::invalid_argument((string("Suit, parse error: ") + c).c_str());
+  throw std::invalid_argument((std::string("Suit, parse error: ") + c).c_str());
 }
 
 Suit::Suit(const std::string& str) : _suit(suit_code(str[0])) {}
@@ -231,9 +229,9 @@ Suit::Suit(uint8_t c) {
     _suit = c;
 }
 
-string Suit::str() const { return decodeSuit(_suit); }
+std::string Suit::str() const { return decodeSuit(_suit); }
 
-void Suit::fromString(const string& c) { _suit = suit_code(c[0]); }
+void Suit::fromString(const std::string& c) { _suit = suit_code(c[0]); }
 
 bool Suit::isSuitChar(char c) {
   switch (c) {

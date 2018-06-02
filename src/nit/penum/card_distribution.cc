@@ -17,8 +17,6 @@
 
 #define boost_foreach BOOST_FOREACH
 
-using namespace std;
-
 namespace nit {
 
 CardDistribution::CardDistribution() : _handList(1, CardSet()), _weights() {
@@ -40,8 +38,8 @@ CardDistribution& CardDistribution::operator=(const CardDistribution& other) {
 
 size_t CardDistribution::size() const { return _handList.size(); }
 
-string CardDistribution::str() const {
-  string ret;
+std::string CardDistribution::str() const {
+  std::string ret;
   for (size_t i = 0; i < _handList.size(); i++) {
     const CardSet& hand = _handList[i];
     ret += (i > 0 ? "," : "") +
@@ -64,7 +62,7 @@ void CardDistribution::fill(int n) {
 }
 
 void CardDistribution::fill(const CardSet& cs, int n) {
-  vector<Card> cards = cs.cards();
+  std::vector<Card> cards = cs.cards();
   int setsize = static_cast<int>(cards.size());
   combinations hands(setsize, n);
   int vsize = boost::math::binomial_coefficient<double>(setsize, n);
@@ -88,7 +86,7 @@ const CardSet& CardDistribution::operator[](size_t index) const {
 
 const double& CardDistribution::operator[](const CardSet& hand) const {
   static const double kStaticZero = 0.0;  // for hands not in distribution
-  map<CardSet, double>::const_iterator it = _weights.find(hand);
+  std::map<CardSet, double>::const_iterator it = _weights.find(hand);
   if (it == _weights.end())
     return kStaticZero;
   return it->second;
@@ -119,21 +117,21 @@ bool CardDistribution::parse(const std::string& input) {
     return true;
   }
 
-  vector<string> hands;
+  std::vector<std::string> hands;
   boost::split(hands, input, boost::is_any_of(","));
-  boost_foreach(const string& h, hands) {
+  boost_foreach(const std::string& h, hands) {
     // handle the weight
     double weight = 1.0;
     if (boost::contains(h, "=")) {
       // trap for the case where the input ends with "="
-      string::size_type weightPos = h.rfind("=") + 1;
+      std::string::size_type weightPos = h.rfind("=") + 1;
       if (weightPos == h.size())
         return false;
       weight = boost::lexical_cast<double>(h.substr(weightPos));
     }
 
     // handle the hand one card at a time.
-    string handstr = h.substr(0, h.rfind("="));
+    std::string handstr = h.substr(0, h.rfind("="));
     if (handstr.size() % 2 != 0)
       return false;
     CardSet hand;

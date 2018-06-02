@@ -17,12 +17,10 @@
 //#include "lowball_a5_hand_evaluator.h"
 //#include "three_card_poker_hand_evaluator.h"
 
-using namespace std;
-
 namespace nit {
 
 boost::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc(
-    const string& strid) {
+    const std::string& strid) {
   boost::shared_ptr<PokerHandEvaluator> ret;
   switch (strid[0]) {
     case 'h':  //     hold'em

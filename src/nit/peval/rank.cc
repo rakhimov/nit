@@ -5,11 +5,9 @@
 
 #include <stdexcept>
 
-using namespace std;
-
 namespace nit {
 
-Rank::Rank(const string& c) { fromString(c); }
+Rank::Rank(const std::string& c) { fromString(c); }
 
 Rank::Rank(uint8_t code) {
   if (code <= RANK_ACE)
@@ -18,7 +16,7 @@ Rank::Rank(uint8_t code) {
     _rank = rank_code(code);
 }
 
-string Rank::str() const {
+std::string Rank::str() const {
   switch (_rank) {
     case RANK_TWO:
       return "2";
@@ -50,12 +48,12 @@ string Rank::str() const {
   return "?";
 }
 
-void Rank::fromString(const string& c) {
+void Rank::fromString(const std::string& c) {
   int code = rank_code(c[0]);
   if (code >= 0)
     _rank = code;
   else
-    throw std::domain_error(string("rank parse error: " + c).c_str());
+    throw std::domain_error(std::string("rank parse error: " + c).c_str());
 }
 
 int Rank::rank_code(char c) {

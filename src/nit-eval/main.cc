@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <vector>
 
 #include <boost/program_options.hpp>
@@ -6,7 +7,6 @@
 #include <nit/penum/showdown_enumerator.h>
 
 namespace po = boost::program_options;
-using namespace std;
 
 int main(int argc, char** argv) {
   po::options_description desc("nit-eval, a poker hand evaluator");
@@ -14,10 +14,10 @@ int main(int argc, char** argv) {
   // clang-format off
   desc.add_options()
       ("help,?", "produce help message")
-      ("game,g", po::value<string>()->default_value("h"),
+      ("game,g", po::value<std::string>()->default_value("h"),
           "game to use for evaluation")
-      ("board,b", po::value<string>(), "community cards for he/o/o8")
-      ("hand,h", po::value<vector<string>>(), "a hand for evaluation")
+      ("board,b", po::value<std::string>(), "community cards for he/o/o8")
+      ("hand,h", po::value<std::vector<std::string>>(), "a hand for evaluation")
       ("quiet,q", "produces no output");
   // clang-format on
 
@@ -36,22 +36,22 @@ int main(int argc, char** argv) {
 
   // check for help
   if (vm.count("help") || argc == 1) {
-    cout << desc << endl;
+    std::cout << desc << std::endl;
     return 1;
   }
 
   // extract the options
-  string game = vm["game"].as<string>();
-  string board = vm.count("board") ? vm["board"].as<string>() : "";
-  vector<string> hands = vm["hand"].as<vector<string>>();
+  std::string game = vm["game"].as<std::string>();
+  std::string board = vm.count("board") ? vm["board"].as<std::string>() : "";
+  std::vector<std::string> hands = vm["hand"].as<std::vector<std::string>>();
 
   bool quiet = vm.count("quiet") > 0;
 
   // allocate evaluator and create card distributions
   boost::shared_ptr<nit::PokerHandEvaluator> evaluator =
       nit::PokerHandEvaluator::alloc(game);
-  vector<nit::CardDistribution> handDists;
-  for (const string& hand : hands) {
+  std::vector<nit::CardDistribution> handDists;
+  for (const std::string& hand : hands) {
     handDists.emplace_back();
     handDists.back().parse(hand);
   }
@@ -62,9 +62,9 @@ int main(int argc, char** argv) {
     handDists.back().fill(evaluator->handSize());
   }
 
-  // calcuate the results and print them
+  // calculate the results and print them
   nit::ShowdownEnumerator showdown;
-  vector<nit::EquityResult> results =
+  std::vector<nit::EquityResult> results =
       showdown.calculateEquity(handDists, nit::CardSet(board), evaluator);
 
   double total = 0.0;
@@ -75,10 +75,10 @@ int main(int argc, char** argv) {
   if (!quiet) {
     for (size_t i = 0; i < results.size(); ++i) {
       double equity = (results[i].winShares + results[i].tieShares) / total;
-      string handDesc =
+      std::string handDesc =
           (i < hands.size()) ? "The hand " + hands[i] : "A random hand";
-      cout << handDesc << " has " << equity * 100. << " % equity ("
-           << results[i].str() << ")" << endl;
+      std::cout << handDesc << " has " << equity * 100. << " % equity ("
+                << results[i].str() << ")" << std::endl;
     }
   }
 }

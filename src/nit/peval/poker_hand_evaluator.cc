@@ -5,8 +5,6 @@
 
 #include <iostream>
 
-using namespace std;
-
 namespace nit {
 
 PokerHandEvaluator::PokerHandEvaluator()
@@ -20,20 +18,19 @@ static double INV_LUT[] = {0,       1 / 1.0, 1 / 2.0, 1 / 3.0, 1 / 4.0, 1 / 5.0,
 /**
  * debugging util
  */
-void display(const vector<CardSet>& hands, const CardSet& board,
-             vector<EquityResult>& result) {
+void display(const std::vector<CardSet>& hands, const CardSet& board,
+             std::vector<EquityResult>& result) {
   for (size_t i = 0; i < hands.size(); i++)
-    cout << hands[i].str() << " ";
+    std::cout << hands[i].str() << " ";
   for (size_t i = 0; i < result.size(); i++)
-    cout << result[i].winShares << " ";
-  cout << endl;
+    std::cout << result[i].winShares << " ";
+  std::cout << std::endl;
 }
 
-void PokerHandEvaluator::evaluateShowdown(const vector<CardSet>& hands,
-                                          const CardSet& board,
-                                          vector<PokerHandEvaluation>& evals,
-                                          vector<EquityResult>& result,
-                                          double weight) const {
+void PokerHandEvaluator::evaluateShowdown(
+    const std::vector<CardSet>& hands, const CardSet& board,
+    std::vector<PokerHandEvaluation>& evals, std::vector<EquityResult>& result,
+    double weight) const {
   // this is a special trick we use.  the hands vector could actually
   // contain hands [0..n],board because of the way we step through the
   // ParitionEnumerator, however, the size evals vector *must* be equal to

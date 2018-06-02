@@ -13,8 +13,6 @@
 #include "card.h"
 #include "poker_evaluation_tables.h"
 
-using namespace std;
-
 namespace nit {
 
 // some useful consts that don't need to be exposd
@@ -79,7 +77,7 @@ int PokerEvaluation::reducedCode2to7() const {
 
     case THREE_OF_A_KIND: {
       PokerEvaluation e(_evalcode);
-      vector<int> ranks(3);
+      std::vector<int> ranks(3);
       ranks[0] = botRankTable[kickerBits()];
       ranks[1] = botRankTable[kickerBits() ^ 0x01 << ranks[0]];
       ranks[2] = e.majorRank().code();
@@ -92,7 +90,7 @@ int PokerEvaluation::reducedCode2to7() const {
 
     case ONE_PAIR: {
       PokerEvaluation e(_evalcode);
-      vector<int> ranks(4);
+      std::vector<int> ranks(4);
       uint16_t kickers = kickerBits();
       ranks[0] = lastbit(kickers);
       kickers ^= 0x01 << ranks[0];
@@ -110,7 +108,7 @@ int PokerEvaluation::reducedCode2to7() const {
 
     case TWO_PAIR: {
       PokerEvaluation e(_evalcode);
-      vector<int> ranks(3);
+      std::vector<int> ranks(3);
       uint16_t kickers = kickerBits();
       ranks[0] = lastbit(kickers);
       ranks[1] = e.minorRank().code();
@@ -133,7 +131,7 @@ int PokerEvaluation::reducedCode2to7() const {
 
     case FULL_HOUSE: {
       PokerEvaluation e(_evalcode);
-      vector<int> ranks(2);
+      std::vector<int> ranks(2);
       ranks[0] = e.minorRank().code();
       ranks[1] = e.majorRank().code();
       sort(ranks.begin(), ranks.end());
@@ -145,7 +143,7 @@ int PokerEvaluation::reducedCode2to7() const {
 
     case FOUR_OF_A_KIND: {
       PokerEvaluation e(_evalcode);
-      vector<int> ranks(2);
+      std::vector<int> ranks(2);
       uint16_t kickers = kickerBits();
       ranks[0] = lastbit(kickers);
       ranks[1] = e.majorRank().code();
@@ -262,7 +260,7 @@ void PokerEvaluation::fixWheel2to7(int rankMask) {
   }
 }
 
-string PokerEvaluation::makeRankString(int r, bool acelow) const {
+std::string PokerEvaluation::makeRankString(int r, bool acelow) const {
   if (acelow) {
     if (r == 0)
       r = Rank::NUM_RANK - 1;
@@ -274,8 +272,8 @@ string PokerEvaluation::makeRankString(int r, bool acelow) const {
   return rank.str();
 }
 
-string PokerEvaluation::strKickers(int n) const {
-  string out;
+std::string PokerEvaluation::strKickers(int n) const {
+  std::string out;
   for (int i = Rank::NUM_RANK - 1; i >= 0; i--)
     if ((n & (0x01 << i)) > 0) {
       //      Rank r(i);
@@ -285,22 +283,22 @@ string PokerEvaluation::strKickers(int n) const {
   return out;
 }
 
-string PokerEvaluation::strTop(int n) const {
+std::string PokerEvaluation::strTop(int n) const {
   int i = (n >> 20) & 0x0F;
   //    Rank r(i);
   //    return r.toString ();
   return makeRankString(i, acePlaysLow());
 }
 
-string PokerEvaluation::strBot(int n) const {
+std::string PokerEvaluation::strBot(int n) const {
   int i = (n >> 16) & 0x0F;
   //    Rank r(i);
   //    return r.toString ();
   return makeRankString(i, acePlaysLow());
 }
 
-string PokerEvaluation::bitstr() const {
-  string ret;
+std::string PokerEvaluation::bitstr() const {
+  std::string ret;
   int n = _evalcode;
   for (int i = 31; i >= 0; i--) {
     if ((n & (0x01 << i)) > 0)
@@ -313,8 +311,8 @@ string PokerEvaluation::bitstr() const {
   return ret;
 }
 
-string PokerEvaluation::str() const {
-  string ret;
+std::string PokerEvaluation::str() const {
+  std::string ret;
   int n = _evalcode;
 
   if (n == 0)
@@ -332,21 +330,21 @@ string PokerEvaluation::str() const {
   return ret;
 }
 
-string PokerEvaluation::toStringCannon() const {
-  const string highcard = "high card:    ";
-  const string onepair = "one pair:     ";
-  const string threeflush = "three flush:  ";
-  const string threestraight = "three str8:   ";
-  const string twopair = "two pair:     ";
-  const string trips = "trips:        ";
-  const string threestr8flush = "3 str8 flush: ";
-  const string straight = "straight:     ";
-  const string flush = "flush:        ";
-  const string fullhouse = "full house:   ";
-  const string quads = "quads:        ";
-  const string straightflush = "str8 flush:   ";
+std::string PokerEvaluation::toStringCannon() const {
+  const std::string highcard = "high card:    ";
+  const std::string onepair = "one pair:     ";
+  const std::string threeflush = "three flush:  ";
+  const std::string threestraight = "three str8:   ";
+  const std::string twopair = "two pair:     ";
+  const std::string trips = "trips:        ";
+  const std::string threestr8flush = "3 str8 flush: ";
+  const std::string straight = "straight:     ";
+  const std::string flush = "flush:        ";
+  const std::string fullhouse = "full house:   ";
+  const std::string quads = "quads:        ";
+  const std::string straightflush = "str8 flush:   ";
 
-  string ret;
+  std::string ret;
   int n = _evalcode;
 
   if (isFlipped()) {
@@ -355,10 +353,10 @@ string PokerEvaluation::toStringCannon() const {
     return e.toStringCannon();
   }
 
-  string hand;
-  string topr;
-  string botr;
-  string kick;
+  std::string hand;
+  std::string topr;
+  std::string botr;
+  std::string kick;
 
   int val = n >> 24;
   switch (val) {
@@ -429,14 +427,14 @@ string PokerEvaluation::toStringCannon() const {
       break;
   }
 
-  string ranks = topr + botr + kick;
+  std::string ranks = topr + botr + kick;
   ret = (boost::format("%s %-5s") % hand % ranks).str();
 
   return ret;
 }
 
 void PokerEvaluation::generateLowballLookupA5() {
-  cout << "const int lowballA5Ranks[] = {\n";
+  std::cout << "const int lowballA5Ranks[] = {\n";
   // this is a 13 bit lookup table
   for (int i = 0; i <= 0x1FFF; i++) {
     // ok, we are passing in plain old rankbits, but
@@ -455,13 +453,14 @@ void PokerEvaluation::generateLowballLookupA5() {
       if (nbits == 5)
         break;
     }
-    cout << boost::format("    %6d, // %s\n") % lowbits % toBitString(lowbits);
+    std::cout << boost::format("    %6d, // %s\n") % lowbits %
+                     toBitString(lowbits);
   }
-  cout << "};\n";
+  std::cout << "};\n";
 }
 
 void PokerEvaluation::generateBottomRankMask() {
-  cout << "const int bottomRankMask[] = {\n";
+  std::cout << "const int bottomRankMask[] = {\n";
   // this is a 13 bit lookup table
   for (int i = 0; i <= 0x1FFF; i++) {
     int bits = i;
@@ -472,15 +471,15 @@ void PokerEvaluation::generateBottomRankMask() {
         break;
       }
     }
-    cout << boost::format("    %6d, // %s\n") % lowbits % toBitString(lowbits);
+    std::cout << boost::format("    %6d, // %s\n") % lowbits %
+                     toBitString(lowbits);
   }
-  cout << "};\n";
+  std::cout << "};\n";
 }
 
 }  // namespace nit
 
-std::ostream& operator<<(std::ostream& sout,
-                         const nit::PokerEvaluation& e) {
+std::ostream& operator<<(std::ostream& sout, const nit::PokerEvaluation& e) {
   sout << e.str();
   return sout;
 }

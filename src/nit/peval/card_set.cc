@@ -23,8 +23,6 @@
 #include "rank.h"
 #include "suit.h"
 
-using namespace std;
-
 namespace nit {
 
 // some suit mask macros
@@ -58,10 +56,10 @@ CardSet::CardSet(const CardSet& cs) : _cardmask(cs._cardmask) {}
 
 CardSet::CardSet(const Card& c) : _cardmask(ONE64 << c._card) {}
 
-CardSet::CardSet(const string& c) : _cardmask(0) { fromString(c); }
+CardSet::CardSet(const std::string& c) : _cardmask(0) { fromString(c); }
 
-string CardSet::str() const {
-  string out = "";
+std::string CardSet::str() const {
+  std::string out = "";
   uint64_t v = _cardmask;
   while (v) {
     Card card(lastbit64(v));
@@ -72,8 +70,8 @@ string CardSet::str() const {
 }
 
 // TODO: use same loop as in ::str()
-string CardSet::rankstr() const {
-  string out = "";
+std::string CardSet::rankstr() const {
+  std::string out = "";
   for (size_t i = 0; i < STANDARD_DECK_SIZE; i++) {
     uint64_t mask = ONE64 << i;
     if (_cardmask & mask) {
@@ -81,12 +79,12 @@ string CardSet::rankstr() const {
       out += c.rank().str();
     }
   }
-  sort(out.begin(), out.end());
+  std::sort(out.begin(), out.end());
   return out;
 }
 
-string CardSet::toRankBitString() const {
-  string out = "";
+std::string CardSet::toRankBitString() const {
+  std::string out = "";
   for (size_t i = 0; i < STANDARD_DECK_SIZE; i++) {
     if (_cardmask & ONE64 << i)
       out += "1";
@@ -107,7 +105,7 @@ size_t CardSet::countSuits() const {
 }
 
 size_t CardSet::countMaxSuit() const {
-  vector<size_t> suit(Suit::NUM_SUIT);
+  std::vector<size_t> suit(Suit::NUM_SUIT);
   suit[0] = (nRanksTable[SMASK(0)]);
   suit[1] = (nRanksTable[SMASK(1)]);
   suit[2] = (nRanksTable[SMASK(2)]);
@@ -125,7 +123,7 @@ size_t CardSet::size() const {
   return c;
 }
 
-void CardSet::fromString(const string& instr) {
+void CardSet::fromString(const std::string& instr) {
   clear();
 
   for (size_t i = 0; i < instr.size(); i += 2) {
@@ -166,7 +164,7 @@ CardSet CardSet::canonize() const {
   for (Suit s = Suit::begin(); s < Suit::end(); ++s)
     smasks[i++] = suitMask(s);
 
-  sort(smasks, smasks + Suit::NUM_SUIT);
+  std::sort(smasks, smasks + Suit::NUM_SUIT);
 
   return CardSet(static_cast<uint64_t>(smasks[3]) |
                  static_cast<uint64_t>(smasks[2]) << Rank::NUM_RANK |
@@ -176,7 +174,7 @@ CardSet CardSet::canonize() const {
 
 CardSet CardSet::canonize(const CardSet& other) const {
   CardSet cother = other.canonize();
-  vector<int> perms = findSuitPermutation(other, cother);
+  std::vector<int> perms = findSuitPermutation(other, cother);
   CardSet hand = *this;
   CardSet chand = hand.rotateSuits(perms[0], perms[1], perms[2], perms[3]);
   return chand;
@@ -227,7 +225,7 @@ bool CardSet::insertRanks(const CardSet& rset) {
 CardSet CardSet::canonizeRanks() const {
   // this is very slow, optimize if it winds up in an inner loop
   CardSet ret;
-  string ranks = rankstr();
+  std::string ranks = rankstr();
   for (size_t i = 0; i < ranks.size(); i++) {
     for (Suit s = Suit::Clubs(); s <= Suit::Spades(); ++s) {
       Card candidate(Rank(ranks.substr(i, 1)), s);
@@ -245,8 +243,8 @@ CardSet& CardSet::insert(const Card& c) {
   return *this;
 }
 
-vector<Card> CardSet::cards() const {
-  vector<Card> out(size());
+std::vector<Card> CardSet::cards() const {
+  std::vector<Card> out(size());
   size_t n = 0;
   for (size_t i = 0; i < STANDARD_DECK_SIZE; i++)
     if (_cardmask & (ONE64 << i))
@@ -254,8 +252,8 @@ vector<Card> CardSet::cards() const {
   return out;
 }
 
-vector<CardSet> CardSet::cardSets() const {
-  vector<CardSet> out(size());
+std::vector<CardSet> CardSet::cardSets() const {
+  std::vector<CardSet> out(size());
   size_t n = 0;
   for (size_t i = 0; i < STANDARD_DECK_SIZE; i++)
     if (_cardmask & (ONE64 << i))
@@ -485,7 +483,7 @@ PokerEvaluation CardSet::evaluateHigh() const {
     } break;
   }
 
-  cerr << "oops\n";
+  std::cerr << "oops\n";
   return PokerEvaluation(0);
 }
 
@@ -637,7 +635,7 @@ PokerEvaluation CardSet::evaluateHighRanks() const {
     } break;
   }
 
-  cerr << "oops\n";
+  std::cerr << "oops\n";
   return PokerEvaluation(0);
 }
 
@@ -743,7 +741,7 @@ PokerEvaluation CardSet::evaluatePairing() const {
     } break;
   }
 
-  cerr << "oops\n";
+  std::cerr << "oops\n";
   return PokerEvaluation(0);
 }
 
@@ -770,7 +768,7 @@ PokerEvaluation CardSet::evaluateLow2to7() const {
     default:
       // this is a slow way to handle the general case.
       // TODO: specialize the code for the 6 and 7 card cases.
-      vector<Card> cards = this->cards();
+      std::vector<Card> cards = this->cards();
       combinations combo(size(), FULL_HAND_SIZE);
       PokerEvaluation best;
       do {
@@ -812,7 +810,7 @@ PokerEvaluation CardSet::evaluateRanksLow2to7() const {
     default:
       // this is a slow way to handle the general case.
       // TODO: specialize the code for the 6 and 7 card cases.
-      vector<Card> cards = this->cards();
+      std::vector<Card> cards = this->cards();
       combinations combo(size(), FULL_HAND_SIZE);
       PokerEvaluation best;
       do {
@@ -853,7 +851,7 @@ PokerEvaluation CardSet::evaluateSuitsLow2to7() const {
     default:
       // this is a slow way to handle the general case.
       // TODO: specialize the code for the 6 and 7 card cases.
-      vector<Card> cards = this->cards();
+      std::vector<Card> cards = this->cards();
       combinations combo(size(), FULL_HAND_SIZE);
       PokerEvaluation best;
       do {
@@ -1070,7 +1068,7 @@ PokerEvaluation CardSet::evaluateBadugi() const {
         ind[k++] = suits[i];
     };
   }
-  sort(ind.begin(), ind.begin() + k);
+  std::sort(ind.begin(), ind.begin() + k);
 
   // now enter into the fray to find the best possible badugi.  suit
   // order in this loop matters, so we cycle through the permutations
@@ -1089,7 +1087,7 @@ PokerEvaluation CardSet::evaluateBadugi() const {
 
     if (badugiless(branks, minbadugi))
       minbadugi = branks;
-  } while (next_permutation(ind.begin(), ind.begin() + k));
+  } while (std::next_permutation(ind.begin(), ind.begin() + k));
 
   // encode the badugi, it's a low hand where aces plays low.  we set
   // the number of missing suits in the badugi as the "major rank". the
@@ -1216,9 +1214,9 @@ std::ostream& operator<<(std::ostream& sout, const CardSet& e) {
   return sout;
 }
 
-vector<int> findSuitPermutation(const CardSet& source, const CardSet& dest) {
-  vector<int> rot(4, -1);
-  vector<int> taken(4, 0);
+std::vector<int> findSuitPermutation(const CardSet& source, const CardSet& dest) {
+  std::vector<int> rot(4, -1);
+  std::vector<int> taken(4, 0);
 
   int i = 0;
   for (Suit s = Suit::begin(); s < Suit::end(); ++s, ++i) {
@@ -1238,7 +1236,7 @@ vector<int> findSuitPermutation(const CardSet& source, const CardSet& dest) {
 
 CardSet canonizeToBoard(const CardSet& board, const CardSet& hand) {
   CardSet cboard = board.canonize();
-  vector<int> perms = findSuitPermutation(board, cboard);
+  std::vector<int> perms = findSuitPermutation(board, cboard);
   CardSet chand = hand.rotateSuits(perms[0], perms[1], perms[2], perms[3]);
   return chand;
 }
@@ -1252,7 +1250,7 @@ CardSet canonizeToBoard(const CardSet& board, const CardSet& hand) {
 #undef SUITMASK
 
 size_t CardSet::colex() const {
-  vector<Card> cards = this->cards();
+  std::vector<Card> cards = this->cards();
   size_t value = 0;
   for (size_t i = 0; i < cards.size(); i++) {
     size_t code = cards[i].code();
