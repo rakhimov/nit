@@ -1,0 +1,22 @@
+platform: x64
+
+configuration:
+    - Release
+
+install:
+    - git submodule update --init --recursive
+    - set PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
+    - pacman --noconfirm -S mingw-w64-x86_64-boost
+    - pacman --noconfirm -S mingw-w64-x86_64-cmake
+
+before_build:
+    - md build
+
+build_script:
+    - where cmake
+    - cd build
+    - cmake .. -G "MSYS Makefiles" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DCMAKE_VERBOSE_MAKEFILE=ON
+    - make -j 2
+
+test_script:
+    - ctest --verbose
