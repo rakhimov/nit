@@ -20,13 +20,10 @@ endif()
 #
 # set up boost
 #
-set(Boost_USE_STATIC_LIBS OFF)
-set(Boost_USE_MULTITHREADED ON)
-find_package(Boost COMPONENTS program_options REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
-link_directories(${Boost_LIBRARY_DIRS})
+set(BOOST_MIN_VERSION "1.46.0")
+find_package(Boost ${BOOST_MIN_VERSION} REQUIRED COMPONENTS program_options)
+include_directories(SYSTEM ${Boost_INCLUDE_DIR})
 message(STATUS "Boost Include: ${Boost_INCLUDE_DIR}")
-message(STATUS "Boost Libraries: ${Boost_LIBRARY_DIRS}")
 message(STATUS "Boost Libraries: ${Boost_LIBRARIES}")
 
 # Also search for includes in PROJECT_BINARY_DIR to find config.h.
