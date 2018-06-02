@@ -1,7 +1,8 @@
 Nit
 ===
 
-[![Build Status](https://travis-ci.org/rakhimov/nit.svg?branch=master)](https://travis-ci.org/rakhimov/nit)
+[![Travis-CI](https://travis-ci.org/rakhimov/nit.svg?branch=master)](https://travis-ci.org/rakhimov/nit)
+[![Appveyor-CI](https://ci.appveyor.com/api/projects/status/y75jx0in3q4jx6c0?svg=true)](https://ci.appveyor.com/project/rakhimov/nit)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/15886/badge.svg)](https://scan.coverity.com/projects/rakhimov-nit)
 [![codecov](https://codecov.io/gh/rakhimov/nit/branch/master/graph/badge.svg)](https://codecov.io/gh/rakhimov/nit)
 
