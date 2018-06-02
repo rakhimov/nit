@@ -12,10 +12,7 @@
 #include <set>
 #include <vector>
 
-#include <boost/algorithm/string.hpp>
 #include <boost/array.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/math/special_functions/binomial.hpp>
 
 #include <nit/util/combinations.h>
@@ -27,7 +24,6 @@
 #include "suit.h"
 
 using namespace std;
-using namespace boost;
 
 namespace nit {
 
