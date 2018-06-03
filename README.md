@@ -21,7 +21,7 @@ As code is reviewed and code sanitized further commits will be added.
 
 ## Libraries
 
-### peval
+### nit/eval
 
 This is a c++ poker hand evaluation library.
 The main design goals of the library are generality, extensibility, and ease of use.
@@ -34,7 +34,7 @@ built into the CardSet class.
 ### nit-eval
 
 A tool for poker hand evaluation.
-It demonstrates how to use the peval library,
+It demonstrates how to use the nit/eval library,
 and to create evaluators for the different variants of poker.
 
 ### nit-colex

@@ -1,12 +1,12 @@
-# `nit::peval`
+# `nit::eval`
 
-The peval library is a simple flexible library for evaluating poker hands.
+The eval library is a simple flexible library for evaluating poker hands.
 There are two main components to the library, the CardSet class and the
 PokerHandEvaluator class.
 
 ## CardSet
 
-The CardSet class is available by including `<nit/peval/CardSet.h>`.
+The CardSet class is available by including `<nit/eval/CardSet.h>`.
 
 The CardSet class represents a bitset of all cards encoded as a bitset, as well
 as various utility functions for manipulating and querying the contents of the
@@ -28,7 +28,7 @@ string representations can be used to create them.
 Here is a sample program that constructs two hands and prints them to the console.
 
     #include <iostream>
-    #include <nit/peval/CardSet.h>
+    #include <nit/eval/CardSet.h>
 
     using nit::CardSet;
     using nit::Card;
