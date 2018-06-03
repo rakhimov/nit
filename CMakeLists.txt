@@ -15,10 +15,20 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -Wnon-virtual-dtor -Wold-style-cast")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -Werror -Wnon-virtual-dtor -Wold-style-cast")
 
 if(WITH_COVERAGE)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
+endif()
+
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wpedantic -Wredundant-decls -Wcast-align -Wlogical-op -Wvla -Wuseless-cast -Wunreachable-code -Wmissing-declarations")
+  if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER "7.1")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wshadow -Wimplicit-fallthrough=0")
+  endif()
+
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wno-missing-braces -Wshadow -Wunused-exception-parameter")
 endif()
 
 #
