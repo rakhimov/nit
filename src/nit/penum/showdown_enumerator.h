@@ -4,9 +4,8 @@
 #ifndef NIT_PENUM_SHOWDOWN_ENUMERATOR_H_
 #define NIT_PENUM_SHOWDOWN_ENUMERATOR_H_
 
+#include <memory>
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
 
 #include <nit/peval/poker_hand_evaluator.h>
 
@@ -23,7 +22,7 @@ class ShowdownEnumerator {
    */
   std::vector<EquityResult> calculateEquity(
       const std::vector<CardDistribution>& dists, const CardSet& board,
-      boost::shared_ptr<PokerHandEvaluator> peval) const;
+      std::shared_ptr<PokerHandEvaluator> peval) const;
 };
 
 }  // namespace nit

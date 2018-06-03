@@ -4,10 +4,9 @@
 #ifndef NIT_PEVAL_POKER_HAND_EVALUATOR_H_
 #define NIT_PEVAL_POKER_HAND_EVALUATOR_H_
 
+#include <memory>
 #include <string>
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
 
 #include "card_set.h"
 #include "poker_hand_evaluation.h"
@@ -74,8 +73,7 @@ class PokerHandEvaluator {
    * - 'e'    stud/8
    * - 'b'    badugi
    */
-  typedef boost::shared_ptr<PokerHandEvaluator> eval_ptr;
-  static eval_ptr alloc(const std::string& strid);
+  static std::shared_ptr<PokerHandEvaluator> alloc(const std::string& strid);
 
   /**
    * The generic evaluation method.  returns the evaluation for this

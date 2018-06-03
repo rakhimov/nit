@@ -19,9 +19,9 @@
 
 namespace nit {
 
-boost::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc(
+std::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc(
     const std::string& strid) {
-  boost::shared_ptr<PokerHandEvaluator> ret;
+  std::shared_ptr<PokerHandEvaluator> ret;
   switch (strid[0]) {
     case 'h':  //     hold'em
     case 'H':  //     hold'em
