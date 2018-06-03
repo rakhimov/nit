@@ -1,3 +1,4 @@
+#include <exception>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -6,16 +7,20 @@
 
 #include <nit/enum/showdown_enumerator.h>
 
+#include "guard.h"
+
 namespace po = boost::program_options;
 
-int main(int argc, char** argv) {
+namespace {
+
+int runEval(int argc, char** argv) {
   po::options_description desc("nit-eval, a poker hand evaluator");
 
   // clang-format off
   desc.add_options()
       ("help,?", "produce help message")
       ("game,g", po::value<std::string>()->default_value("h"),
-          "game to use for evaluation")
+       "game to use for evaluation")
       ("board,b", po::value<std::string>(), "community cards for he/o/o8")
       ("hand,h", po::value<std::vector<std::string>>(), "a hand for evaluation")
       ("quiet,q", "produces no output");
@@ -26,12 +31,13 @@ int main(int argc, char** argv) {
   p.add("hand", -1);
 
   po::variables_map vm;
-  po::store(po::command_line_parser(argc, argv)
-                .style(po::command_line_style::unix_style)
-                .options(desc)
-                .positional(p)
-                .run(),
-            vm);
+  try {
+    po::store(po::parse_command_line(argc, argv, desc), vm);
+  } catch (const std::exception& err) {
+    std::cerr << "Option error: " << err.what() << "\n\n"
+              << desc << std::endl;
+    return 1;
+  }
   po::notify(vm);
 
   // check for help
@@ -81,4 +87,12 @@ int main(int argc, char** argv) {
                 << results[i].str() << ")" << std::endl;
     }
   }
+
+  return 0;
+}
+
+}  // namespace
+
+int main(int argc, char** argv) {
+  return guard([&argc, &argv] { return runEval(argc, argv); });
 }
