@@ -19,7 +19,8 @@ class RazzHandEvaluator : public PokerHandEvaluator {
   }
 
   PokerEvaluation evaluateRanks(
-      const CardSet& hand, const CardSet& board = CardSet(0)) const override {
+      const CardSet& hand,
+      const CardSet& /*board*/ = CardSet(0)) const override {
     return hand.evaluateLowA5();
   }
 

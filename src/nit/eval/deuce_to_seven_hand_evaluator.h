@@ -24,12 +24,14 @@ class DeuceToSevenHandEvaluator : public PokerHandEvaluator {
   }
 
   PokerEvaluation evaluateRanks(
-      const CardSet& hand, const CardSet& board = CardSet(0)) const override {
+      const CardSet& hand,
+      const CardSet& /*board*/ = CardSet(0)) const override {
     return hand.evaluateRanksLow2to7();
   }
 
   PokerEvaluation evaluateSuits(
-      const CardSet& hand, const CardSet& board = CardSet(0)) const override {
+      const CardSet& hand,
+      const CardSet& /*board*/ = CardSet(0)) const override {
     return hand.evaluateSuitsLow2to7();
   }
 

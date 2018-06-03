@@ -123,7 +123,9 @@ class PokerHandEvaluator {
   /**
    * used to add "draws" to draw games
    */
-  virtual void setNumDraws(size_t sz) { throw LogicError("not implemented"); }
+  virtual void setNumDraws(size_t /*sz*/) {
+    throw LogicError("not implemented");
+  }
 
   /**
    * Given a set of showdown hands, return the corresponding number of

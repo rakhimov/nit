@@ -21,12 +21,14 @@ class DrawHighHandEvaluator : public PokerHandEvaluator {
   }
 
   PokerEvaluation evaluateRanks(
-      const CardSet& hand, const CardSet& board = CardSet(0)) const override {
+      const CardSet& hand,
+      const CardSet& /*board*/ = CardSet(0)) const override {
     return hand.evaluateHighRanks();
   }
 
   PokerEvaluation evaluateSuits(
-      const CardSet& hand, const CardSet& board = CardSet(0)) const override {
+      const CardSet& hand,
+      const CardSet& /*board*/ = CardSet(0)) const override {
     return hand.evaluateHighFlush();
   }
 
