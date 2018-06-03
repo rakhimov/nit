@@ -112,8 +112,8 @@ void PokerHand::append(const Card& c) {
 
 void PokerHand::append(const CardSet& cs) {
   std::vector<Card> cards = cs.cards();
-  for (size_t i = 0; i < cards.size(); i++)
-    append(cards[i]);
+  for (auto card : cards)
+    append(card);
 }
 
 void PokerHand::append(const PokerHand& h) {
@@ -221,8 +221,8 @@ void PokerHand::sortEval() const {
 
 void PokerHand::remove(const CardSet& cs) {
   std::vector<Card> cards = cs.cards();
-  for (size_t i = 0; i < cards.size(); i++)
-    remove(cards[i]);
+  for (auto card : cards)
+    remove(card);
 }
 
 void PokerHand::remove(const PokerHand& ph) {

@@ -37,10 +37,10 @@ class OmahaHighHandEvaluator : public PokerHandEvaluator {
     fillHands(hand_candidates, hand);
     fillBoards(board_candidates, board);
 
-    for (size_t i = 0; i < hand_candidates.size(); i++)
-      for (size_t j = 0; j < board_candidates.size(); j++) {
+    for (auto& hand_candidate : hand_candidates)
+      for (const auto& board_candidate : board_candidates) {
         PokerEvaluation e =
-            CardSet(hand_candidates[i] | board_candidates[j]).evaluateHigh();
+            CardSet(hand_candidate | board_candidate).evaluateHigh();
         if (e > eval[0])
           eval[0] = e;
       }
@@ -87,10 +87,10 @@ class OmahaHighHandEvaluator : public PokerHandEvaluator {
     fillHands(hand_candidates, hand);
     fillBoards(board_candidates, board);
 
-    for (size_t i = 0; i < hand_candidates.size(); i++)
-      for (size_t j = 0; j < board_candidates.size(); j++) {
-        PokerEvaluation e = CardSet(hand_candidates[i] | board_candidates[j])
-                                .evaluateHighFlush();
+    for (auto& hand_candidate : hand_candidates)
+      for (const auto& board_candidate : board_candidates) {
+        PokerEvaluation e =
+            CardSet(hand_candidate | board_candidate).evaluateHighFlush();
         if (e > eval)
           eval = e;
       }

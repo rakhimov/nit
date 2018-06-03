@@ -67,10 +67,10 @@ class OmahaEightHandEvaluator : public PokerHandEvaluator {
     fillHands(hand_candidates, hand);
     fillBoards(board_candidates, board);
 
-    for (size_t i = 0; i < hand_candidates.size(); i++)
-      for (size_t j = 0; j < board_candidates.size(); j++) {
+    for (auto& hand_candidate : hand_candidates)
+      for (const auto& board_candidate : board_candidates) {
         PokerEvaluation e =
-            CardSet(hand_candidates[i] | board_candidates[j]).evaluateHigh();
+            CardSet(hand_candidate | board_candidate).evaluateHigh();
         if (e > eval[0])
           eval[0] = e;
       }
@@ -107,8 +107,8 @@ class OmahaEightHandEvaluator : public PokerHandEvaluator {
 
     int bmask = flipAce(board.rankMask() & 0x107F);
     if (nRanksTable[bmask] >= 3) {
-      for (size_t i = 0; i < hand_candidates.size(); i++) {
-        int hmask = flipAce(hand_candidates[i].rankMask() & 0x107F);
+      for (auto& hand_candidate : hand_candidates) {
+        int hmask = flipAce(hand_candidate.rankMask() & 0x107F);
         if (nRanksTable[hmask] < 2)
           continue;
         CardSet lowRanks(unflipAce(
@@ -144,8 +144,8 @@ class OmahaEightHandEvaluator : public PokerHandEvaluator {
     fillHands(hand_candidates, hand);
     int bmask = flipAce(board.rankMask() & 0x107F);
     if (nRanksTable[bmask] >= 3) {
-      for (size_t i = 0; i < hand_candidates.size(); i++) {
-        int hmask = flipAce(hand_candidates[i].rankMask() & 0x107F);
+      for (auto& hand_candidate : hand_candidates) {
+        int hmask = flipAce(hand_candidate.rankMask() & 0x107F);
         if (nRanksTable[hmask] < 2)
           continue;
         CardSet lowRanks(unflipAce(

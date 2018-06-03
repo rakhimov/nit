@@ -76,11 +76,13 @@ int main(int argc, char** argv) {
     } while (cards.next());
 
     if (vm.count("ranks") > 0) {
-      for (auto it = rankHands.begin(); it != rankHands.end(); it++)
-        std::cout << boost::format("%s: %d\n") % it->first % it->second;
+      for (auto& rankHand : rankHands)
+        std::cout << boost::format("%s: %d\n") % rankHand.first %
+                         rankHand.second;
     } else {
-      for (auto it = canonicalHands.begin(); it != canonicalHands.end(); it++)
-        std::cout << boost::format("%s: %d\n") % it->str() % it->colex();
+      for (const auto& canonicalHand : canonicalHands)
+        std::cout << boost::format("%s: %d\n") % canonicalHand.str() %
+                         canonicalHand.colex();
     }
   } catch (std::exception& e) {
     std::cerr << "-- caught exception--\n" << e.what() << "\n";

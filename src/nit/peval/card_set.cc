@@ -1057,15 +1057,15 @@ PokerEvaluation CardSet::evaluateBadugi() const {
   std::array<int, 4> ind;
   int bmust = 0;
   size_t k = 0;
-  for (size_t i = 0; i < suits.size(); i++) {
-    switch (nRanksTable[suits[i]]) {
+  for (int suit : suits) {
+    switch (nRanksTable[suit]) {
       case 1:
-        bmust |= suits[i];
+        bmust |= suit;
         // fall through
       case 0:
         break;
       default:
-        ind[k++] = suits[i];
+        ind[k++] = suit;
     };
   }
   std::sort(ind.begin(), ind.begin() + k);

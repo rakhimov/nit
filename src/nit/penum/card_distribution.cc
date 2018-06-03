@@ -153,9 +153,9 @@ bool CardDistribution::parse(const std::string& input) {
 std::string CardDistribution::display() const { return str(); }
 
 void CardDistribution::removeCards(const CardSet& dead) {
-  for (size_t i = 0; i < _handList.size(); i++)
-    if (_handList[i].intersects(dead))
-      _weights[_handList[i]] = 0.0;
+  for (auto& i : _handList)
+    if (i.intersects(dead))
+      _weights[i] = 0.0;
 }
 
 double CardDistribution::weight() const {

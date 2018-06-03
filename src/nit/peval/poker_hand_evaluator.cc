@@ -20,10 +20,10 @@ static double INV_LUT[] = {0,       1 / 1.0, 1 / 2.0, 1 / 3.0, 1 / 4.0, 1 / 5.0,
  */
 void display(const std::vector<CardSet>& hands, const CardSet& board,
              std::vector<EquityResult>& result) {
-  for (size_t i = 0; i < hands.size(); i++)
-    std::cout << hands[i].str() << " ";
-  for (size_t i = 0; i < result.size(); i++)
-    std::cout << result[i].winShares << " ";
+  for (const auto& hand : hands)
+    std::cout << hand.str() << " ";
+  for (auto& i : result)
+    std::cout << i.winShares << " ";
   std::cout << std::endl;
 }
 

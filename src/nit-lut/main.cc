@@ -58,33 +58,33 @@ int main(int argc, char** argv) {
     std::set<nit::CardSet> boards = nit::createCardSet(boardCount, grouping);
 
     auto evaluator = nit::PokerHandEvaluator::alloc(game);
-    for (auto pit = pockets.begin(); pit != pockets.end(); pit++)
-      for (auto bit = boards.begin(); bit != boards.end(); bit++) {
+    for (const auto& pocket : pockets)
+      for (const auto& board : boards) {
         if (ranks) {
-          nit::PokerEvaluation eval = evaluator->evaluateRanks(*pit, *bit);
+          nit::PokerEvaluation eval = evaluator->evaluateRanks(pocket, board);
           // cout << boost::format("%s, %s\n") % pit->rankstr() %
           // bit->rankstr();
 
           // clang-format off
           std::cout << boost::format("%s, %s: [%4d,%4d] -> %s [%9d]\n") %
-                           pit->str() %
-                           bit->str() %
-                           pit->rankColex() %
-                           bit->rankColex() %
+                           pocket.str() %
+                           board.str() %
+                           pocket.rankColex() %
+                           board.rankColex() %
                            eval.str() %
                            eval.code();
           // clang-format on
         } else {
-          bit->canonize(*pit);
-          if (pit->intersects(*bit))
+          board.canonize(pocket);
+          if (pocket.intersects(board))
             continue;
-          nit::PokerHandEvaluation eval = evaluator->evaluate(*pit, *bit);
+          nit::PokerHandEvaluation eval = evaluator->evaluate(pocket, board);
           // clang-format off
           std::cout << boost::format("%s, %s: [%4d,%4d] -> %s [%9d]\n") %
-                           pit->str() %
-                           bit->str() %
-                           pit->colex() %
-                           bit->colex() %
+                           pocket.str() %
+                           board.str() %
+                           pocket.colex() %
+                           board.colex() %
                            eval.str() %
                            eval.high().code();
           // clang-format on

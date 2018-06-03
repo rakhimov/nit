@@ -188,9 +188,8 @@ class PartitionEnumerator2 {
                        _subsets[n].begin());
     } else if (n == 0) {
       size_t i = 0;
-      for (std::vector<size_t>::iterator it = _subsets[0].begin();
-           it != _subsets[0].end(); it++)
-        *it = i++;
+      for (size_t& it : _subsets[0])
+        it = i++;
     }
     _pcombos[n].reset();
     makeMask(n);
