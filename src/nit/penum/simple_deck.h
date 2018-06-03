@@ -97,7 +97,7 @@ class SimpleDeck {
   void shuffle() {
     std::shuffle(m_deck.begin(), m_deck.end(),
                  std::mt19937(std::random_device()()));
-    reset();  //m_current = 0;
+    reset();  // m_current = 0;
   }
 
   /**
