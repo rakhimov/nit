@@ -41,6 +41,19 @@ matrix:
               - make test
               - cd ..
               - .travis/submit_codecov.sh
+        - os: linux
+          compiler: gcc
+          env: CONFIG=Memcheck
+          addons:
+              apt:
+                  packages:
+                      - libboost-all-dev
+                      - valgrind
+          script:
+              - cd build
+              - cmake .. -DCMAKE_BUILD_TYPE=Debug
+              - make -j 2
+              - find bin/ -name '*_tests' | xargs -n 1 valgrind --tool=memcheck --leak-check=full --show-leak-kinds=definite --errors-for-leak-kinds=definite
 
 before_script:
     - mkdir build
