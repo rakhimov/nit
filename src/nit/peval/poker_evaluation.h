@@ -47,8 +47,8 @@ const int ACE_LOW_BIT = 0x01 << Rank::NUM_RANK;
 class PokerEvaluation {
  public:
   PokerEvaluation();
-  explicit PokerEvaluation(
-      int ecode);  //!< for codes saved for later use, like in a file
+  /// for codes saved for later use, like in a file
+  explicit PokerEvaluation(int ecode);
 
 #if 0
     PokerEvaluation(int type,             //!< Manually create high hand evaluation
@@ -200,11 +200,11 @@ class PokerEvaluation {
    * the the ordering is reversed.  That will
    * make the comparison 75432 > K5432 true.
    */
-  int _evalcode;
+  int _evalcode{0};
 };
 
 // typedef to support refactoring
-typedef PokerEvaluation Evaluation;
+using Evaluation = PokerEvaluation;
 
 }  // namespace nit
 

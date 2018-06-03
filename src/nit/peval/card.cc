@@ -10,9 +10,7 @@
 
 namespace nit {
 
-Card::Card() : _card(0) {}
-
-Card::Card(const std::string& str) : _card(0) { fromString(str); }
+Card::Card(const std::string& str) { fromString(str); }
 
 Card::Card(const Rank& r, const Suit& s) : _card(encode(r, s)) {}
 

@@ -194,7 +194,7 @@ class CardSet {
  private:
   //!< bit mask of cards in "canonical" order. [2c,3c ... Ac,Ad ... Ah ...
   //!< Qs,Ks,As]
-  uint64_t _cardmask;
+  uint64_t _cardmask{0};
 };
 
 ////////////////////////////////////////////////////////////////////////////////

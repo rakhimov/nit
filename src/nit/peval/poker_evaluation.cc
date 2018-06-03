@@ -20,7 +20,7 @@ const int MAJOR_MASK = 0xF << MAJOR_SHIFT;
 const int MINOR_MASK = 0xF << MINOR_SHIFT;
 const int KICKER_MASK = 0x1FFF;
 
-PokerEvaluation::PokerEvaluation() : _evalcode(0) {}
+PokerEvaluation::PokerEvaluation() = default;
 
 PokerEvaluation::PokerEvaluation(int ecode) : _evalcode(ecode) {}
 

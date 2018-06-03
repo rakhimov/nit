@@ -11,12 +11,12 @@
 
 namespace nit {
 
-ShowdownEnumerator::ShowdownEnumerator() {}
+ShowdownEnumerator::ShowdownEnumerator() = default;
 
 std::vector<EquityResult> ShowdownEnumerator::calculateEquity(
     const std::vector<CardDistribution>& dists, const CardSet& board,
     std::shared_ptr<PokerHandEvaluator> peval) const {
-  if (peval.get() == NULL)
+  if (peval.get() == nullptr)
     throw std::runtime_error("ShowdownEnumerator, null evaluator");
   assert(dists.size() > 1);
   const size_t ndists = dists.size();

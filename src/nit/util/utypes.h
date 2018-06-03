@@ -5,7 +5,7 @@
 
 #include <string>
 
-typedef unsigned int uint;
+using uint = unsigned int;
 // typedef unsigned char ubyte;
 
 const uint64_t ONE64 = 1;

@@ -13,33 +13,33 @@ namespace nit {
  */
 class BadugiHandEvaluator : public PokerHandEvaluator {
  public:
-  BadugiHandEvaluator() : PokerHandEvaluator(), _numDraws(0) {}
+  BadugiHandEvaluator() = default;
 
-  virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                           const CardSet&) const {
+  PokerHandEvaluation evaluateHand(const CardSet& hand,
+                                   const CardSet&) const override {
     return PokerHandEvaluation(hand.evaluateBadugi());
   }
 
-  virtual PokerEvaluation evaluateRanks(
-      const CardSet& hand, const CardSet& board = CardSet(0)) const {
+  PokerEvaluation evaluateRanks(
+      const CardSet& hand, const CardSet& board = CardSet(0)) const override {
     throw std::runtime_error(
         "BadugiHandEvaluator::evaluateRanks, not implemented");
   }
 
-  virtual PokerEvaluation evaluateSuits(
-      const CardSet& hand, const CardSet& board = CardSet(0)) const {
+  PokerEvaluation evaluateSuits(
+      const CardSet& hand, const CardSet& board = CardSet(0)) const override {
     throw std::runtime_error(
         "BadugiHandEvaluator::evaluateSuits, not implemented");
   }
 
-  virtual size_t handSize() const { return 4; }
-  virtual size_t boardSize() const { return 0; }
-  virtual size_t evaluationSize() const { return 1; }
-  virtual size_t numDraws() const { return _numDraws; }
-  virtual void setNumDraws(size_t sz) { _numDraws = sz; }
+  size_t handSize() const override { return 4; }
+  size_t boardSize() const override { return 0; }
+  size_t evaluationSize() const override { return 1; }
+  size_t numDraws() const override { return _numDraws; }
+  void setNumDraws(size_t sz) override { _numDraws = sz; }
 
  private:
-  size_t _numDraws;
+  size_t _numDraws{0};
 };
 
 }  // namespace nit

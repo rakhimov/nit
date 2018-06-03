@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <array>
 #include <functional>
+#include <random>
 #include <string>
 
 #include <nit/peval/card.h>
@@ -94,7 +95,8 @@ class SimpleDeck {
   CardSet operator[](size_t i) const { return _deck[i]; }
 
   void shuffle() {
-    std::random_shuffle(_deck.begin(), _deck.end());
+    std::shuffle(_deck.begin(), _deck.end(),
+                 std::mt19937(std::random_device()()));
     reset();  //_current = 0;
   }
 
@@ -108,8 +110,8 @@ class SimpleDeck {
 #endif
     CardSet ret;
 
-    uint32_t lower = static_cast<uint32_t>(mask & UINT32_C(0xFFFFFFFF));
-    uint32_t upper =
+    auto lower = static_cast<uint32_t>(mask & UINT32_C(0xFFFFFFFF));
+    auto upper =
         static_cast<uint32_t>((mask & UINT64_C(0xFFFFFFFF00000000)) >> 32);
 
     while (lower) {

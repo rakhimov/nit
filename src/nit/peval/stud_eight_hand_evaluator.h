@@ -13,14 +13,14 @@ namespace nit {
  */
 class StudEightHandEvaluator : public PokerHandEvaluator {
  public:
-  virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                           const CardSet&) const {
+  PokerHandEvaluation evaluateHand(const CardSet& hand,
+                                   const CardSet&) const override {
     return PokerHandEvaluation(hand.evaluateHigh(), hand.evaluate8LowA5());
   }
 
-  virtual size_t handSize() const { return 7; }
-  virtual size_t boardSize() const { return 0; }
-  virtual size_t evaluationSize() const { return 2; }
+  size_t handSize() const override { return 7; }
+  size_t boardSize() const override { return 0; }
+  size_t evaluationSize() const override { return 2; }
 };
 
 }  // namespace nit

@@ -32,17 +32,17 @@ std::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc(
 
     case 'k':  //     Kansas City lowball (2-7)
       ret.reset(new UniversalHandEvaluator(1, 5, 0, 0, 0,
-                                           &CardSet::evaluateLow2to7, NULL));
+                                           &CardSet::evaluateLow2to7, nullptr));
       break;
 
     case 'l':  //     lowball (A-5)
       ret.reset(new UniversalHandEvaluator(1, 5, 0, 0, 0,
-                                           &CardSet::evaluateLowA5, NULL));
+                                           &CardSet::evaluateLowA5, nullptr));
       break;
 
     case '3':  //     three card poker
       ret.reset(new UniversalHandEvaluator(1, 3, 0, 0, 0, &CardSet::evaluate3CP,
-                                           NULL));
+                                           nullptr));
       break;
 
     case 'O':  //     omaha high
@@ -97,7 +97,7 @@ std::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc(
 
     case 'T':  //     triple draw lowball (A-5)
       ret.reset(new UniversalHandEvaluator(1, 5, 0, 0, 0,
-                                           &CardSet::evaluateLowA5, NULL));
+                                           &CardSet::evaluateLowA5, nullptr));
       break;
 
     case 'o':  //     omaha/high low

@@ -76,7 +76,7 @@ std::string PokerHand::preflopstr() const {
 // extracted and populate the hand.
 void PokerHand::fromString(const std::string& instr) {
   clear();
-  size_t slen = (size_t)instr.length();
+  auto slen = (size_t)instr.length();
   if (slen == 0)
     return;
   if (slen == 1)

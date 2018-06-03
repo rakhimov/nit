@@ -28,7 +28,7 @@ class CardDistribution {
   CardDistribution(const CardDistribution& cd);
   CardDistribution& operator=(const CardDistribution& other);
 
-  virtual ~CardDistribution() {}  //!< for the virtual methods
+  virtual ~CardDistribution() = default;  //!< for the virtual methods
 
   void clear();
 

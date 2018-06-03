@@ -21,7 +21,7 @@ class combinations {
     if (k_ > 0)
       comb_ = new size_t[k_];
     else
-      comb_ = NULL;
+      comb_ = nullptr;
     for (size_t i = 0; i < k_; ++i)
       comb_[i] = i;
   }
@@ -42,7 +42,7 @@ class combinations {
     if (k_ > 0)
       comb_ = new size_t[k_];
     else
-      comb_ = NULL;
+      comb_ = nullptr;
     for (size_t i = 0; i < k_; ++i)
       comb_[i] = c.comb_[i];
   }
@@ -114,12 +114,7 @@ class combinations {
 template <unsigned int N>
 class Combinations {
  public:
-  Combinations() : K(1) {
-    for (unsigned int i = 0; i < K; ++i)
-      comb_[i] = i;
-  }
-
-  Combinations(unsigned int k) : K(k) {
+  explicit Combinations(unsigned int k = 1) : K(k) {
     for (unsigned int i = 0; i < K; ++i)
       comb_[i] = i;
   }

@@ -80,10 +80,10 @@ inline int lastbit(uint16_t v) {
 
 inline int lastbit(uint64_t v) {
   if (v) {
-    uint32_t lower = static_cast<uint32_t>(v & 0xFFFFFFFF);
+    auto lower = static_cast<uint32_t>(v & 0xFFFFFFFF);
     if (lower)
       return lastbit(lower);
-    uint32_t upper =
+    auto upper =
         static_cast<uint32_t>((v & UINT64_C(0xFFFFFFFF00000000)) >> 32);
 
     // uint32_t upper = static_cast<uint32_t>((v>>32)&0xFFFFFFFF);

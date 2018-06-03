@@ -14,8 +14,8 @@ namespace nit {
  */
 class HoldemHandEvaluator : public PokerHandEvaluator {
  public:
-  virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                           const CardSet& board) const {
+  PokerHandEvaluation evaluateHand(const CardSet& hand,
+                                   const CardSet& board) const override {
     // if (hand.size () != NUM_HOLDEM_POCKET)
     // throw std::invalid_argument ("HHE: incorrect number of pocket
     // cards");
@@ -24,23 +24,23 @@ class HoldemHandEvaluator : public PokerHandEvaluator {
     return PokerHandEvaluation(h.evaluateHigh());
   }
 
-  virtual PokerEvaluation evaluateRanks(
-      const CardSet& hand, const CardSet& board = CardSet(0)) const {
+  PokerEvaluation evaluateRanks(
+      const CardSet& hand, const CardSet& board = CardSet(0)) const override {
     CardSet h = hand;
     h.insertRanks(board);
     return h.evaluateHighRanks();
   }
 
-  virtual PokerEvaluation evaluateSuits(
-      const CardSet& hand, const CardSet& board = CardSet(0)) const {
+  PokerEvaluation evaluateSuits(
+      const CardSet& hand, const CardSet& board = CardSet(0)) const override {
     CardSet h = hand;
     h.insert(board);
     return h.evaluateHighFlush();
   }
 
-  virtual size_t handSize() const { return NUM_HOLDEM_POCKET; }
-  virtual size_t boardSize() const { return BOARD_SIZE; }
-  virtual size_t evaluationSize() const { return 1; }
+  size_t handSize() const override { return NUM_HOLDEM_POCKET; }
+  size_t boardSize() const override { return BOARD_SIZE; }
+  size_t evaluationSize() const override { return 1; }
 };
 
 }  // namespace nit

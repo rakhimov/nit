@@ -20,13 +20,12 @@ namespace nit {
  * being used.  Usually it is either wins/ties, or m1/m2
  */
 struct EquityResult {
-  double winShares;
-  double tieShares;
-  double equity;
-  double equity2;  // second moment of equity
+  double winShares{0.0};
+  double tieShares{0.0};
+  double equity{0.0};
+  double equity2{0.0};  // second moment of equity
 
-  explicit EquityResult()
-      : winShares(0.0), tieShares(0.0), equity(0.0), equity2(0.0) {}
+  EquityResult() = default;
 
   EquityResult& operator+=(const EquityResult& other) {
     winShares += other.winShares;
@@ -166,11 +165,11 @@ class PokerHandEvaluator {
   std::string _subclassID;
 
   // we can turn on and off suit evaluation if we choose
-  bool _useSuits;
+  bool _useSuits{true};
 };
 
 // for planned refactoring
-typedef PokerHandEvaluator GameEvaluator;
+using GameEvaluator = PokerHandEvaluator;
 
 }  // namespace nit
 

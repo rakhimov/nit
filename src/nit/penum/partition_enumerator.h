@@ -36,7 +36,7 @@ OutputIterator myset_difference(InputIterator1 first1, InputIterator1 last1,
   return copy(first1, last1, result);
 }
 
-typedef combinations Combos;
+using Combos = combinations;
 
 /**
  * this class enumerates over all partistions of a set of data
@@ -58,8 +58,8 @@ class PartitionEnumerator2 {
         _masks(partitions.size()) {
     int used = 0;
     for (size_t i = 0; i < _parts.size(); i++) {
-      _pcombos.push_back(Combos(_setSize - used, _parts[i]));
-      _subsets.push_back(std::vector<size_t>(_setSize - used));
+      _pcombos.emplace_back(_setSize - used, _parts[i]);
+      _subsets.emplace_back(_setSize - used);
       used += _parts[i];
       setup(static_cast<int>(i));
     }
@@ -73,7 +73,7 @@ class PartitionEnumerator2 {
     for (size_t p = 0; p < numParts(); p++) {
       ret += (p ? " {" : "{");
       for (size_t i = 0; i < partSize(p); i++) {
-        int el = boost::lexical_cast<int>(getIndex(p, i));
+        auto el = boost::lexical_cast<int>(getIndex(p, i));
         ret += (i ? " " : "") + std::to_string(el);
       }
       ret += "}";
@@ -89,7 +89,7 @@ class PartitionEnumerator2 {
     for (size_t p = 0; p < numParts(); p++) {
       ret += (p ? " {" : "{");
       for (size_t i = 0; i < partSize(p); i++) {
-        int el = boost::lexical_cast<int>(get(p, i));
+        auto el = boost::lexical_cast<int>(get(p, i));
         ret += (i ? " " : "") + std::to_string(el);
       }
       if (partSize(p) == 0)
@@ -142,7 +142,7 @@ class PartitionEnumerator2 {
       _masks[0] = _pcombos[0].getMask();
     } else {
       const size_t* c = _pcombos[partnum].begin();
-      std::vector<size_t>::const_iterator s = _subsets[partnum].begin();
+      auto s = _subsets[partnum].begin();
       uint64_t ret = 0;
 
       // this loop is very expensive, it accounts for about *half*

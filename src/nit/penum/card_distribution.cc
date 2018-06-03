@@ -27,11 +27,8 @@ CardDistribution::CardDistribution(const CardSet& cs)
 
 CardDistribution::CardDistribution(const CardDistribution& cd) { *this = cd; }
 
-CardDistribution& CardDistribution::operator=(const CardDistribution& other) {
-  _handList = other._handList;
-  _weights = other._weights;
-  return *this;
-}
+CardDistribution& CardDistribution::operator=(const CardDistribution& other) =
+    default;
 
 size_t CardDistribution::size() const { return _handList.size(); }
 
@@ -60,7 +57,7 @@ void CardDistribution::fill(int n) {
 
 void CardDistribution::fill(const CardSet& cs, int n) {
   std::vector<Card> cards = cs.cards();
-  int setsize = static_cast<int>(cards.size());
+  auto setsize = static_cast<int>(cards.size());
   combinations hands(setsize, n);
   int vsize = boost::math::binomial_coefficient<double>(setsize, n);
   clear();
@@ -83,7 +80,7 @@ const CardSet& CardDistribution::operator[](size_t index) const {
 
 const double& CardDistribution::operator[](const CardSet& hand) const {
   static const double kStaticZero = 0.0;  // for hands not in distribution
-  std::map<CardSet, double>::const_iterator it = _weights.find(hand);
+  auto it = _weights.find(hand);
   if (it == _weights.end())
     return kStaticZero;
   return it->second;

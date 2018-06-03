@@ -50,9 +50,9 @@ namespace nit {
  * ctors
  */
 
-CardSet::CardSet() : _cardmask(0) {}
+CardSet::CardSet() = default;
 
-CardSet::CardSet(const CardSet& cs) : _cardmask(cs._cardmask) {}
+CardSet::CardSet(const CardSet& cs) = default;
 
 CardSet::CardSet(const Card& c) : _cardmask(ONE64 << c._card) {}
 
@@ -289,7 +289,7 @@ Card CardSet::find(const Rank& r) const {
     if (SMASK(i) & r.rankBit())
       return Card(r, Suit(i));
   }
-  return Card();
+  return {};
 }
 
 bool CardSet::contains(const Suit& s) const {

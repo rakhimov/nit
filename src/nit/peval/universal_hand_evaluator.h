@@ -25,7 +25,7 @@
 
 namespace nit {
 
-typedef PokerEvaluation (CardSet::*evalFunction)() const;
+using evalFunction = PokerEvaluation (CardSet::*)() const;
 
 /**
  * A generic poker game hand evaluator, from which nearly all poker evaluators
@@ -58,27 +58,27 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
         _herouse(herouse),
         _evalA(evalA),
         _evalB(evalB) {
-    if (evalA == evalFunction(NULL))
+    if (evalA == evalFunction(nullptr))
       throw std::invalid_argument(
           "UnivHandEval: first evaluator (A) must be non-null");
 
-    if (evalB == evalFunction(NULL))
+    if (evalB == evalFunction(nullptr))
       _evalsperhand = 1;
     else
       _evalsperhand = 2;
   }
 
-  virtual size_t handSize() const { return _heromax; }
-  virtual size_t boardSize() const { return _boardmax; }
+  size_t handSize() const override { return _heromax; }
+  size_t boardSize() const override { return _boardmax; }
 
-  virtual size_t evaluationSize() const {
-    if (_evalB == evalFunction(NULL))
+  size_t evaluationSize() const override {
+    if (_evalB == evalFunction(nullptr))
       return 1;
     return 2;
   }
 
-  virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                           const CardSet& board) const {
+  PokerHandEvaluation evaluateHand(const CardSet& hand,
+                                   const CardSet& board) const override {
     PokerEvaluation eval[2];
 
     // check to see if the input hand is consistent with the game
@@ -125,7 +125,7 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
     }
 
     // if it's a one dimensional evaluation we are done
-    if (_evalB != evalFunction(NULL)) {
+    if (_evalB != evalFunction(nullptr)) {
       // second dimension of the evaulation, usually low in a high/low
       // game.
       eval[1] = PokerEvaluation();
@@ -142,7 +142,7 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
   void fillSubsets(std::vector<CardSet>& candidates, size_t subsetsize,
                    CardSet cards) const {
     if (subsetsize > cards.size()) {
-      candidates.push_back(CardSet());
+      candidates.emplace_back();
       return;
     }
     if (subsetsize == 0) {

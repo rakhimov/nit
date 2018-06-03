@@ -36,7 +36,7 @@ class Card {
     RANK,
   };
 
-  Card();
+  Card() = default;
   explicit Card(const std::string& str);
   explicit Card(const Rank& r, const Suit& s);
 
@@ -81,7 +81,7 @@ class Card {
 
   friend class CardSet;
 
-  uint8_t _card;
+  uint8_t _card{0};
 };
 
 }  // namespace nit

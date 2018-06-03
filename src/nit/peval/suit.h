@@ -35,7 +35,7 @@ class Suit {
   /**
    * Default constructor initializes suit to Suit::Clubs()
    */
-  Suit() : _suit(0) {}
+  Suit() = default;
 
   /**
    * Create from input string.  Only the first letter of the input
@@ -104,7 +104,7 @@ class Suit {
   friend class Card;
   friend class CardSet;
 
-  uint8_t _suit;
+  uint8_t _suit{0};
 
   static display __suitStringType;
 

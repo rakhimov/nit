@@ -53,15 +53,15 @@ class OmahaEightHandEvaluator : public PokerHandEvaluator {
 
    */
 
-  virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                           const CardSet& board) const {
+  PokerHandEvaluation evaluateHand(const CardSet& hand,
+                                   const CardSet& board) const override {
     PokerEvaluation eval[2];
 
     // generate the possible sub hands, player hand candidates are all
     // 4c2 combinations of hands cards,
     // board candidates are all Nc3 board candidates, where N is the size
     // of the board
-    double combos = boost::math::binomial_coefficient<double>(board.size(), 3);
+    auto combos = boost::math::binomial_coefficient<double>(board.size(), 3);
     std::vector<CardSet> board_candidates(static_cast<size_t>(combos));
     std::vector<CardSet> hand_candidates(6);
     fillHands(hand_candidates, hand);
@@ -132,7 +132,7 @@ class OmahaEightHandEvaluator : public PokerHandEvaluator {
     int bmask = flipAce(board.rankMask() & 0x107F);
     int hmask = flipAce(twocard.rankMask() & 0x107F);
     if (nRanksTable[hmask] < 2)
-      return PokerEvaluation();
+      return {};
     CardSet lowRanks(
         unflipAce(bottomRanks(bottomRanks(bmask & (~hmask), 3) | hmask, 5)));
     return lowRanks.evaluate8LowA5();
@@ -193,9 +193,9 @@ class OmahaEightHandEvaluator : public PokerHandEvaluator {
     }
   }
 
-  virtual size_t handSize() const { return NUM_OMAHA_POCKET; }
-  virtual size_t boardSize() const { return BOARD_SIZE; }
-  virtual size_t evaluationSize() const { return 2; }
+  size_t handSize() const override { return NUM_OMAHA_POCKET; }
+  size_t boardSize() const override { return BOARD_SIZE; }
+  size_t evaluationSize() const override { return 2; }
 };
 
 }  // namespace nit

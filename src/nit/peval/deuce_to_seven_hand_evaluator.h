@@ -13,34 +13,34 @@ namespace nit {
  */
 class DeuceToSevenHandEvaluator : public PokerHandEvaluator {
  public:
-  DeuceToSevenHandEvaluator() : PokerHandEvaluator(), _numDraws(0) {}
+  DeuceToSevenHandEvaluator() = default;
 
-  virtual PokerHandEvaluation evaluateHand(const CardSet& hand,
-                                           const CardSet&) const {
+  PokerHandEvaluation evaluateHand(const CardSet& hand,
+                                   const CardSet&) const override {
     if (usesSuits())
       return PokerHandEvaluation(hand.evaluateLow2to7());
     else
       return PokerHandEvaluation(hand.evaluateRanksLow2to7());
   }
 
-  virtual PokerEvaluation evaluateRanks(
-      const CardSet& hand, const CardSet& board = CardSet(0)) const {
+  PokerEvaluation evaluateRanks(
+      const CardSet& hand, const CardSet& board = CardSet(0)) const override {
     return hand.evaluateRanksLow2to7();
   }
 
-  virtual PokerEvaluation evaluateSuits(
-      const CardSet& hand, const CardSet& board = CardSet(0)) const {
+  PokerEvaluation evaluateSuits(
+      const CardSet& hand, const CardSet& board = CardSet(0)) const override {
     return hand.evaluateSuitsLow2to7();
   }
 
-  virtual size_t handSize() const { return 5; }
-  virtual size_t boardSize() const { return 0; }
-  virtual size_t evaluationSize() const { return 1; }
-  virtual size_t numDraws() const { return _numDraws; }
-  virtual void setNumDraws(size_t sz) { _numDraws = sz; }
+  size_t handSize() const override { return 5; }
+  size_t boardSize() const override { return 0; }
+  size_t evaluationSize() const override { return 1; }
+  size_t numDraws() const override { return _numDraws; }
+  void setNumDraws(size_t sz) override { _numDraws = sz; }
 
  private:
-  size_t _numDraws;
+  size_t _numDraws{0};
 };
 
 }  // namespace nit
