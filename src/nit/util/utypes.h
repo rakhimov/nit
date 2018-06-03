@@ -1,16 +1,9 @@
 #ifndef NIT_UTIL_UTYPES_H_
 #define NIT_UTIL_UTYPES_H_
 
+#include <cstdint>
+
 #include <string>
-
-#include <boost/cstdint.hpp>
-
-// extract exactly these types globally
-using boost::int64_t;
-using boost::uint16_t;
-using boost::uint32_t;
-using boost::uint64_t;
-using boost::uint8_t;
 
 typedef unsigned int uint;
 // typedef unsigned char ubyte;

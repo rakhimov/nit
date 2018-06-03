@@ -4,7 +4,7 @@
 #ifndef NIT_PEVAL_POKER_EVALUATION_TABLES_H_
 #define NIT_PEVAL_POKER_EVALUATION_TABLES_H_
 
-#include <boost/cstdint.hpp>
+#include <cstdint>
 
 namespace nit {
 

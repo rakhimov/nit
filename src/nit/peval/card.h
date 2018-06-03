@@ -4,9 +4,9 @@
 #ifndef NIT_PEVAL_CARD_H_
 #define NIT_PEVAL_CARD_H_
 
-#include <string>
+#include <cstdint>
 
-#include <boost/cstdint.hpp>
+#include <string>
 
 namespace nit {
 

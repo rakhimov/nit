@@ -4,11 +4,11 @@
 #ifndef NIT_PEVAL_CARD_SET_H_
 #define NIT_PEVAL_CARD_SET_H_
 
+#include <cstdint>
+
 #include <iosfwd>
 #include <string>
 #include <vector>
-
-#include <boost/cstdint.hpp>
 
 #include "rank.h"
 #include "suit.h"

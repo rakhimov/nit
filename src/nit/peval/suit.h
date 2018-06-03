@@ -4,10 +4,9 @@
 #ifndef NIT_PEVAL_SUIT_H_
 #define NIT_PEVAL_SUIT_H_
 
-#include <string>
+#include <cstdint>
 
-#include <boost/cstdint.hpp>
-#include <boost/operators.hpp>
+#include <string>
 
 namespace nit {
 
@@ -81,8 +80,6 @@ class Suit {
   /**
    * Construct suit from the first char of the input string.  Exception will
    * be thrown if the character is not a valid suit character.
-   *
-   * boost/operators.hpp is used for closure
    */
   bool operator==(const Suit& s) const { return _suit == s._suit; }
   bool operator<=(const Suit& s) const { return _suit <= s._suit; }
