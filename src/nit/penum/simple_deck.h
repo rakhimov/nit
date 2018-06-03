@@ -5,10 +5,9 @@
 #define NIT_PENUM_SIMPLE_DECK_H_
 
 #include <algorithm>
+#include <array>
 #include <functional>
 #include <string>
-
-#include <boost/array.hpp>
 
 #include <nit/peval/card.h>
 #include <nit/peval/card_set.h>
@@ -141,7 +140,7 @@ class SimpleDeck {
 
  private:
   // these are the data which track info about the deck
-  boost::array<CardSet, STANDARD_DECK_SIZE> _deck;
+  std::array<CardSet, STANDARD_DECK_SIZE> _deck;
   size_t _current;
 };
 

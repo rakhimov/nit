@@ -4,7 +4,7 @@
 #ifndef NIT_PEVAL_POKER_HAND_H_
 #define NIT_PEVAL_POKER_HAND_H_
 
-#include <boost/array.hpp>
+#include <array>
 
 #include "card.h"
 #include "card_set.h"
@@ -134,7 +134,7 @@ class PokerHand {
 #ifdef MUTABLE
   mutable  //!< _cards can be mutable to handle sorts, better solution?
 #endif
-      boost::array<Card, MAX_PHCARDS>
+      std::array<Card, MAX_PHCARDS>
           _cards;
   uint8_t _ncards;
 };
