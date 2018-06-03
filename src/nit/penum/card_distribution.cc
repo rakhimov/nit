@@ -7,15 +7,12 @@
 #include <vector>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/foreach.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/math/special_functions/binomial.hpp>
 
 #include <nit/peval/card.h>
 #include <nit/util/combinations.h>
-
-#define boost_foreach BOOST_FOREACH
 
 namespace nit {
 
@@ -119,7 +116,7 @@ bool CardDistribution::parse(const std::string& input) {
 
   std::vector<std::string> hands;
   boost::split(hands, input, boost::is_any_of(","));
-  boost_foreach(const std::string& h, hands) {
+  for (const std::string& h : hands) {
     // handle the weight
     double weight = 1.0;
     if (boost::contains(h, "=")) {
@@ -163,8 +160,8 @@ void CardDistribution::removeCards(const CardSet& dead) {
 
 double CardDistribution::weight() const {
   double total = 0.0;
-  std::pair<CardSet, double> w;
-  boost_foreach(w, _weights) { total += w.second; }
+  for (const std::pair<CardSet, double>& w : _weights)
+    total += w.second;
   return total;
 }
 
