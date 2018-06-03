@@ -12,5 +12,4 @@ execute_process(COMMAND git describe --tags --always
 configure_file(config.h.in nit/config.h)
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
-add_subdirectory(nit/peval)
-add_subdirectory(nit/penum)
+add_subdirectory(nit)

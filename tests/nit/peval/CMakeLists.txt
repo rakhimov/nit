@@ -11,5 +11,5 @@ set(PEVAL_TEST_SRC
   main.cc
   )
 add_executable(peval_tests ${PEVAL_TEST_SRC})
-target_link_libraries(peval_tests peval)
+target_link_libraries(peval_tests nit)
 add_test(TestPeval ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/peval_tests)
