@@ -1214,7 +1214,8 @@ std::ostream& operator<<(std::ostream& sout, const CardSet& e) {
   return sout;
 }
 
-std::vector<int> findSuitPermutation(const CardSet& source, const CardSet& dest) {
+std::vector<int> findSuitPermutation(const CardSet& source,
+                                     const CardSet& dest) {
   std::vector<int> rot(4, -1);
   std::vector<int> taken(4, 0);
 

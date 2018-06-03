@@ -152,7 +152,7 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
 
     std::vector<Card> clist = cards.cards();
     nit::combinations cc(static_cast<uint>(clist.size()),
-                                static_cast<uint>(subsetsize));
+                         static_cast<uint>(subsetsize));
     do {
       CardSet cand;
       for (size_t i = 0; i < subsetsize; i++) {

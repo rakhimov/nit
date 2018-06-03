@@ -211,7 +211,6 @@ typedef PokerEvaluation Evaluation;
 //
 // Extraction operators.
 //
-std::ostream& operator<<(std::ostream& sout,
-                         const nit::PokerEvaluation& e);
+std::ostream& operator<<(std::ostream& sout, const nit::PokerEvaluation& e);
 
 #endif  // NIT_PEVAL_POKER_EVALUATION_H_

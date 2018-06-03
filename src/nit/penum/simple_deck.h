@@ -20,8 +20,7 @@ namespace nit {
 /**
  * used for removing cards from the deck
  */
-struct isLive : public std::binary_function<nit::CardSet,
-                                            nit::CardSet, bool> {
+struct isLive : public std::binary_function<nit::CardSet, nit::CardSet, bool> {
   bool operator()(const CardSet& c, const CardSet& dead) const {
     return !dead.contains(c);
   }

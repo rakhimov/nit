@@ -36,9 +36,8 @@ struct EquityResult {
 
   std::string str() const {
     std::string ret = std::to_string(winShares) + " " +
-                      std::to_string(tieShares) + " " +
-                      std::to_string(equity) + " " +
-                      std::to_string(equity2);
+                      std::to_string(tieShares) + " " + std::to_string(equity) +
+                      " " + std::to_string(equity2);
     return ret;
   }
 };
