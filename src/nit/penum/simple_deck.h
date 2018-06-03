@@ -18,15 +18,6 @@
 namespace nit {
 
 /**
- * used for removing cards from the deck
- */
-struct isLive : public std::binary_function<nit::CardSet, nit::CardSet, bool> {
-  bool operator()(const CardSet& c, const CardSet& dead) const {
-    return !dead.contains(c);
-  }
-};
-
-/**
  * A very simple deck of the cards.
  */
 class SimpleDeck {
@@ -91,7 +82,9 @@ class SimpleDeck {
    */
   void remove(const nit::CardSet& cards) {
     int decr = CardSet(cards | dead()).size();
-    stable_partition(_deck.begin(), _deck.end(), bind2nd(isLive(), cards));
+    std::stable_partition(
+        _deck.begin(), _deck.end(),
+        [&cards](const CardSet& c) { return !cards.contains(c); });
     _current = STANDARD_DECK_SIZE - decr;
   }
 
