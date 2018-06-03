@@ -4,7 +4,7 @@
 
 #include <boost/program_options.hpp>
 
-#include <nit/penum/showdown_enumerator.h>
+#include <nit/enum/showdown_enumerator.h>
 
 namespace po = boost::program_options;
 

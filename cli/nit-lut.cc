@@ -5,10 +5,10 @@
 #include <boost/format.hpp>
 #include <boost/program_options.hpp>
 
-#include <nit/peval/card.h>
-#include <nit/peval/card_set.h>
-#include <nit/peval/card_set_generators.h>
-#include <nit/peval/poker_hand_evaluator.h>
+#include <nit/eval/card.h>
+#include <nit/eval/card_set.h>
+#include <nit/eval/card_set_generators.h>
+#include <nit/eval/poker_hand_evaluator.h>
 #include <nit/util/combinations.h>
 
 namespace po = boost::program_options;
