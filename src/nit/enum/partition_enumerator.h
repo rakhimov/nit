@@ -164,8 +164,8 @@ class PartitionEnumerator2 {
     while (n >= 0) {
       if (m_pcombos[n].next()) {
         makeMask(n);
-        while (++n < m_parts.size())
-          setup(static_cast<int>(n));
+        while (static_cast<std::size_t>(++n) < m_parts.size())
+          setup(n);
         return true;
       }
       if (n == 0) {

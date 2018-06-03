@@ -14,7 +14,7 @@ TEST_CASE("Rank.ConstructorChars", "[Rank]") {
   char rankstr[] = "?";
 
   // test the valid char range
-  for (int i = 0; i < std::strlen(ranks); i++) {
+  for (int i = 0; i <= 12; i++) {
     Rank r(ranks[i]);
     rankstr[0] = ranks[i];
     CHECK(r.str() == rankstr);
