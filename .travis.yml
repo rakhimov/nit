@@ -19,12 +19,27 @@ addons:
         packages:
             - libboost-all-dev
 
-matrix:
+jobs:
     include:
-        - os: osx
+        - stage: lint
+          compiler: clang
+          env: CONFIG=Lint CLANG_VERSION=6.0
+          addons:
+              apt:
+                  packages:
+                      - clang-format-6.0
+                  sources:
+                      - ubuntu-toolchain-r-test
+                      - llvm-toolchain-trusty-6.0
+          install:
+              - git clone https://github.com/Sarcasm/run-clang-format
+          script:
+              - .travis/lint.sh
+        - stage: test
+          os: osx
           compiler: clang
           env: CONFIG=Release
-        - os: linux
+        - stage: test
           compiler: gcc
           env: CONFIG=Coverage
           addons:
@@ -41,7 +56,7 @@ matrix:
               - make test
               - cd ..
               - .travis/submit_codecov.sh
-        - os: linux
+        - stage: test
           compiler: gcc
           env: CONFIG=Memcheck
           addons:
@@ -54,6 +69,10 @@ matrix:
               - cmake .. -DCMAKE_BUILD_TYPE=Debug
               - make -j 2
               - find bin/ -name '*_tests' | xargs -n 1 valgrind --tool=memcheck --leak-check=full --show-leak-kinds=definite --errors-for-leak-kinds=definite
+
+stages:
+    - lint
+    - test
 
 before_script:
     - mkdir build
