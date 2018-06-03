@@ -13,7 +13,7 @@ TEST_CASE("Suit.ConstructorChars", "[Suit]") {
   char suitstr[] = "?";
 
   // test the valid char range
-  for (int i = 0; i < std::strlen(suits); i++) {
+  for (int i = 0; i <= 7; i++) {
     Suit s(suits[i]);
     suitstr[0] = suits[i];
     CHECK_THAT(s.str(), Catch::Equals(suitstr, Catch::CaseSensitive::No));
