@@ -87,8 +87,8 @@ class CardDistribution {
  private:
   const double& weight(const CardSet& cards) const;  // operator[]
 
-  std::vector<CardSet> _handList;
-  std::map<CardSet, double> _weights;
+  std::vector<CardSet> m_handList;
+  std::map<CardSet, double> m_weights;
 };
 
 }  // namespace nit

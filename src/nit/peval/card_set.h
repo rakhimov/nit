@@ -41,15 +41,15 @@ class CardSet {
   CardSet(const CardSet& cs);       //!< copy constructor (default)
   CardSet(const std::string& c);    //!< parse cards untill fail
   explicit CardSet(const Card& c);  //!< create a set with one card
-  explicit CardSet(uint64_t mask) : _cardmask(mask) {}
+  explicit CardSet(uint64_t mask) : m_cardmask(mask) {}
 
-  void clear() { _cardmask = 0; }  //!< empty the set
+  void clear() { m_cardmask = 0; }  //!< empty the set
   void fill() {
-    _cardmask = ~(0xffffffffffffffff << STANDARD_DECK_SIZE);
+    m_cardmask = ~(0xffffffffffffffff << STANDARD_DECK_SIZE);
   }                     //!< put all cards into the set
   size_t size() const;  //!< return number of cards in set
 
-  uint64_t mask() const { return _cardmask; }  //!< 1 bit per card
+  uint64_t mask() const { return m_cardmask; }  //!< 1 bit per card
 
   std::vector<Card> cards() const;        //!< break into Cards
   std::vector<CardSet> cardSets() const;  //!< break into one card/CardSet
@@ -64,7 +64,7 @@ class CardSet {
   CardSet& remove(const Card& c);         //!< remove a card
   CardSet& remove(const CardSet& c);
   bool disjoint(const CardSet& c) const {
-    return (_cardmask & c._cardmask) == 0;
+    return (m_cardmask & c.m_cardmask) == 0;
   }
   bool intersects(const CardSet& c) const { return !disjoint(c); }
 
@@ -164,26 +164,26 @@ class CardSet {
   // this is a bitset, so exposing bit operations should be ok.
   // one thing that should be considered is implementing the &=, etc
   // operators for efficiency and generality using boost::opperators
-  void operator|=(const CardSet& c) { _cardmask |= c._cardmask; }
-  void operator^=(const CardSet& c) { _cardmask ^= c._cardmask; }
-  bool operator==(const CardSet& c) const { return _cardmask == c._cardmask; }
-  bool operator!=(const CardSet& c) const { return _cardmask != c._cardmask; }
-  bool operator<(const CardSet& c) const { return _cardmask < c._cardmask; }
-  bool operator>(const CardSet& c) const { return _cardmask > c._cardmask; }
+  void operator|=(const CardSet& c) { m_cardmask |= c.m_cardmask; }
+  void operator^=(const CardSet& c) { m_cardmask ^= c.m_cardmask; }
+  bool operator==(const CardSet& c) const { return m_cardmask == c.m_cardmask; }
+  bool operator!=(const CardSet& c) const { return m_cardmask != c.m_cardmask; }
+  bool operator<(const CardSet& c) const { return m_cardmask < c.m_cardmask; }
+  bool operator>(const CardSet& c) const { return m_cardmask > c.m_cardmask; }
   CardSet operator&(const CardSet& c) const {
-    return CardSet(_cardmask & c._cardmask);
+    return CardSet(m_cardmask & c.m_cardmask);
   }
   CardSet operator|(const CardSet& c) const {
-    return CardSet(_cardmask | c._cardmask);
+    return CardSet(m_cardmask | c.m_cardmask);
   }
   CardSet operator^(const CardSet& c) const {
-    return CardSet(_cardmask ^ c._cardmask);
+    return CardSet(m_cardmask ^ c.m_cardmask);
   }
 
   void swap(CardSet& c) {
-    uint64_t t = c._cardmask;
-    c._cardmask = _cardmask;
-    _cardmask = t;
+    uint64_t t = c.m_cardmask;
+    c.m_cardmask = m_cardmask;
+    m_cardmask = t;
   }
 
  protected:
@@ -194,7 +194,7 @@ class CardSet {
  private:
   //!< bit mask of cards in "canonical" order. [2c,3c ... Ac,Ad ... Ah ...
   //!< Qs,Ks,As]
-  uint64_t _cardmask{0};
+  uint64_t m_cardmask{0};
 };
 
 ////////////////////////////////////////////////////////////////////////////////

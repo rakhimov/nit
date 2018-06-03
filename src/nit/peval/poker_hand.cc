@@ -19,16 +19,16 @@ PokerHand::PokerHand() { clear(); }
 
 CardSet PokerHand::cardSet() const {
   CardSet cs;
-  for (uint8_t i = 0; i < _ncards; i++)
-    cs.insert(Card(_cards[i]));
+  for (uint8_t i = 0; i < m_ncards; i++)
+    cs.insert(Card(m_cards[i]));
   return cs;
 }
 
 CardSet PokerHand::cardSet(size_t first, size_t len) const {
   CardSet cs;
-  size_t last = std::min(first + len, static_cast<size_t>(_ncards));
+  size_t last = std::min(first + len, static_cast<size_t>(m_ncards));
   for (size_t i = first; i < last; i++)
-    cs.insert(_cards[i]);
+    cs.insert(m_cards[i]);
   return cs;
 }
 
@@ -42,23 +42,23 @@ PokerHand::PokerHand(const std::string& s) {
   fromString(s);
 }
 
-void PokerHand::clear() { _ncards = 0; }
+void PokerHand::clear() { m_ncards = 0; }
 
 // if we have few enough cards, we'll spit it out in order, otherwise
 // just output them as a sorted set.
 std::string PokerHand::str() const {
   std::string out = "";
-  for (int i = 0; i < _ncards; i++)
-    out += _cards[i].str();
+  for (int i = 0; i < m_ncards; i++)
+    out += m_cards[i].str();
   return out;
 }
 
 std::string PokerHand::preflopstr() const {
-  if (_ncards != 2)
+  if (m_ncards != 2)
     throw std::runtime_error(
         "incorrect number of cards for hold'em preflop canon");
-  Card c0 = Card(_cards[0]);
-  Card c1 = Card(_cards[1]);
+  Card c0 = Card(m_cards[0]);
+  Card c1 = Card(m_cards[1]);
 
   if (c0.rank() == c1.rank())
     return c0.rank().str() + c0.rank().str();
@@ -93,11 +93,11 @@ void PokerHand::fromString(const std::string& instr) {
   }
 }
 
-size_t PokerHand::size() const { return static_cast<size_t>(_ncards); }
+size_t PokerHand::size() const { return static_cast<size_t>(m_ncards); }
 
 bool PokerHand::contains(const Card& c) const {
-  for (uint8_t i = 0; i < _ncards; i++)
-    if (_cards[i] == c)
+  for (uint8_t i = 0; i < m_ncards; i++)
+    if (m_cards[i] == c)
       return true;
   return false;
 }
@@ -106,8 +106,8 @@ void PokerHand::append(const Card& c) {
   if (contains(c))
     return;
 
-  if (_ncards < MAX_PHCARDS)
-    _cards[_ncards++] = c;
+  if (m_ncards < MAX_PHCARDS)
+    m_cards[m_ncards++] = c;
 }
 
 void PokerHand::append(const CardSet& cs) {
@@ -117,35 +117,35 @@ void PokerHand::append(const CardSet& cs) {
 }
 
 void PokerHand::append(const PokerHand& h) {
-  for (int i = 0; i < h._ncards; i++)
-    append(h._cards[i]);
+  for (int i = 0; i < h.m_ncards; i++)
+    append(h.m_cards[i]);
 }
 
 void PokerHand::remove(const Card& c) {
-  for (uint8_t i = 0, j = 0; i < _ncards; i++, j++) {
-    if (c == _cards[i]) {
+  for (uint8_t i = 0, j = 0; i < m_ncards; i++, j++) {
+    if (c == m_cards[i]) {
       j++;
-      _ncards--;
+      m_ncards--;
     }
-    _cards[i] = _cards[j];
+    m_cards[i] = m_cards[j];
   }
 }
 
-Card& PokerHand::operator[](size_t index) { return _cards[index]; }
+Card& PokerHand::operator[](size_t index) { return m_cards[index]; }
 
-const Card& PokerHand::operator[](size_t index) const { return _cards[index]; }
+const Card& PokerHand::operator[](size_t index) const { return m_cards[index]; }
 
 void PokerHand::sort() const {
-  std::sort(_cards.begin(), _cards.begin() + _ncards);
+  std::sort(m_cards.begin(), m_cards.begin() + m_ncards);
 }
 
 void PokerHand::pushCardToFront(size_t nth) const {
-  if (nth >= _ncards)
+  if (nth >= m_ncards)
     return;
-  Card c = _cards[nth];
+  Card c = m_cards[nth];
   for (size_t i = nth; i > 0; i--)
-    _cards[i] = _cards[i - 1];
-  _cards[0] = c;
+    m_cards[i] = m_cards[i - 1];
+  m_cards[0] = c;
 }
 
 static bool rankgreater(Card c1, Card c2) {
@@ -155,7 +155,7 @@ static bool rankgreater(Card c1, Card c2) {
 }
 
 void PokerHand::sortRanks() const {
-  std::sort(_cards.begin(), _cards.begin() + _ncards, rankgreater);
+  std::sort(m_cards.begin(), m_cards.begin() + m_ncards, rankgreater);
 }
 
 void PokerHand::sortEval() const {
@@ -215,8 +215,8 @@ void PokerHand::sortEval() const {
       break;
   }
 
-  for (int i = 0; i < _ncards; i++)
-    _cards[i] = newh._cards[i];
+  for (int i = 0; i < m_ncards; i++)
+    m_cards[i] = newh.m_cards[i];
 }
 
 void PokerHand::remove(const CardSet& cs) {
@@ -226,14 +226,14 @@ void PokerHand::remove(const CardSet& cs) {
 }
 
 void PokerHand::remove(const PokerHand& ph) {
-  for (uint8_t i = 0; i < ph._ncards; i++)
-    remove(ph._cards[i]);
+  for (uint8_t i = 0; i < ph.m_ncards; i++)
+    remove(ph.m_cards[i]);
 }
 
 std::vector<Card> PokerHand::cards() const {
   std::vector<Card> out;
-  for (uint8_t i = 0; i < _ncards; i++)
-    out.push_back(_cards[i]);
+  for (uint8_t i = 0; i < m_ncards; i++)
+    out.push_back(m_cards[i]);
   return out;
 }
 

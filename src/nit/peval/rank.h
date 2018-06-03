@@ -42,7 +42,7 @@ class Rank {
   /**
    * Default constructor initializes suit to Rank::Two()
    */
-  Rank() : _rank(RANK_TWO) {}
+  Rank() : m_rank(RANK_TWO) {}
 
   /**
    * Create from input string.
@@ -90,12 +90,12 @@ class Rank {
    * relative ordering: 2<3<4<5<6<7<8<9<T<J<Q<K<A.
    * note that these operators always assume that Ace is high.
    */
-  bool operator==(const Rank& r) const { return _rank == r._rank; }
-  bool operator<=(const Rank& r) const { return _rank <= r._rank; }
-  bool operator<(const Rank& r) const { return _rank < r._rank; }
-  bool operator>(const Rank& r) const { return _rank > r._rank; }
-  void operator++() { ++_rank; }
-  void operator--() { --_rank; }
+  bool operator==(const Rank& r) const { return m_rank == r.m_rank; }
+  bool operator<=(const Rank& r) const { return m_rank <= r.m_rank; }
+  bool operator<(const Rank& r) const { return m_rank < r.m_rank; }
+  bool operator>(const Rank& r) const { return m_rank > r.m_rank; }
+  void operator++() { ++m_rank; }
+  void operator--() { --m_rank; }
 
  private:
   /**
@@ -107,9 +107,9 @@ class Rank {
    * a last resort.  Probably the best solution is to limit access
    * to these functions to friends.
    */
-  void encode(uint8_t c) { _rank = c % NUM_RANK; }  // was encode
-  uint8_t code() const { return _rank; }
-  int rankBit() const { return 0x01 << _rank; }
+  void encode(uint8_t c) { m_rank = c % NUM_RANK; }  // was encode
+  uint8_t code() const { return m_rank; }
+  int rankBit() const { return 0x01 << m_rank; }
 
   static bool isRankChar(char c);
 
@@ -117,7 +117,7 @@ class Rank {
   friend class CardSet;
   friend class PokerEvaluation;
 
-  uint8_t _rank;
+  uint8_t m_rank;
 
   static uint8_t TwoVal() { return 0; }
   static uint8_t ThreeVal() { return 1; }

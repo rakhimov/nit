@@ -69,7 +69,7 @@ class Card {
   /**
    * required for storage in STL containers
    */
-  bool operator==(const Card& r) const { return _card == r._card; }
+  bool operator==(const Card& r) const { return m_card == r.m_card; }
 
   /**
    * required for storage in STL containers
@@ -81,7 +81,7 @@ class Card {
 
   friend class CardSet;
 
-  uint8_t _card{0};
+  uint8_t m_card{0};
 };
 
 }  // namespace nit

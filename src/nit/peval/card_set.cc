@@ -26,13 +26,13 @@
 namespace nit {
 
 // some suit mask macros
-#define SMASK(n) (static_cast<int>(_cardmask >> (n)*Rank::NUM_RANK) & 0x1FFF)
+#define SMASK(n) (static_cast<int>(m_cardmask >> (n)*Rank::NUM_RANK) & 0x1FFF)
 
 #if 1
-#define C() (static_cast<int>(_cardmask >> (0) * Rank::NUM_RANK) & 0x1FFF)
-#define D() (static_cast<int>(_cardmask >> (1) * Rank::NUM_RANK) & 0x1FFF)
-#define H() (static_cast<int>(_cardmask >> (2) * Rank::NUM_RANK) & 0x1FFF)
-#define S() (static_cast<int>(_cardmask >> (3) * Rank::NUM_RANK) & 0x1FFF)
+#define C() (static_cast<int>(m_cardmask >> (0) * Rank::NUM_RANK) & 0x1FFF)
+#define D() (static_cast<int>(m_cardmask >> (1) * Rank::NUM_RANK) & 0x1FFF)
+#define H() (static_cast<int>(m_cardmask >> (2) * Rank::NUM_RANK) & 0x1FFF)
+#define S() (static_cast<int>(m_cardmask >> (3) * Rank::NUM_RANK) & 0x1FFF)
 #else
 #define C() SMASK(0)
 #define D() SMASK(1)
@@ -54,13 +54,13 @@ CardSet::CardSet() = default;
 
 CardSet::CardSet(const CardSet& cs) = default;
 
-CardSet::CardSet(const Card& c) : _cardmask(ONE64 << c._card) {}
+CardSet::CardSet(const Card& c) : m_cardmask(ONE64 << c.m_card) {}
 
-CardSet::CardSet(const std::string& c) : _cardmask(0) { fromString(c); }
+CardSet::CardSet(const std::string& c) : m_cardmask(0) { fromString(c); }
 
 std::string CardSet::str() const {
   std::string out = "";
-  uint64_t v = _cardmask;
+  uint64_t v = m_cardmask;
   while (v) {
     Card card(lastbit64(v));
     out += card.str();
@@ -74,7 +74,7 @@ std::string CardSet::rankstr() const {
   std::string out = "";
   for (size_t i = 0; i < STANDARD_DECK_SIZE; i++) {
     uint64_t mask = ONE64 << i;
-    if (_cardmask & mask) {
+    if (m_cardmask & mask) {
       Card c(i);
       out += c.rank().str();
     }
@@ -86,7 +86,7 @@ std::string CardSet::rankstr() const {
 std::string CardSet::toRankBitString() const {
   std::string out = "";
   for (size_t i = 0; i < STANDARD_DECK_SIZE; i++) {
-    if (_cardmask & ONE64 << i)
+    if (m_cardmask & ONE64 << i)
       out += "1";
     else
       out += ".";
@@ -115,7 +115,7 @@ size_t CardSet::countMaxSuit() const {
 }
 
 size_t CardSet::size() const {
-  uint64_t v = _cardmask;
+  uint64_t v = m_cardmask;
   size_t c;
   for (c = 0; v; c++) {
     v &= v - 1;  // clear the least significant bit set
@@ -135,16 +135,16 @@ void CardSet::fromString(const std::string& instr) {
     int code = Rank::rank_code(instr[i]) +
                Suit::suit_code(instr[i + 1]) * Rank::NUM_RANK;
     uint64_t mask = (ONE64 << code);
-    if (_cardmask & mask) {
+    if (m_cardmask & mask) {
       clear();  // card duplication is an error, no hand parsed
       return;
     }
-    _cardmask |= mask;
+    m_cardmask |= mask;
   }
 }
 
 CardSet& CardSet::insert(const CardSet& c) {
-  _cardmask |= c._cardmask;
+  m_cardmask |= c.m_cardmask;
   return *this;
 }
 
@@ -183,8 +183,8 @@ CardSet CardSet::canonize(const CardSet& other) const {
 // This is super slow, make it faster
 bool CardSet::insertRanks(const CardSet& rset) {
   // try the fastest way first
-  if ((_cardmask & rset._cardmask) == 0) {
-    _cardmask |= rset._cardmask;
+  if ((m_cardmask & rset.m_cardmask) == 0) {
+    m_cardmask |= rset.m_cardmask;
     return true;
   }
 
@@ -192,8 +192,8 @@ bool CardSet::insertRanks(const CardSet& rset) {
   for (size_t s = 1; s < Suit::NUM_SUIT; s++) {
     CardSet flipped(rset);
     flipped.flipSuits();
-    if ((_cardmask & flipped._cardmask) == 0) {
-      _cardmask |= flipped._cardmask;
+    if ((m_cardmask & flipped.m_cardmask) == 0) {
+      m_cardmask |= flipped.m_cardmask;
       return true;
     }
   }
@@ -239,7 +239,7 @@ CardSet CardSet::canonizeRanks() const {
 }
 
 CardSet& CardSet::insert(const Card& c) {
-  _cardmask |= (ONE64 << c.code());
+  m_cardmask |= (ONE64 << c.code());
   return *this;
 }
 
@@ -247,7 +247,7 @@ std::vector<Card> CardSet::cards() const {
   std::vector<Card> out(size());
   size_t n = 0;
   for (size_t i = 0; i < STANDARD_DECK_SIZE; i++)
-    if (_cardmask & (ONE64 << i))
+    if (m_cardmask & (ONE64 << i))
       out[n++] = Card(i);
   return out;
 }
@@ -256,28 +256,28 @@ std::vector<CardSet> CardSet::cardSets() const {
   std::vector<CardSet> out(size());
   size_t n = 0;
   for (size_t i = 0; i < STANDARD_DECK_SIZE; i++)
-    if (_cardmask & (ONE64 << i))
+    if (m_cardmask & (ONE64 << i))
       out[n++] = CardSet(ONE64 << i);
   return out;
 }
 
 CardSet& CardSet::remove(const CardSet& c) {
-  _cardmask ^= c._cardmask;
+  m_cardmask ^= c.m_cardmask;
   return *this;
 }
 
 CardSet& CardSet::remove(const Card& c) {
-  _cardmask ^= ONE64 << c.code();
+  m_cardmask ^= ONE64 << c.code();
   return *this;
 }
 
 bool CardSet::contains(const CardSet& c) const {
-  return (c._cardmask == (_cardmask & c._cardmask));
+  return (c.m_cardmask == (m_cardmask & c.m_cardmask));
 }
 
 bool CardSet::contains(const Card& c) const {
   uint64_t bit = ONE64 << c.code();
-  return ((bit & _cardmask) != 0);
+  return ((bit & m_cardmask) != 0);
 }
 
 bool CardSet::contains(const Rank& r) const {

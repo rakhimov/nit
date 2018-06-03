@@ -51,28 +51,28 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
                          int herouse, evalFunction evalA, evalFunction evalB)
 
       : PokerHandEvaluator(),
-        _heromin(heromin),
-        _heromax(heromax),
-        _boardmin(boardmin),
-        _boardmax(boardmax),
-        _herouse(herouse),
-        _evalA(evalA),
-        _evalB(evalB) {
+        m_heromin(heromin),
+        m_heromax(heromax),
+        m_boardmin(boardmin),
+        m_boardmax(boardmax),
+        m_herouse(herouse),
+        m_evalA(evalA),
+        m_evalB(evalB) {
     if (evalA == evalFunction(nullptr))
       throw std::invalid_argument(
           "UnivHandEval: first evaluator (A) must be non-null");
 
     if (evalB == evalFunction(nullptr))
-      _evalsperhand = 1;
+      m_evalsperhand = 1;
     else
-      _evalsperhand = 2;
+      m_evalsperhand = 2;
   }
 
-  size_t handSize() const override { return _heromax; }
-  size_t boardSize() const override { return _boardmax; }
+  size_t handSize() const override { return m_heromax; }
+  size_t boardSize() const override { return m_boardmax; }
 
   size_t evaluationSize() const override {
-    if (_evalB == evalFunction(nullptr))
+    if (m_evalB == evalFunction(nullptr))
       return 1;
     return 2;
   }
@@ -82,7 +82,7 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
     PokerEvaluation eval[2];
 
     // check to see if the input hand is consistent with the game
-    if (hand.size() < _heromin || hand.size() > _heromax)
+    if (hand.size() < m_heromin || hand.size() > m_heromax)
       throw std::invalid_argument(
           std::string("UnivHandEval: " + std::to_string(hand.size()) +
                       ": invalid number of pocket cards"));
@@ -94,7 +94,7 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
 
     // now check the board, it's a distribution
     size_t bz = board.size();
-    if ((bz < _boardmin && bz > 0) || bz > _boardmax)
+    if ((bz < m_boardmin && bz > 0) || bz > m_boardmax)
       throw std::invalid_argument(
           std::string("UnivHandEval: " + std::to_string(board.size()) +
                       " unsupported number of board cards"));
@@ -102,8 +102,8 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
     // generate the possible sub parts, the reference example is omaha
     // where a player must use two cards from their hand, and three
     // from the board.
-    fillSubsets(hand_candidates, _herouse, h);
-    fillSubsets(board_candidates, boardSize() - _herouse, board);
+    fillSubsets(hand_candidates, m_herouse, h);
+    fillSubsets(board_candidates, boardSize() - m_herouse, board);
 
     // combine the subset candidates to create all possible sets of
     // evaluations at the river in omaha, this should produce (4c2)*(5c3) =
@@ -117,20 +117,20 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
     // of the one candidate which *must* be there, and then if
     // there are more candidates, we just run through them updating
     // as we find better ones.
-    eval[0] = ((eval_candidates[0]).*(_evalA))();
+    eval[0] = ((eval_candidates[0]).*(m_evalA))();
     for (uint i = 1; i < eval_candidates.size(); i++) {
-      PokerEvaluation e = ((eval_candidates[i]).*(_evalA))();
+      PokerEvaluation e = ((eval_candidates[i]).*(m_evalA))();
       if (e > eval[0])
         eval[0] = e;
     }
 
     // if it's a one dimensional evaluation we are done
-    if (_evalB != evalFunction(nullptr)) {
+    if (m_evalB != evalFunction(nullptr)) {
       // second dimension of the evaulation, usually low in a high/low
       // game.
       eval[1] = PokerEvaluation();
       for (auto& eval_candidate : eval_candidates) {
-        PokerEvaluation e = (eval_candidate.*(_evalB))();
+        PokerEvaluation e = (eval_candidate.*(m_evalB))();
         if (e > eval[1]) {
           eval[1] = e;
         }
@@ -162,17 +162,17 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
     } while (cc.nextcomb());
   }
 
-  virtual size_t evalsPerHand() const { return _evalsperhand; }
+  virtual size_t evalsPerHand() const { return m_evalsperhand; }
 
  private:
-  size_t _heromin;
-  size_t _heromax;
-  size_t _boardmin;
-  size_t _boardmax;
-  size_t _herouse;
-  evalFunction _evalA;
-  evalFunction _evalB;
-  int _evalsperhand;
+  size_t m_heromin;
+  size_t m_heromax;
+  size_t m_boardmin;
+  size_t m_boardmax;
+  size_t m_herouse;
+  evalFunction m_evalA;
+  evalFunction m_evalB;
+  int m_evalsperhand;
 };
 
 }  // namespace nit

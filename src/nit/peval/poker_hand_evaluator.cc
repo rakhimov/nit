@@ -7,7 +7,7 @@
 
 namespace nit {
 
-PokerHandEvaluator::PokerHandEvaluator() : _subclassID("abstract-base-class") {}
+PokerHandEvaluator::PokerHandEvaluator() : m_subclassID("abstract-base-class") {}
 
 PokerHandEvaluator::~PokerHandEvaluator() = default;
 

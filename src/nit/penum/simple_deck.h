@@ -28,7 +28,7 @@ class SimpleDeck {
    */
   SimpleDeck() {
     for (uint8_t i = 0; i < STANDARD_DECK_SIZE; i++) {
-      _deck[i] = CardSet(Card(i));
+      m_deck[i] = CardSet(Card(i));
     }
     reset();
   }
@@ -36,12 +36,12 @@ class SimpleDeck {
   /**
    * put all dealt cards back into deck, don't reorder
    */
-  void reset() { _current = STANDARD_DECK_SIZE; }
+  void reset() { m_current = STANDARD_DECK_SIZE; }
 
   /**
    * number of cards left in the deck
    */
-  size_t size() const { return _current; }
+  size_t size() const { return m_current; }
 
   /**
    * print cards in deck with un/dealt divider
@@ -49,11 +49,11 @@ class SimpleDeck {
   std::string str() const {
     std::string ret;
     for (uint i = 0; i < STANDARD_DECK_SIZE; i++) {
-      if (i == _current)
+      if (i == m_current)
         ret += "/";
-      ret = ret + _deck[i].str();
+      ret = ret + m_deck[i].str();
     }
-    if (_current == STANDARD_DECK_SIZE)
+    if (m_current == STANDARD_DECK_SIZE)
       ret += "/";
     return ret;
   }
@@ -62,8 +62,8 @@ class SimpleDeck {
     // TODO: fix and test this code, edge cases clearly at risk here
     if (ncards == 0)
       return nit::CardSet();
-    _current -= static_cast<uint>(ncards);
-    CardSet* pcur = &_deck[_current];
+    m_current -= static_cast<uint>(ncards);
+    CardSet* pcur = &m_deck[m_current];
     const CardSet* pend = pcur + ncards;
     CardSet cards(*pcur++);
     while (pcur < pend)
@@ -73,8 +73,8 @@ class SimpleDeck {
 
   nit::CardSet dead() const {
     nit::CardSet cs;
-    for (size_t i = _current; i < STANDARD_DECK_SIZE; i++)
-      cs.insert(_deck[i]);
+    for (size_t i = m_current; i < STANDARD_DECK_SIZE; i++)
+      cs.insert(m_deck[i]);
     return cs;
   }
 
@@ -84,20 +84,20 @@ class SimpleDeck {
   void remove(const nit::CardSet& cards) {
     int decr = CardSet(cards | dead()).size();
     std::stable_partition(
-        _deck.begin(), _deck.end(),
+        m_deck.begin(), m_deck.end(),
         [&cards](const CardSet& c) { return !cards.contains(c); });
-    _current = STANDARD_DECK_SIZE - decr;
+    m_current = STANDARD_DECK_SIZE - decr;
   }
 
   /**
    * look at ith card from the top of the deck
    */
-  CardSet operator[](size_t i) const { return _deck[i]; }
+  CardSet operator[](size_t i) const { return m_deck[i]; }
 
   void shuffle() {
-    std::shuffle(_deck.begin(), _deck.end(),
+    std::shuffle(m_deck.begin(), m_deck.end(),
                  std::mt19937(std::random_device()()));
-    reset();  //_current = 0;
+    reset();  //m_current = 0;
   }
 
   /**
@@ -115,10 +115,10 @@ class SimpleDeck {
         static_cast<uint32_t>((mask & UINT64_C(0xFFFFFFFF00000000)) >> 32);
 
     while (lower) {
-      ret |= _deck[lastbit(lower)];
+      ret |= m_deck[lastbit(lower)];
       lower ^= (lower & -lower);
     }
-    const CardSet* top = &_deck[32];
+    const CardSet* top = &m_deck[32];
     while (upper) {
       ret |= top[lastbit(upper)];
       upper ^= (upper & -upper);
@@ -134,8 +134,8 @@ class SimpleDeck {
 
  private:
   // these are the data which track info about the deck
-  std::array<CardSet, STANDARD_DECK_SIZE> _deck;
-  size_t _current;
+  std::array<CardSet, STANDARD_DECK_SIZE> m_deck;
+  size_t m_current;
 };
 
 }  // namespace nit

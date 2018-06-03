@@ -11,13 +11,13 @@ Rank::Rank(const std::string& c) { fromString(c); }
 
 Rank::Rank(uint8_t code) {
   if (code <= RANK_ACE)
-    _rank = code;
+    m_rank = code;
   else
-    _rank = rank_code(code);
+    m_rank = rank_code(code);
 }
 
 std::string Rank::str() const {
-  switch (_rank) {
+  switch (m_rank) {
     case RANK_TWO:
       return "2";
     case RANK_THREE:
@@ -51,7 +51,7 @@ std::string Rank::str() const {
 void Rank::fromString(const std::string& c) {
   int code = rank_code(c[0]);
   if (code >= 0)
-    _rank = code;
+    m_rank = code;
   else
     throw std::domain_error(std::string("rank parse error: " + c).c_str());
 }

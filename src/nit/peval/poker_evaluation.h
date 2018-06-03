@@ -120,22 +120,22 @@ class PokerEvaluation {
 
   // boost/operators.hpp creates closure
   bool operator==(const PokerEvaluation& e) const {
-    return _evalcode == e._evalcode;
+    return m_evalcode == e.m_evalcode;
   }
   bool operator!=(const PokerEvaluation& e) const {
-    return _evalcode != e._evalcode;
+    return m_evalcode != e.m_evalcode;
   }
   bool operator<=(const PokerEvaluation& e) const {
-    return _evalcode <= e._evalcode;
+    return m_evalcode <= e.m_evalcode;
   }
   bool operator<(const PokerEvaluation& e) const {
-    return _evalcode < e._evalcode;
+    return m_evalcode < e.m_evalcode;
   }
   bool operator>(const PokerEvaluation& e) const {
-    return _evalcode > e._evalcode;
+    return m_evalcode > e.m_evalcode;
   }
-  void operator++() { ++_evalcode; }
-  void operator--() { --_evalcode; }
+  void operator++() { ++m_evalcode; }
+  void operator--() { --m_evalcode; }
 
   std::string toStringCannon() const;
 
@@ -158,9 +158,9 @@ class PokerEvaluation {
 
   // the "low" evaluations get flipped so that best hand ordering is
   // maintained
-  void flip() { _evalcode = INT_MAX - _evalcode; }
+  void flip() { m_evalcode = INT_MAX - m_evalcode; }
   bool isFlipped() const {
-    return (_evalcode > INT_MAX >> 1);
+    return (m_evalcode > INT_MAX >> 1);
   }  // should use <numerics>
 
   // this function needs friend access to rank
@@ -200,7 +200,7 @@ class PokerEvaluation {
    * the the ordering is reversed.  That will
    * make the comparison 75432 > K5432 true.
    */
-  int _evalcode{0};
+  int m_evalcode{0};
 };
 
 // typedef to support refactoring

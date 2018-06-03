@@ -51,16 +51,16 @@ class PartitionEnumerator2 {
    * @partitions the list of partition sizes to use for enumeration
    */
   PartitionEnumerator2(size_t setSize, const std::vector<size_t> partitions)
-      : _setSize(setSize),
-        _parts(partitions),
-        _pcombos(),
-        _subsets(),
-        _masks(partitions.size()) {
+      : m_setSize(setSize),
+        m_parts(partitions),
+        m_pcombos(),
+        m_subsets(),
+        m_masks(partitions.size()) {
     int used = 0;
-    for (size_t i = 0; i < _parts.size(); i++) {
-      _pcombos.emplace_back(_setSize - used, _parts[i]);
-      _subsets.emplace_back(_setSize - used);
-      used += _parts[i];
+    for (size_t i = 0; i < m_parts.size(); i++) {
+      m_pcombos.emplace_back(m_setSize - used, m_parts[i]);
+      m_subsets.emplace_back(m_setSize - used);
+      used += m_parts[i];
       setup(static_cast<int>(i));
     }
   }
@@ -99,57 +99,57 @@ class PartitionEnumerator2 {
     return ret;
   }
 
-  size_t numParts() const { return _parts.size(); }
+  size_t numParts() const { return m_parts.size(); }
 
   /**
    * size of a given partition
    */
-  size_t partSize(size_t p) const { return _parts[p]; }
+  size_t partSize(size_t p) const { return m_parts[p]; }
 
   /**
    * the the contents of specific part
    */
   size_t getIndex(size_t partnum, size_t index) const {
-    return _pcombos[partnum][index];
+    return m_pcombos[partnum][index];
   }
 
   size_t get(size_t partnum, size_t index) const {
-    return _subsets[partnum][_pcombos[partnum][index]];
+    return m_subsets[partnum][m_pcombos[partnum][index]];
   }
 
-  uint64_t getMask(size_t partnum) const { return _masks[partnum]; }
+  uint64_t getMask(size_t partnum) const { return m_masks[partnum]; }
 
   std::vector<size_t> get(size_t partnum) const {
-    std::vector<size_t> ret(_parts[partnum]);
-    for (size_t i = 0; i < _parts[partnum]; i++)
-      ret[i] = _subsets[partnum][_pcombos[partnum][i]];
+    std::vector<size_t> ret(m_parts[partnum]);
+    for (size_t i = 0; i < m_parts[partnum]; i++)
+      ret[i] = m_subsets[partnum][m_pcombos[partnum][i]];
     return ret;
   }
 
   bool next() { return incr(); }
 
  private:
-  size_t _setSize;
-  std::vector<size_t> _parts;
-  std::vector<Combos> _pcombos;
-  std::vector<std::vector<size_t>> _subsets;
-  mutable std::vector<uint64_t> _masks;
+  size_t m_setSize;
+  std::vector<size_t> m_parts;
+  std::vector<Combos> m_pcombos;
+  std::vector<std::vector<size_t>> m_subsets;
+  mutable std::vector<uint64_t> m_masks;
 
   bool incr() { return incr(numParts() - 1); }
 
   void makeMask(size_t partnum) const {
     if (partnum == 0) {
-      _masks[0] = _pcombos[0].getMask();
+      m_masks[0] = m_pcombos[0].getMask();
     } else {
-      const size_t* c = _pcombos[partnum].begin();
-      auto s = _subsets[partnum].begin();
+      const size_t* c = m_pcombos[partnum].begin();
+      auto s = m_subsets[partnum].begin();
       uint64_t ret = 0;
 
       // this loop is very expensive, it accounts for about *half*
       // of the total enumeration time
-      for (size_t i = 0; i < _parts[partnum]; i++)
+      for (size_t i = 0; i < m_parts[partnum]; i++)
         ret |= UINT64_C(0x01) << s[*c++];
-      _masks[partnum] = ret;
+      m_masks[partnum] = ret;
     }
   }
 
@@ -162,9 +162,9 @@ class PartitionEnumerator2 {
     // TODO: verify not buggies!
     // int n = num;
     while (n >= 0) {
-      if (_pcombos[n].next()) {
+      if (m_pcombos[n].next()) {
         makeMask(n);
-        while (++n < _parts.size())
+        while (++n < m_parts.size())
           setup(static_cast<int>(n));
         return true;
       }
@@ -178,20 +178,20 @@ class PartitionEnumerator2 {
 
   void setup(int n)  // setup the nth subset for enumerating
   {
-    if (n >= static_cast<int>(_parts.size()))
+    if (n >= static_cast<int>(m_parts.size()))
       return;
 
     // set up the list for this combinator
     if (n - 1 >= 0) {
-      myset_difference(_subsets[n - 1].begin(), _subsets[n - 1].end(),
-                       _pcombos[n - 1].begin(), _pcombos[n - 1].end(),
-                       _subsets[n].begin());
+      myset_difference(m_subsets[n - 1].begin(), m_subsets[n - 1].end(),
+                       m_pcombos[n - 1].begin(), m_pcombos[n - 1].end(),
+                       m_subsets[n].begin());
     } else if (n == 0) {
       size_t i = 0;
-      for (size_t& it : _subsets[0])
+      for (size_t& it : m_subsets[0])
         it = i++;
     }
-    _pcombos[n].reset();
+    m_pcombos[n].reset();
     makeMask(n);
   }
 };

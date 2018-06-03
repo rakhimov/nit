@@ -119,7 +119,7 @@ std::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc(
       break;
   }
 
-  ret->_subclassID = strid;
+  ret->m_subclassID = strid;
 
   return ret;
 }

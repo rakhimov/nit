@@ -132,11 +132,11 @@ class PokerHand {
 
  private:
 #ifdef MUTABLE
-  mutable  //!< _cards can be mutable to handle sorts, better solution?
+  mutable  //!< m_cards can be mutable to handle sorts, better solution?
 #endif
       std::array<Card, MAX_PHCARDS>
-          _cards;
-  uint8_t _ncards;
+          m_cards;
+  uint8_t m_ncards;
 };
 
 }  // namespace nit

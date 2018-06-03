@@ -22,9 +22,9 @@ const int KICKER_MASK = 0x1FFF;
 
 PokerEvaluation::PokerEvaluation() = default;
 
-PokerEvaluation::PokerEvaluation(int ecode) : _evalcode(ecode) {}
+PokerEvaluation::PokerEvaluation(int ecode) : m_evalcode(ecode) {}
 
-int PokerEvaluation::code() const { return _evalcode; }
+int PokerEvaluation::code() const { return m_evalcode; }
 
 int PokerEvaluation::reducedCode() const {
   if (isFlipped()) {
@@ -33,14 +33,14 @@ int PokerEvaluation::reducedCode() const {
     return e.reducedCode2to7();
   }
 
-  if (_evalcode == 0)
+  if (m_evalcode == 0)
     return 0;
   switch (type()) {
     case NO_PAIR:
     case ONE_PAIR:
     case THREE_FLUSH:
     case FLUSH: {
-      PokerEvaluation e(_evalcode);
+      PokerEvaluation e(m_evalcode);
       int kick1 = topRankTable[kickerBits()];
       int kick2 = topRankTable[kickerBits() ^ 0x01 << kick1];
       int kbits = (0x01 << kick1) | (0x01 << kick2);
@@ -59,11 +59,11 @@ int PokerEvaluation::reducedCode() const {
 }
 
 int PokerEvaluation::reducedCode2to7() const {
-  if (_evalcode == 0)
+  if (m_evalcode == 0)
     return 0;
   switch (type()) {
     case NO_PAIR: {
-      PokerEvaluation e(_evalcode);
+      PokerEvaluation e(m_evalcode);
       int kick1 = topRankTable[kickerBits()];
       int kick2 = topRankTable[kickerBits() ^ 0x01 << kick1];
       int kick3 = topRankTable[kickerBits() ^ 0x01 << kick1 ^ 0x01 << kick2];
@@ -76,7 +76,7 @@ int PokerEvaluation::reducedCode2to7() const {
     }
 
     case THREE_OF_A_KIND: {
-      PokerEvaluation e(_evalcode);
+      PokerEvaluation e(m_evalcode);
       std::vector<int> ranks(3);
       ranks[0] = botRankTable[kickerBits()];
       ranks[1] = botRankTable[kickerBits() ^ 0x01 << ranks[0]];
@@ -89,7 +89,7 @@ int PokerEvaluation::reducedCode2to7() const {
     }
 
     case ONE_PAIR: {
-      PokerEvaluation e(_evalcode);
+      PokerEvaluation e(m_evalcode);
       std::vector<int> ranks(4);
       uint16_t kickers = kickerBits();
       ranks[0] = lastbit(kickers);
@@ -107,7 +107,7 @@ int PokerEvaluation::reducedCode2to7() const {
     }
 
     case TWO_PAIR: {
-      PokerEvaluation e(_evalcode);
+      PokerEvaluation e(m_evalcode);
       std::vector<int> ranks(3);
       uint16_t kickers = kickerBits();
       ranks[0] = lastbit(kickers);
@@ -121,7 +121,7 @@ int PokerEvaluation::reducedCode2to7() const {
     }
 
     case FLUSH: {
-      PokerEvaluation e(_evalcode);
+      PokerEvaluation e(m_evalcode);
       int kick1 = topRankTable[kickerBits()];
       int kbits = (0x01 << kick1);
       e.setKickerBits(kbits);
@@ -130,7 +130,7 @@ int PokerEvaluation::reducedCode2to7() const {
     }
 
     case FULL_HOUSE: {
-      PokerEvaluation e(_evalcode);
+      PokerEvaluation e(m_evalcode);
       std::vector<int> ranks(2);
       ranks[0] = e.minorRank().code();
       ranks[1] = e.majorRank().code();
@@ -142,7 +142,7 @@ int PokerEvaluation::reducedCode2to7() const {
     }
 
     case FOUR_OF_A_KIND: {
-      PokerEvaluation e(_evalcode);
+      PokerEvaluation e(m_evalcode);
       std::vector<int> ranks(2);
       uint16_t kickers = kickerBits();
       ranks[0] = lastbit(kickers);
@@ -159,7 +159,7 @@ int PokerEvaluation::reducedCode2to7() const {
 }
 
 int PokerEvaluation::showdownCode() const {
-  if (_evalcode == 0)
+  if (m_evalcode == 0)
     return 0;
 
   int minor = 0;
@@ -169,7 +169,7 @@ int PokerEvaluation::showdownCode() const {
         minor = 1;
     case THREE_OF_A_KIND:
     case FOUR_OF_A_KIND: {
-      PokerEvaluation e(_evalcode);
+      PokerEvaluation e(m_evalcode);
       e.setMinorRank(minor);
       e.setKickerBits(0);
       return e.code();
@@ -180,23 +180,23 @@ int PokerEvaluation::showdownCode() const {
   }
 }
 
-int PokerEvaluation::type() const { return _evalcode >> VSHIFT; }
+int PokerEvaluation::type() const { return m_evalcode >> VSHIFT; }
 
-int PokerEvaluation::kickerBits() const { return _evalcode & KICKER_MASK; }
+int PokerEvaluation::kickerBits() const { return m_evalcode & KICKER_MASK; }
 Rank PokerEvaluation::majorRank() const {
-  return Rank((_evalcode >> MAJOR_SHIFT) & 0x0F);
+  return Rank((m_evalcode >> MAJOR_SHIFT) & 0x0F);
 }
 Rank PokerEvaluation::minorRank() const {
-  return Rank((_evalcode >> MINOR_SHIFT) & 0x0F);
+  return Rank((m_evalcode >> MINOR_SHIFT) & 0x0F);
 }
 void PokerEvaluation::setKickerBits(int k) {
-  _evalcode = (_evalcode & ~KICKER_MASK) | k;
+  m_evalcode = (m_evalcode & ~KICKER_MASK) | k;
 }
 void PokerEvaluation::setMajorRank(int r) {
-  _evalcode = (_evalcode & ~MAJOR_MASK) | r << MAJOR_SHIFT;
+  m_evalcode = (m_evalcode & ~MAJOR_MASK) | r << MAJOR_SHIFT;
 }
 void PokerEvaluation::setMinorRank(int r) {
-  _evalcode = (_evalcode & ~MINOR_MASK) | r << MINOR_SHIFT;
+  m_evalcode = (m_evalcode & ~MINOR_MASK) | r << MINOR_SHIFT;
 }
 
 // this converts the evaluation to one where
@@ -206,7 +206,7 @@ void PokerEvaluation::playAceLow() {
   if (acePlaysLow())
     return;
 
-  _evalcode |= ACE_LOW_BIT;
+  m_evalcode |= ACE_LOW_BIT;
 
   // make room for the ace in kicker land, and if
   // we have an ace, push it to the bottom
@@ -235,7 +235,7 @@ void PokerEvaluation::playAceHigh() {
   if (acePlaysLow() == false)
     return;
 
-  _evalcode ^= ACE_LOW_BIT;
+  m_evalcode ^= ACE_LOW_BIT;
 
   // make room for the ace in kicker land, and if
   // we have an ace, push it to the bottom
@@ -247,16 +247,16 @@ void PokerEvaluation::playAceHigh() {
 }
 
 bool PokerEvaluation::acePlaysLow() const {
-  if (_evalcode & ACE_LOW_BIT)
+  if (m_evalcode & ACE_LOW_BIT)
     return true;
   return false;
 }
 
 void PokerEvaluation::fixWheel2to7(int rankMask) {
   if (type() == STRAIGHT && majorRank() == Rank::Five()) {
-    _evalcode = (NO_PAIR << VSHIFT) ^ rankMask;
+    m_evalcode = (NO_PAIR << VSHIFT) ^ rankMask;
   } else if (type() == STRAIGHT_FLUSH && majorRank() == Rank::Five()) {
-    _evalcode = (FLUSH << VSHIFT) ^ rankMask;
+    m_evalcode = (FLUSH << VSHIFT) ^ rankMask;
   }
 }
 
@@ -299,7 +299,7 @@ std::string PokerEvaluation::strBot(int n) const {
 
 std::string PokerEvaluation::bitstr() const {
   std::string ret;
-  int n = _evalcode;
+  int n = m_evalcode;
   for (int i = 31; i >= 0; i--) {
     if ((n & (0x01 << i)) > 0)
       ret += "1";
@@ -313,14 +313,14 @@ std::string PokerEvaluation::bitstr() const {
 
 std::string PokerEvaluation::str() const {
   std::string ret;
-  int n = _evalcode;
+  int n = m_evalcode;
 
   if (n == 0)
     return "";
 
   if (n != 0) {
     if (isFlipped()) {
-      PokerEvaluation e(_evalcode);
+      PokerEvaluation e(m_evalcode);
       e.flip();
       return e.str();
     }
@@ -345,10 +345,10 @@ std::string PokerEvaluation::toStringCannon() const {
   const std::string straightflush = "str8 flush:   ";
 
   std::string ret;
-  int n = _evalcode;
+  int n = m_evalcode;
 
   if (isFlipped()) {
-    PokerEvaluation e(_evalcode);
+    PokerEvaluation e(m_evalcode);
     e.flip();
     return e.toStringCannon();
   }

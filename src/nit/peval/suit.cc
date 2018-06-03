@@ -12,11 +12,11 @@
 
 namespace nit {
 
-Suit::display Suit::__suitStringType = SUIT_ASCII;
+Suit::display Suit::m_suitStringType = SUIT_ASCII;
 
-void Suit::setSuitStringType(Suit::display s) { __suitStringType = s; }
+void Suit::setSuitStringType(Suit::display s) { m_suitStringType = s; }
 
-Suit::display Suit::getSuitStringType() { return __suitStringType; }
+Suit::display Suit::getSuitStringType() { return m_suitStringType; }
 
 std::string Suit::decodeSuitANSI_EXT(int c) const {
   if (c < 0)
@@ -173,7 +173,7 @@ std::string Suit::decodeSuit2ColorHTML(int c) const {
 }
 
 std::string Suit::decodeSuit(int c) const {
-  switch (__suitStringType) {
+  switch (m_suitStringType) {
     case SUIT_ASCII:
       return decodeSuitASCII(c);
 
@@ -220,18 +220,18 @@ int Suit::suit_code(char c) {
   throw std::invalid_argument((std::string("Suit, parse error: ") + c).c_str());
 }
 
-Suit::Suit(const std::string& str) : _suit(suit_code(str[0])) {}
+Suit::Suit(const std::string& str) : m_suit(suit_code(str[0])) {}
 
 Suit::Suit(uint8_t c) {
   if (isSuitChar(c))
-    _suit = suit_code(c);
+    m_suit = suit_code(c);
   else
-    _suit = c;
+    m_suit = c;
 }
 
-std::string Suit::str() const { return decodeSuit(_suit); }
+std::string Suit::str() const { return decodeSuit(m_suit); }
 
-void Suit::fromString(const std::string& c) { _suit = suit_code(c[0]); }
+void Suit::fromString(const std::string& c) { m_suit = suit_code(c[0]); }
 
 bool Suit::isSuitChar(char c) {
   switch (c) {

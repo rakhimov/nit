@@ -30,14 +30,14 @@ class DrawHighHandEvaluator : public PokerHandEvaluator {
     return hand.evaluateHighFlush();
   }
 
-  size_t handSize() const override { return _handSize; }
+  size_t handSize() const override { return m_handSize; }
   size_t boardSize() const override { return 0; }
   size_t evaluationSize() const override { return 1; }
 
-  virtual void setHandSize(size_t sz) { _handSize = sz; }
+  virtual void setHandSize(size_t sz) { m_handSize = sz; }
 
  private:
-  size_t _handSize{5};
+  size_t m_handSize{5};
 };
 
 }  // namespace nit

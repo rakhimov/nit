@@ -114,9 +114,9 @@ class PokerHandEvaluator {
     return evaluateHand(hand, board).eval(0);
   }
 
-  virtual bool usesSuits() const { return _useSuits; }
+  virtual bool usesSuits() const { return m_useSuits; }
 
-  void useSuits(bool use) { _useSuits = use; }
+  void useSuits(bool use) { m_useSuits = use; }
 
   /**
    * used to add "draws" to draw games
@@ -162,10 +162,10 @@ class PokerHandEvaluator {
   PokerHandEvaluator& operator=(const PokerHandEvaluator&);
 
   // for printing
-  std::string _subclassID;
+  std::string m_subclassID;
 
   // we can turn on and off suit evaluation if we choose
-  bool _useSuits{true};
+  bool m_useSuits{true};
 };
 
 // for planned refactoring

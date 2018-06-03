@@ -36,11 +36,11 @@ class DeuceToSevenHandEvaluator : public PokerHandEvaluator {
   size_t handSize() const override { return 5; }
   size_t boardSize() const override { return 0; }
   size_t evaluationSize() const override { return 1; }
-  size_t numDraws() const override { return _numDraws; }
-  void setNumDraws(size_t sz) override { _numDraws = sz; }
+  size_t numDraws() const override { return m_numDraws; }
+  void setNumDraws(size_t sz) override { m_numDraws = sz; }
 
  private:
-  size_t _numDraws{0};
+  size_t m_numDraws{0};
 };
 
 }  // namespace nit

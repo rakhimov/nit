@@ -81,11 +81,11 @@ class Suit {
    * Construct suit from the first char of the input string.  Exception will
    * be thrown if the character is not a valid suit character.
    */
-  bool operator==(const Suit& s) const { return _suit == s._suit; }
-  bool operator<=(const Suit& s) const { return _suit <= s._suit; }
-  bool operator<(const Suit& s) const { return _suit < s._suit; }
-  void operator++() { ++_suit; }
-  void operator--() { --_suit; }
+  bool operator==(const Suit& s) const { return m_suit == s.m_suit; }
+  bool operator<=(const Suit& s) const { return m_suit <= s.m_suit; }
+  bool operator<(const Suit& s) const { return m_suit < s.m_suit; }
+  void operator++() { ++m_suit; }
+  void operator--() { --m_suit; }
 
  private:
   /**
@@ -93,9 +93,9 @@ class Suit {
    * effects of leakage, we limit access to these functions to
    * friends.
    */
-  uint8_t code() const { return _suit; }
-  void encode(uint8_t c) { _suit = c; }
-  int suitBit() const { return 0x01 << _suit * 3; }
+  uint8_t code() const { return m_suit; }
+  void encode(uint8_t c) { m_suit = c; }
+  int suitBit() const { return 0x01 << m_suit * 3; }
 
   void fromString(const std::string& s);
 
@@ -104,9 +104,9 @@ class Suit {
   friend class Card;
   friend class CardSet;
 
-  uint8_t _suit{0};
+  uint8_t m_suit{0};
 
-  static display __suitStringType;
+  static display m_suitStringType;
 
   std::string decodeSuitASCII(int c) const;
   std::string decodeSuitASCII_EXT(int card) const;

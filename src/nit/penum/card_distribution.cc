@@ -16,13 +16,13 @@
 
 namespace nit {
 
-CardDistribution::CardDistribution() : _handList(1, CardSet()), _weights() {
-  _weights[CardSet()] = 1.0;
+CardDistribution::CardDistribution() : m_handList(1, CardSet()), m_weights() {
+  m_weights[CardSet()] = 1.0;
 }
 
 CardDistribution::CardDistribution(const CardSet& cs)
-    : _handList(1, cs), _weights() {
-  _weights[cs] = 1.0;
+    : m_handList(1, cs), m_weights() {
+  m_weights[cs] = 1.0;
 }
 
 CardDistribution::CardDistribution(const CardDistribution& cd) { *this = cd; }
@@ -30,12 +30,12 @@ CardDistribution::CardDistribution(const CardDistribution& cd) { *this = cd; }
 CardDistribution& CardDistribution::operator=(const CardDistribution& other) =
     default;
 
-size_t CardDistribution::size() const { return _handList.size(); }
+size_t CardDistribution::size() const { return m_handList.size(); }
 
 std::string CardDistribution::str() const {
   std::string ret;
-  for (size_t i = 0; i < _handList.size(); i++) {
-    const CardSet& hand = _handList[i];
+  for (size_t i = 0; i < m_handList.size(); i++) {
+    const CardSet& hand = m_handList[i];
     ret += (i > 0 ? "," : "") +
            (boost::format("%s=%.3f") % hand.str() % weight(hand)).str();
   }
@@ -43,8 +43,8 @@ std::string CardDistribution::str() const {
 }
 
 void CardDistribution::clear() {
-  _handList.clear();
-  _weights.clear();
+  m_handList.clear();
+  m_weights.clear();
 }
 
 CardDistribution CardDistribution::data() const { return *this; }
@@ -61,33 +61,33 @@ void CardDistribution::fill(const CardSet& cs, int n) {
   combinations hands(setsize, n);
   int vsize = boost::math::binomial_coefficient<double>(setsize, n);
   clear();
-  _handList.reserve(vsize);
+  m_handList.reserve(vsize);
 
   do {
     CardSet cs;
     for (int i = 0; i < n; i++)
       cs.insert(cards[hands[i]]);
-    _handList.push_back(cs);
-    _weights[cs] = 1.0;
+    m_handList.push_back(cs);
+    m_weights[cs] = 1.0;
   } while (hands.next());
 }
 
 const CardSet& CardDistribution::operator[](size_t index) const {
-  if (index >= _handList.size())
+  if (index >= m_handList.size())
     throw std::runtime_error("CardDistribution::operator: bounds error");
-  return _handList[index];
+  return m_handList[index];
 }
 
 const double& CardDistribution::operator[](const CardSet& hand) const {
   static const double kStaticZero = 0.0;  // for hands not in distribution
-  auto it = _weights.find(hand);
-  if (it == _weights.end())
+  auto it = m_weights.find(hand);
+  if (it == m_weights.end())
     return kStaticZero;
   return it->second;
 }
 
 double& CardDistribution::operator[](const CardSet& hand) {
-  return _weights[hand];
+  return m_weights[hand];
 }
 
 // this is a simple wrapper to make reading the code easier
@@ -106,8 +106,8 @@ bool CardDistribution::parse(const std::string& input) {
     CardSet hand;
     if (hand.size() != 0)
       return false;
-    _weights[hand] = 1.0;
-    _handList.push_back(hand);
+    m_weights[hand] = 1.0;
+    m_handList.push_back(hand);
     return true;
   }
 
@@ -141,8 +141,8 @@ bool CardDistribution::parse(const std::string& input) {
     // final check and
     if (hand.size() == 0)
       return false;
-    _weights[hand] = weight;
-    _handList.push_back(hand);
+    m_weights[hand] = weight;
+    m_handList.push_back(hand);
   }
   return true;
 }
@@ -150,14 +150,14 @@ bool CardDistribution::parse(const std::string& input) {
 std::string CardDistribution::display() const { return str(); }
 
 void CardDistribution::removeCards(const CardSet& dead) {
-  for (auto& i : _handList)
+  for (auto& i : m_handList)
     if (i.intersects(dead))
-      _weights[i] = 0.0;
+      m_weights[i] = 0.0;
 }
 
 double CardDistribution::weight() const {
   double total = 0.0;
-  for (const std::pair<CardSet, double>& w : _weights)
+  for (const std::pair<CardSet, double>& w : m_weights)
     total += w.second;
   return total;
 }
