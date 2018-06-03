@@ -3,8 +3,6 @@
  */
 #include "suit.h"
 
-#include <iostream>
-
 #include <boost/format.hpp>
 
 #include <nit/error.h>
@@ -37,7 +35,6 @@ std::string Suit::decodeSuitANSI_EXT(int c) const {
     default:
       return "#";
   }
-  return "?";
 }
 
 std::string Suit::decodeSuitUnicode(int c) const {
@@ -60,7 +57,6 @@ std::string Suit::decodeSuitUnicode(int c) const {
     default:
       return "#";
   }
-  return "?";
 }
 
 std::string Suit::decodeSuitASCII(int c) const {
@@ -79,7 +75,6 @@ std::string Suit::decodeSuitASCII(int c) const {
     default:
       return "?";
   }
-  return "?";
 }
 
 std::string Suit::decodeSuitASCII_EXT(int card) const {

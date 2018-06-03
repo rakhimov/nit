@@ -8,7 +8,6 @@
 
 #include <algorithm>
 #include <array>
-#include <iostream>
 #include <limits>
 #include <set>
 #include <vector>
@@ -483,9 +482,7 @@ PokerEvaluation CardSet::evaluateHigh() const {
                                (botind << MINOR_SHIFT));
     } break;
   }
-
-  std::cerr << "oops\n";
-  return PokerEvaluation(0);
+  assert(false);
 }
 
 // same as evaluateHigh, but with the non-flush logic
@@ -635,9 +632,7 @@ PokerEvaluation CardSet::evaluateHighRanks() const {
                                (botind << MINOR_SHIFT));
     } break;
   }
-
-  std::cerr << "oops\n";
-  return PokerEvaluation(0);
+  assert(false);
 }
 
 // this is just evaluateHigh without the straight or flush code
@@ -741,9 +736,7 @@ PokerEvaluation CardSet::evaluatePairing() const {
                                (botind << MINOR_SHIFT));
     } break;
   }
-
-  std::cerr << "oops\n";
-  return PokerEvaluation(0);
+  assert(false);
 }
 
 // This one is not fully optimized
