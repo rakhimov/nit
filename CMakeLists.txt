@@ -1,17 +1,15 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 
-project(nit CXX)
+project(nit LANGUAGES CXX)
 
 option(WITH_COVERAGE "Instrument for coverage analysis" OFF)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)  # Needed for Clang Tooling.
 
-# TODO: Discover C++11 support.
-# TODO: This flags only works for GCC compatible compilers (Clang, Intel).
-#
-# TODO: This, ideally, should be per library requirement,
-#       but since all of them require C++11, the flag is set globally.
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+# Require C++11 support.
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(WITH_COVERAGE)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
