@@ -35,3 +35,6 @@ add_subdirectory(src)
 
 enable_testing()
 add_subdirectory(tests)
+
+# Command-line tools
+add_subdirectory(cli)
