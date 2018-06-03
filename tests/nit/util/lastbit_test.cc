@@ -4,28 +4,9 @@
 
 #include <catch.hpp>
 
-TEST_CASE("firstbit64", "[lastbit]") {
-  // firstbit arg is uint64_t
-  // There are no overloads, so we don't have to worry about which
-  // one is being tested.
-  CHECK(firstbit(0) == 0);
-  CHECK(firstbit(1) == 0);
-  CHECK(firstbit(2) == 1);
-  CHECK(firstbit(3) == 1);
-  CHECK(firstbit(4) == 2);
-  CHECK(firstbit(31) == 4);
-  CHECK(firstbit(32) == 5);
-
-  for (int i = 1; i < 64; i++) {
-    CHECK(firstbit((UINT64_C(1) << i) - 1) == (i - 1));
-    CHECK(firstbit((UINT64_C(1) << i)) == i);
-  }
-}
-
 TEST_CASE("lastbit32", "[lastbit]") {
   // There are uint16_t, uint32_t and uint64_t overloads of lastbit.
   // Explicitly cast arg so we know which we are testing.
-  CHECK(lastbit(uint32_t(0)) == 0);
   CHECK(lastbit(uint32_t(1)) == 0);
   CHECK(lastbit(uint32_t(2)) == 1);
   CHECK(lastbit(uint32_t(3)) == 0);
@@ -49,7 +30,6 @@ TEST_CASE("lastbit32", "[lastbit]") {
 TEST_CASE("lastbit16", "[lastbit]") {
   // There are uint16_t, uint32_t and uint64_t overloads of lastbit.
   // Explicitly cast arg so we know which we are testing.
-  CHECK(lastbit(uint16_t(0)) == 0);
   CHECK(lastbit(uint16_t(1)) == 0);
   CHECK(lastbit(uint16_t(2)) == 1);
   CHECK(lastbit(uint16_t(3)) == 0);
@@ -72,7 +52,6 @@ TEST_CASE("lastbit16", "[lastbit]") {
 TEST_CASE("lastbit 64 overload", "[lastbit]") {
   // There are uint16_t, uint32_t and uint64_t overloads of lastbit.
   // Explicitly cast arg so we know which we are testing.
-  CHECK(lastbit(uint64_t(0)) == 0);
   CHECK(lastbit(uint64_t(1)) == 0);
   CHECK(lastbit(uint64_t(2)) == 1);
   CHECK(lastbit(uint64_t(3)) == 0);
@@ -94,7 +73,6 @@ TEST_CASE("lastbit 64 overload", "[lastbit]") {
 
 TEST_CASE("lastbit64", "[lastbit]") {
   // No overloads for this function.
-  CHECK(lastbit64(0) == 0);
   CHECK(lastbit64(1) == 0);
   CHECK(lastbit64(2) == 1);
   CHECK(lastbit64(3) == 0);
