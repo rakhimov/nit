@@ -49,8 +49,9 @@ This should allow you to build it on any platform with minimal tweaking.
 In order to build the libraries,
 you'll need the following installed on your platform of choice:
 
+* C++11 compliant compiler: gcc (>=4.8), clang (>=3.3), msvc (>=2015)
 * boost, version 1.46 or higher
-* cmake, version 2.8 or higher
+* cmake, version 3.1 or higher
 
 ### Linux
 
