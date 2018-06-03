@@ -3,34 +3,29 @@
  */
 #include "showdown_enumerator.h"
 
-#include <string>
 #include <vector>
 
 #include "odometer.h"
 #include "partition_enumerator.h"
 #include "simple_deck.h"
 
-using std::runtime_error;
-using std::string;
-using std::vector;
-
 namespace nit {
 
 ShowdownEnumerator::ShowdownEnumerator() {}
 
-vector<EquityResult> ShowdownEnumerator::calculateEquity(
-    const vector<CardDistribution>& dists, const CardSet& board,
+std::vector<EquityResult> ShowdownEnumerator::calculateEquity(
+    const std::vector<CardDistribution>& dists, const CardSet& board,
     std::shared_ptr<PokerHandEvaluator> peval) const {
   if (peval.get() == NULL)
-    throw runtime_error("ShowdownEnumerator, null evaluator");
+    throw std::runtime_error("ShowdownEnumerator, null evaluator");
   assert(dists.size() > 1);
   const size_t ndists = dists.size();
-  vector<EquityResult> results(ndists, EquityResult());
+  std::vector<EquityResult> results(ndists, EquityResult());
   size_t handsize = peval->handSize();
 
   // the dsizes vector is a list of the sizes of the player hand
   // distributions
-  vector<size_t> dsizes;
+  std::vector<size_t> dsizes;
   for (size_t i = 0; i < ndists; i++) {
     assert(dists[i].size() > 0);
     dsizes.push_back(dists[i].size());
@@ -48,10 +43,10 @@ vector<EquityResult> ShowdownEnumerator::calculateEquity(
   SimpleDeck deck;
   CardSet dead;
   double weight;
-  vector<CardSet> ehands(ndists + nboards);
-  vector<size_t> parts(ndists + nboards);
-  vector<CardSet> cardPartitions(ndists + nboards);
-  vector<PokerHandEvaluation> evals(ndists);  // NO BOARD
+  std::vector<CardSet> ehands(ndists + nboards);
+  std::vector<size_t> parts(ndists + nboards);
+  std::vector<CardSet> cardPartitions(ndists + nboards);
+  std::vector<PokerHandEvaluation> evals(ndists);  // NO BOARD
 
   // copy quickness
   CardSet* copydest = &ehands[0];
