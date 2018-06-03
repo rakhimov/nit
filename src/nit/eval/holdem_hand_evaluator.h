@@ -14,11 +14,9 @@ namespace nit {
  */
 class HoldemHandEvaluator : public PokerHandEvaluator {
  public:
+  /// @todo Deal with invalid hand.
   PokerHandEvaluation evaluateHand(const CardSet& hand,
                                    const CardSet& board) const override {
-    // if (hand.size () != NUM_HOLDEM_POCKET)
-    // throw std::invalid_argument ("HHE: incorrect number of pocket
-    // cards");
     CardSet h = hand;
     h.insert(board);
     return PokerHandEvaluation(h.evaluateHigh());

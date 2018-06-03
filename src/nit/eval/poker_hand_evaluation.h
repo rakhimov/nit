@@ -5,7 +5,8 @@
 #define NIT_EVAL_POKER_HAND_EVALUATION_H_
 
 #include <iostream>
-#include <stdexcept>
+
+#include <nit/error.h>
 
 #include "poker_evaluation.h"
 
@@ -40,7 +41,7 @@ class PokerHandEvaluation {
   bool empty() const { return (eval1 == PokerEvaluation(0)); }
 
   /**
-   * return the evalution for the hand.  the first evaluation will
+   * return the evaluation for the hand.  the first evaluation will
    * be returned by default.
    */
   PokerEvaluation eval(size_t n = 0) const {
@@ -49,7 +50,7 @@ class PokerHandEvaluation {
     else if (n == 1)
       return eval2;
     else
-      throw std::runtime_error("invalid evaluation requested");
+      throw LogicError("invalid evaluation requested");
   }
 
  private:

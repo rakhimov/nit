@@ -6,7 +6,8 @@
 #include <cassert>
 
 #include <algorithm>
-#include <stdexcept>
+
+#include <nit/error.h>
 
 #include "card_set.h"
 #include "holdem.h"
@@ -55,8 +56,7 @@ std::string PokerHand::str() const {
 
 std::string PokerHand::preflopstr() const {
   if (m_ncards != 2)
-    throw std::runtime_error(
-        "incorrect number of cards for hold'em preflop canon");
+    throw LogicError("incorrect number of cards for hold'em preflop canon");
   Card c0 = Card(m_cards[0]);
   Card c1 = Card(m_cards[1]);
 
@@ -71,18 +71,13 @@ std::string PokerHand::preflopstr() const {
   return c0.rank().str() + c1.rank().str() + "o";
 }
 
-// parsing a string has a specific meaning.  All cards found in the
-// string, regardless of the other contents of the string, will be
-// extracted and populate the hand.
 void PokerHand::fromString(const std::string& instr) {
   clear();
-  auto slen = (size_t)instr.length();
+  auto slen = instr.length();
   if (slen == 0)
     return;
   if (slen == 1)
     return;
-  // throw std::invalid_argument (string("PokerHand parse error: " +
-  // instr).c_str());
 
   for (size_t i = 0; i < slen - 1; i++) {
     Card c;

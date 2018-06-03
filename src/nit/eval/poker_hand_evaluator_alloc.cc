@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  */
-#include <stdexcept>
+#include <nit/error.h>
 
 #include "badugi_hand_evaluator.h"
 #include "deuce_to_seven_hand_evaluator.h"
@@ -58,7 +58,7 @@ std::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc(
       else if (strid[2] == 'o' || strid[2] == 'O')  // PLO
         ret.reset(new OmahaHighHandEvaluator);
       else
-        throw std::runtime_error("no comatible pot limit game available");
+        throw LogicError("no comatible pot limit game available");
       break;
 
       //

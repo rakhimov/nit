@@ -5,6 +5,8 @@
 
 #include <vector>
 
+#include <nit/error.h>
+
 #include "odometer.h"
 #include "partition_enumerator.h"
 #include "simple_deck.h"
@@ -17,7 +19,7 @@ std::vector<EquityResult> ShowdownEnumerator::calculateEquity(
     const std::vector<CardDistribution>& dists, const CardSet& board,
     std::shared_ptr<PokerHandEvaluator> peval) const {
   if (peval.get() == nullptr)
-    throw std::runtime_error("ShowdownEnumerator, null evaluator");
+    throw LogicError("ShowdownEnumerator, null evaluator");
   assert(dists.size() > 1);
   const size_t ndists = dists.size();
   std::vector<EquityResult> results(ndists, EquityResult());

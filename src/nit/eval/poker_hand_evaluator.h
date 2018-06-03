@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+#include <nit/error.h>
+
 #include "card_set.h"
 #include "poker_hand_evaluation.h"
 
@@ -121,9 +123,7 @@ class PokerHandEvaluator {
   /**
    * used to add "draws" to draw games
    */
-  virtual void setNumDraws(size_t sz) {
-    throw std::runtime_error("not implemented");
-  }
+  virtual void setNumDraws(size_t sz) { throw LogicError("not implemented"); }
 
   /**
    * Given a set of showdown hands, return the corresponding number of

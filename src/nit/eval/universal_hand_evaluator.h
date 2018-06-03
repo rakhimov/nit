@@ -17,6 +17,7 @@
 
 #include <vector>
 
+#include <nit/error.h>
 #include <nit/util/combinations.h>
 
 #include "card.h"
@@ -59,7 +60,7 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
         m_evalA(evalA),
         m_evalB(evalB) {
     if (evalA == evalFunction(nullptr))
-      throw std::invalid_argument(
+      throw InvalidArgument(
           "UnivHandEval: first evaluator (A) must be non-null");
 
     if (evalB == evalFunction(nullptr))
@@ -83,9 +84,8 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
 
     // check to see if the input hand is consistent with the game
     if (hand.size() < m_heromin || hand.size() > m_heromax)
-      throw std::invalid_argument(
-          std::string("UnivHandEval: " + std::to_string(hand.size()) +
-                      ": invalid number of pocket cards"));
+      throw InvalidArgument("UnivHandEval: invalid number of pocket cards")
+          << errinfo_value(std::to_string(hand.size()));
     CardSet h = hand;
 
     std::vector<CardSet> hand_candidates;
@@ -95,9 +95,8 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
     // now check the board, it's a distribution
     size_t bz = board.size();
     if ((bz < m_boardmin && bz > 0) || bz > m_boardmax)
-      throw std::invalid_argument(
-          std::string("UnivHandEval: " + std::to_string(board.size()) +
-                      " unsupported number of board cards"));
+      throw InvalidArgument("UnivHandEval: unsupported number of board cards")
+          << errinfo_value(std::to_string(board.size()));
 
     // generate the possible sub parts, the reference example is omaha
     // where a player must use two cards from their hand, and three

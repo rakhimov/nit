@@ -3,7 +3,7 @@
  */
 #include "rank.h"
 
-#include <stdexcept>
+#include <nit/error.h>
 
 namespace nit {
 
@@ -53,7 +53,7 @@ void Rank::fromString(const std::string& c) {
   if (code >= 0)
     m_rank = code;
   else
-    throw std::domain_error(std::string("rank parse error: " + c).c_str());
+    throw DomainError("Rank parse error") << errinfo_value(c);
 }
 
 int Rank::rank_code(char c) {

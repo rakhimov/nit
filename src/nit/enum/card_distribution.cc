@@ -11,6 +11,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/math/special_functions/binomial.hpp>
 
+#include <nit/error.h>
 #include <nit/eval/card.h>
 #include <nit/util/combinations.h>
 
@@ -74,7 +75,7 @@ void CardDistribution::fill(const CardSet& cs, int n) {
 
 const CardSet& CardDistribution::operator[](size_t index) const {
   if (index >= m_handList.size())
-    throw std::runtime_error("CardDistribution::operator: bounds error");
+    throw LogicError("CardDistribution::operator: bounds error");
   return m_handList[index];
 }
 

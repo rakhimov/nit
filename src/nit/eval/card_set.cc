@@ -15,6 +15,7 @@
 
 #include <boost/math/special_functions/binomial.hpp>
 
+#include <nit/error.h>
 #include <nit/util/combinations.h>
 
 #include "card.h"
@@ -993,7 +994,7 @@ PokerEvaluation CardSet::evaluate3CP() const {
   int ncards =
       nRanksTable[c] + nRanksTable[d] + nRanksTable[h] + nRanksTable[s];
   if (ncards > 3)
-    throw std::invalid_argument("3CP evaluator only works on three cards");
+    throw InvalidArgument("3CP evaluator only works on three cards");
 
   // check for three flush
   bool threeflush = countSuits() == 1 ? true : false;

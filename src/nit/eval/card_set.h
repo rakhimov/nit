@@ -187,7 +187,7 @@ class CardSet {
   }
 
  protected:
-  void fromString(const std::string& s);  //!< throws exception on parse failre
+  void fromString(const std::string& s);  //!< throws exception on parse failure
   bool isPaired() const;   //!< returns true if *any* two cards match rank
   bool isTripped() const;  //!< returns true if trips
 

@@ -4,7 +4,6 @@
 #include "poker_evaluation.h"
 
 #include <iostream>
-#include <stdexcept>
 
 #include <boost/format.hpp>
 

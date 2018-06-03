@@ -125,8 +125,8 @@ class PokerHand {
   /**
    * Parse a poker hand from a string.  All card tokens found in the entire
    * string will be added to the hand.  This allows for embeded spaces, or
-   * other embeded characters. Strings of zero length will create an empty
-   * hand, strings of length 1 will raise an exception.
+   * other embeded characters. Strings of zero and 1 length will create
+   * an empty hand.
    */
   void fromString(const std::string& s);
 

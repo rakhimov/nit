@@ -4,9 +4,10 @@
 #include "suit.h"
 
 #include <iostream>
-#include <stdexcept>
 
 #include <boost/format.hpp>
+
+#include <nit/error.h>
 
 #include "card.h"
 
@@ -196,8 +197,8 @@ std::string Suit::decodeSuit(int c) const {
       return decodeSuitUnicode(c);
 
     case SUIT_PREFLOP_CANNON:
-      throw std::domain_error(
-          "direct suit decoding not supported for SUIT_PREFLOP_CANNON");
+      throw DomainError(
+          "Direct suit decoding not supported for SUIT_PREFLOP_CANNON");
   }
   return "?";
 }
@@ -217,7 +218,7 @@ int Suit::suit_code(char c) {
     case 'S':
       return Suit::SpadeVal();
   };
-  throw std::invalid_argument((std::string("Suit, parse error: ") + c).c_str());
+  throw InvalidArgument("Suit, parse error") << errinfo_value({c});
 }
 
 Suit::Suit(const std::string& str) : m_suit(suit_code(str[0])) {}

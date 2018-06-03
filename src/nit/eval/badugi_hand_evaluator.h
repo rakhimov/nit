@@ -6,6 +6,8 @@
 
 #include "poker_hand_evaluator.h"
 
+#include <nit/error.h>
+
 namespace nit {
 
 /**
@@ -22,14 +24,12 @@ class BadugiHandEvaluator : public PokerHandEvaluator {
 
   PokerEvaluation evaluateRanks(
       const CardSet& hand, const CardSet& board = CardSet(0)) const override {
-    throw std::runtime_error(
-        "BadugiHandEvaluator::evaluateRanks, not implemented");
+    throw LogicError("BadugiHandEvaluator::evaluateRanks, not implemented");
   }
 
   PokerEvaluation evaluateSuits(
       const CardSet& hand, const CardSet& board = CardSet(0)) const override {
-    throw std::runtime_error(
-        "BadugiHandEvaluator::evaluateSuits, not implemented");
+    throw LogicError("BadugiHandEvaluator::evaluateSuits, not implemented");
   }
 
   size_t handSize() const override { return 4; }
