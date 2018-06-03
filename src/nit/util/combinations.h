@@ -5,8 +5,7 @@
 #define NIT_UTIL_COMBINATIONS_H_
 
 #include <algorithm>
-
-#include <boost/lexical_cast.hpp>
+#include <string>
 
 #include <nit/util/lastbit.h>
 #include <nit/util/utypes.h>
@@ -57,7 +56,7 @@ class combinations {
   std::string str() const {
     std::string ret;
     for (size_t i = 0; i < size(); i++)
-      ret += boost::lexical_cast<std::string>((*this)[i]) + " ";
+      ret += std::to_string((*this)[i]) + " ";
     return ret;
   }
 

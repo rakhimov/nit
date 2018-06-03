@@ -6,6 +6,7 @@
 
 #include <cstdint>
 
+#include <string>
 #include <vector>
 
 #include <boost/lexical_cast.hpp>
@@ -73,7 +74,7 @@ class PartitionEnumerator2 {
       ret += (p ? " {" : "{");
       for (size_t i = 0; i < partSize(p); i++) {
         int el = boost::lexical_cast<int>(getIndex(p, i));
-        ret += (i ? " " : "") + boost::lexical_cast<std::string>(el);
+        ret += (i ? " " : "") + std::to_string(el);
       }
       ret += "}";
     }
@@ -89,7 +90,7 @@ class PartitionEnumerator2 {
       ret += (p ? " {" : "{");
       for (size_t i = 0; i < partSize(p); i++) {
         int el = boost::lexical_cast<int>(get(p, i));
-        ret += (i ? " " : "") + boost::lexical_cast<std::string>(el);
+        ret += (i ? " " : "") + std::to_string(el);
       }
       if (partSize(p) == 0)
         ret += "e";

@@ -17,8 +17,6 @@
 
 #include <vector>
 
-#include <boost/lexical_cast.hpp>
-
 #include <nit/util/combinations.h>
 
 #include "card.h"
@@ -86,8 +84,7 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
     // check to see if the input hand is consistent with the game
     if (hand.size() < _heromin || hand.size() > _heromax)
       throw std::invalid_argument(
-          std::string("UnivHandEval: " +
-                      boost::lexical_cast<std::string>(uint(hand.size())) +
+          std::string("UnivHandEval: " + std::to_string(hand.size()) +
                       ": invalid number of pocket cards"));
     CardSet h = hand;
 
@@ -99,8 +96,7 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
     size_t bz = board.size();
     if ((bz < _boardmin && bz > 0) || bz > _boardmax)
       throw std::invalid_argument(
-          std::string("UnivHandEval: " +
-                      boost::lexical_cast<std::string>((uint)board.size()) +
+          std::string("UnivHandEval: " + std::to_string(board.size()) +
                       " unsupported number of board cards"));
 
     // generate the possible sub parts, the reference example is omaha

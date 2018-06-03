@@ -7,7 +7,6 @@
 #include <string>
 #include <vector>
 
-#include <boost/lexical_cast.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "card_set.h"
@@ -37,10 +36,10 @@ struct EquityResult {
   }
 
   std::string str() const {
-    std::string ret = boost::lexical_cast<std::string>(winShares) + " " +
-                      boost::lexical_cast<std::string>(tieShares) + " " +
-                      boost::lexical_cast<std::string>(equity) + " " +
-                      boost::lexical_cast<std::string>(equity2);
+    std::string ret = std::to_string(winShares) + " " +
+                      std::to_string(tieShares) + " " +
+                      std::to_string(equity) + " " +
+                      std::to_string(equity2);
     return ret;
   }
 };
