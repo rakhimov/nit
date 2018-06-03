@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.1)
 set(CMAKE_DISABLE_SOURCE_CHANGES ON)
 set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 
-project(nit LANGUAGES CXX)
+project(NIT VERSION 0.0.0 LANGUAGES CXX)
 
 option(WITH_COVERAGE "Instrument for coverage analysis" OFF)
 

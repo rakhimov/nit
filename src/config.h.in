@@ -1,1 +1,9 @@
 #cmakedefine HAVE_BUILTIN_BITOPS
+
+// clang-format off
+#define NIT_VERSION_MAJOR @NIT_VERSION_MAJOR@  ///< API stability.
+#define NIT_VERSION_MINOR @NIT_VERSION_MINOR@  ///< Feature release.
+#define NIT_VERSION_MICRO @NIT_VERSION_PATCH@  ///< Micro/patch release.
+#define NIT_VERSION "@NIT_VERSION@"  ///< Dotted "major.minor.micro" string.
+#define NIT_GIT_REVISION "@NIT_GIT_REVISION@"  ///< Detailed version if any.
+// clang-format on
