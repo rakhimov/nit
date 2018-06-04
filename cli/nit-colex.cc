@@ -13,25 +13,6 @@
 
 namespace po = boost::program_options;
 
-#if 0
-std::set<CardSet>
-expandRankSet(size_t numCards)
-{
-    combinations cards(52,numCards);
-    do
-    {
-        CardSet hand;
-        for (size_t i=0; i<num_cards; i++)
-        {
-            hand.insert (Card(cards[i]));
-        }
-        collection.insert(hand.canonize());
-        rankHands[hand.rankstr()] = hand.rankColex();
-    }
-    while (cards.next());
-}
-#endif
-
 namespace {
 
 int runColex(int argc, char** argv) {

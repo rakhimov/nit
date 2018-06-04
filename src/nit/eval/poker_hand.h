@@ -9,8 +9,6 @@
 #include "card.h"
 #include "card_set.h"
 
-#define MUTABLE
-
 namespace nit {
 
 // we might possibly template the size here for performance
@@ -109,17 +107,13 @@ class PokerHand {
   /**
    * Re-order the hand. This changes the order, but are considered
    * const since ONLY the order of the cards change.
+   *
+   * @todo Investigate const-correctness of these members.
    */
-#ifdef MUTABLE
   void pushCardToFront(size_t nth) const;
   void sort() const;
   void sortRanks() const;
   void sortEval() const;
-#else
-  PokerHand sortSuits() const;
-  PokerHand sortRanks() const;
-  PokerHand sortEval() const;
-#endif
 
  protected:
   /**
@@ -131,11 +125,8 @@ class PokerHand {
   void fromString(const std::string& s);
 
  private:
-#ifdef MUTABLE
-  mutable  //!< m_cards can be mutable to handle sorts, better solution?
-#endif
-      std::array<Card, MAX_PHCARDS>
-          m_cards;
+  /// m_cards can be mutable to handle sorts, better solution?
+  mutable std::array<Card, MAX_PHCARDS> m_cards;
   uint8_t m_ncards;
 };
 

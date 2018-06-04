@@ -28,17 +28,10 @@ namespace nit {
 // some suit mask macros
 #define SMASK(n) (static_cast<int>(m_cardmask >> (n)*Rank::NUM_RANK) & 0x1FFF)
 
-#if 1
-#define C() (static_cast<int>(m_cardmask >> (0) * Rank::NUM_RANK) & 0x1FFF)
-#define D() (static_cast<int>(m_cardmask >> (1) * Rank::NUM_RANK) & 0x1FFF)
-#define H() (static_cast<int>(m_cardmask >> (2) * Rank::NUM_RANK) & 0x1FFF)
-#define S() (static_cast<int>(m_cardmask >> (3) * Rank::NUM_RANK) & 0x1FFF)
-#else
 #define C() SMASK(0)
 #define D() SMASK(1)
 #define H() SMASK(2)
 #define S() SMASK(3)
-#endif
 
 #define RMASK() (C() | D() | H() | S())
 
@@ -307,7 +300,6 @@ size_t CardSet::countRanks() const {
 int CardSet::suitMask(const Suit& s) const { return SMASK(s.code()); }
 
 size_t CardSet::count(const Rank& r) const {
-#if 1
   // this version is faster, if less obvious
   int c = C();
   int d = D();
@@ -331,13 +323,6 @@ size_t CardSet::count(const Rank& r) const {
     return 1;
 
   return 0;
-#else
-  size_t ret = 0;
-  for (size_t i = 0; i < Suit::NUM_SUIT; i++)
-    if (r.rankBit() & SMASK(i))
-      ret++;
-  return ret;
-#endif
 }
 
 bool CardSet::hasStraight() const {
@@ -1248,13 +1233,9 @@ size_t CardSet::colex() const {
   size_t value = 0;
   for (size_t i = 0; i < cards.size(); i++) {
     size_t code = cards[i].code();
-#ifdef __AP_MATH__
-    value += tchoose(code, i + 1);
-#else
     if (code >= i + 1)
       value += static_cast<size_t>(
           boost::math::binomial_coefficient<double>(code, i + 1));
-#endif
   }
   return value;
 }

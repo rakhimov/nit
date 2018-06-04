@@ -29,34 +29,4 @@ std::string toBitString(T t) {
   return ret;
 }
 
-/**
- * Count the number of bits that are on in the input.  This may need
- * to be fixed to work with unsigned input
- */
-#if 1
-
-template <typename T>
-int countbits(T v) {
-  size_t c;
-  for (c = 0; v; c++) {
-    v &= v - 1;  // clear the least significant bit set
-  }
-  return c;
-}
-
-#else
-template <typename T>
-int countbits(T x) {
-  int rval = 0;
-  while (x != 0) {
-    if (x & 0x01)
-      rval++;
-    x >>= 1;
-  }
-  return rval;
-}
-#endif
-
-std::string makeCommaNumStr(int64_t n);
-
 #endif  // NIT_UTIL_UTYPES_H_
