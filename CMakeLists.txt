@@ -7,6 +7,8 @@ set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 project(NIT VERSION 0.0.0 LANGUAGES CXX)
 
 option(NIT_WITH_COVERAGE "Instrument for coverage analysis" OFF)
+option(NIT_BUILD_CLI "Build command-line tools" ON)
+option(NIT_BUILD_TESTS "Build tests" ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)  # Needed for Clang Tooling.
 
@@ -17,7 +19,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -Werror -Wnon-virtual-dtor -Wold-style-cast")
 
-if(WITH_COVERAGE)
+if(NIT_WITH_COVERAGE)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
 endif()
 
@@ -45,8 +47,12 @@ include_directories("${PROJECT_BINARY_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(src)
 
-enable_testing()
-add_subdirectory(tests)
+if(NIT_BUILD_TESTS)
+  enable_testing()
+  add_subdirectory(tests)
+endif()
 
 # Command-line tools
-add_subdirectory(cli)
+if(NIT_BUILD_CLI)
+  add_subdirectory(cli)
+endif()
