@@ -4,11 +4,18 @@
 #include <cassert>
 #include <cstdint>
 
+#include <nit/util/utypes.h>
+
 #ifdef _MSC_VER
 #include <intrin.h>
+#include <windows.h>
+
+#pragma intrinsic(_BitScanForward)
+#ifndef _M_IX86
+#pragma intrinsic(_BitScanForward64)
 #endif
 
-#include <nit/util/utypes.h>
+#endif
 
 inline int lastbit(uint32_t v) {
   assert(v != 0);
@@ -16,7 +23,6 @@ inline int lastbit(uint32_t v) {
   return __builtin_ctz(v);
 
 #elif defined(_MSC_VER)
-#pragma intrinsic(_BitScanForward)
   DWORD trailing_zero = 0;
   auto ret = _BitScanForward(&trailing_zero, v);
   assert(ret);
@@ -41,7 +47,6 @@ inline int lastbit(uint64_t v) {
   auto upper = static_cast<uint32_t>(v >> 32);
   return lastbit(upper) + 32;
 #else
-#pragma intrinsic(_BitScanForward64)
   DWORD trailing_zero = 0;
   auto ret = _BitScanForward64(&trailing_zero, v);
   assert(ret);
