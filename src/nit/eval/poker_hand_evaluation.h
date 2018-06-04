@@ -27,7 +27,7 @@ class PokerHandEvaluation {
 
   std::string str() const {
     if (highlow())
-      return std::string(eval1.str() + "\n" + eval2.str());
+      return eval1.str() + "\n" + eval2.str();
     else
       return eval1.str();
   }

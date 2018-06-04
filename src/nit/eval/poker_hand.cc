@@ -21,7 +21,7 @@ PokerHand::PokerHand() { clear(); }
 CardSet PokerHand::cardSet() const {
   CardSet cs;
   for (uint8_t i = 0; i < m_ncards; i++)
-    cs.insert(Card(m_cards[i]));
+    cs.insert(m_cards[i]);
   return cs;
 }
 
@@ -57,8 +57,8 @@ std::string PokerHand::str() const {
 std::string PokerHand::preflopstr() const {
   if (m_ncards != 2)
     throw LogicError("incorrect number of cards for hold'em preflop canon");
-  Card c0 = Card(m_cards[0]);
-  Card c1 = Card(m_cards[1]);
+  Card c0 = m_cards[0];
+  Card c1 = m_cards[1];
 
   if (c0.rank() == c1.rank())
     return c0.rank().str() + c0.rank().str();

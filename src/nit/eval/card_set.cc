@@ -52,7 +52,7 @@ namespace nit {
 
 CardSet::CardSet() = default;
 
-CardSet::CardSet(const CardSet& cs) = default;
+CardSet::CardSet(const CardSet& /*cs*/) = default;
 
 CardSet::CardSet(const Card& c) : m_cardmask(ONE64 << c.m_card) {}
 
@@ -1158,11 +1158,15 @@ Rank CardSet::topRank() const { return Rank(topRankTable[RMASK()]); }
 
 Rank CardSet::bottomRank() const { return Rank(botRankTable[RMASK()]); }
 
+namespace {
+
 double clampedChoose(int n, int m) {
   if (n < m)
     return 0;
   return static_cast<size_t>(boost::math::binomial_coefficient<double>(n, m));
 }
+
+}  // namespace
 
 int CardSet::evaluateStraightOuts() const {
   int sval = straightTable[RMASK()];
@@ -1201,11 +1205,6 @@ size_t CardSet::rankColex() const {
     rbit <<= 1;
   }
   return ret;
-}
-
-std::ostream& operator<<(std::ostream& sout, const CardSet& e) {
-  sout << e.str();
-  return sout;
 }
 
 std::vector<int> findSuitPermutation(const CardSet& source,

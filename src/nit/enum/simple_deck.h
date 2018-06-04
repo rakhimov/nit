@@ -82,7 +82,7 @@ class SimpleDeck {
    * Move all cards which are not live to the end of the deck
    */
   void remove(const nit::CardSet& cards) {
-    int decr = CardSet(cards | dead()).size();
+    int decr = (cards | dead()).size();
     std::stable_partition(
         m_deck.begin(), m_deck.end(),
         [&cards](const CardSet& c) { return !cards.contains(c); });

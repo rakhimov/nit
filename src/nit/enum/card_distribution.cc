@@ -65,11 +65,11 @@ void CardDistribution::fill(const CardSet& cs, int n) {
   m_handList.reserve(vsize);
 
   do {
-    CardSet cs;
+    CardSet cs_i;
     for (int i = 0; i < n; i++)
-      cs.insert(cards[hands[i]]);
-    m_handList.push_back(cs);
-    m_weights[cs] = 1.0;
+      cs_i.insert(cards[hands[i]]);
+    m_handList.push_back(cs_i);
+    m_weights[cs_i] = 1.0;
   } while (hands.next());
 }
 

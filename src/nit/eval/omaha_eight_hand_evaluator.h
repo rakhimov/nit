@@ -69,8 +69,7 @@ class OmahaEightHandEvaluator : public PokerHandEvaluator {
 
     for (auto& hand_candidate : hand_candidates)
       for (const auto& board_candidate : board_candidates) {
-        PokerEvaluation e =
-            CardSet(hand_candidate | board_candidate).evaluateHigh();
+        PokerEvaluation e = (hand_candidate | board_candidate).evaluateHigh();
         if (e > eval[0])
           eval[0] = e;
       }
