@@ -4,13 +4,10 @@
 #include "card_set.h"
 
 #include <cassert>
-#include <cstdio>
 
 #include <algorithm>
 #include <array>
 #include <limits>
-#include <set>
-#include <vector>
 
 #include <boost/math/special_functions/binomial.hpp>
 
@@ -20,8 +17,6 @@
 #include "card.h"
 #include "poker_evaluation.h"
 #include "poker_evaluation_tables.h"
-#include "rank.h"
-#include "suit.h"
 
 namespace nit {
 

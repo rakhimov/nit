@@ -3,9 +3,6 @@
  */
 #include "card_distribution.h"
 
-#include <iostream>
-#include <vector>
-
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>

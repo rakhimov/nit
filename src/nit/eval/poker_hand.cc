@@ -9,7 +9,6 @@
 
 #include <nit/error.h>
 
-#include "card_set.h"
 #include "holdem.h"
 #include "poker_evaluation.h"
 #include "poker_evaluation_tables.h"

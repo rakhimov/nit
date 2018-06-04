@@ -3,8 +3,6 @@
  */
 #include "showdown_enumerator.h"
 
-#include <vector>
-
 #include <nit/error.h>
 
 #include "odometer.h"

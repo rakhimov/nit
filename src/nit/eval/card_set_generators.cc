@@ -5,8 +5,6 @@
 
 #include <nit/util/combinations.h>
 
-#include "card.h"
-
 namespace nit {
 
 std::set<CardSet> createCardSet(size_t numCards, Card::Grouping grouping) {
