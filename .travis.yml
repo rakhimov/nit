@@ -1,6 +1,10 @@
 sudo: false
 dist: trusty
 
+branches:
+    except:
+        - appveyor
+
 language: cpp
 
 os: linux
