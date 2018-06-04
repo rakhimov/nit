@@ -6,7 +6,7 @@ set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 
 project(NIT VERSION 0.0.0 LANGUAGES CXX)
 
-option(WITH_COVERAGE "Instrument for coverage analysis" OFF)
+option(NIT_WITH_COVERAGE "Instrument for coverage analysis" OFF)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)  # Needed for Clang Tooling.
 

@@ -51,7 +51,7 @@ jobs:
               - pip install --user codecov
           script:
               - cd build
-              - cmake .. -DCMAKE_BUILD_TYPE=Debug -DWITH_COVERAGE=ON
+              - cmake .. -DCMAKE_BUILD_TYPE=Debug -DNIT_WITH_COVERAGE=ON
               - make -j 2
               - make test
               - cd ..
