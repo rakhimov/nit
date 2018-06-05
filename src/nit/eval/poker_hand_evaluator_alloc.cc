@@ -14,9 +14,6 @@
 #include "stud_hand_evaluator.h"
 #include "universal_hand_evaluator.h"
 
-//#include "lowball_a5_hand_evaluator.h"
-//#include "three_card_poker_hand_evaluator.h"
-
 namespace nit {
 
 std::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc(

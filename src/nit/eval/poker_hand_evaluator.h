@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+#include <boost/noncopyable.hpp>
+
 #include <nit/error.h>
 
 #include "card_set.h"
@@ -48,7 +50,7 @@ struct EquityResult {
  * trying to do here is to abstract the hand evaluation.  No
  * rollouts of any kind are done in here.
  */
-class PokerHandEvaluator {
+class PokerHandEvaluator : private boost::noncopyable {
  public:
   virtual ~PokerHandEvaluator();
 
@@ -95,16 +97,14 @@ class PokerHandEvaluator {
                                const CardSet& board = CardSet(0)) {
     return evaluateHand(hand, board).high();
   }
-
-  virtual size_t handSize()
-      const = 0;  //!< return the maximum size of a players hand
-  virtual size_t boardSize()
-      const = 0;  //!< return the maximum size of the board
-  virtual size_t evaluationSize()
-      const = 0;  //!< return 1 for high only, 2 for high low
-  virtual size_t numDraws() const {
-    return 0;
-  }  //!< return the maximum size of a players hand
+  /// @returns the maximum size of a players hand
+  virtual size_t handSize() const = 0;
+  /// @returns the maximum size of the board
+  virtual size_t boardSize() const = 0;
+  /// @returns 1 for high only, 2 for high low
+  virtual size_t evaluationSize() const = 0;
+  /// @returns the maximum size of a players hand
+  virtual size_t numDraws() const { return 0; }
 
   virtual PokerEvaluation evaluateRanks(
       const CardSet& hand, const CardSet& board = CardSet(0)) const {
@@ -159,19 +159,12 @@ class PokerHandEvaluator {
   PokerHandEvaluator();
 
  private:
-  // non-copyable
-  PokerHandEvaluator(const PokerHandEvaluator&);
-  PokerHandEvaluator& operator=(const PokerHandEvaluator&);
-
   // for printing
   std::string m_subclassID;
 
   // we can turn on and off suit evaluation if we choose
   bool m_useSuits{true};
 };
-
-// for planned refactoring
-using GameEvaluator = PokerHandEvaluator;
 
 }  // namespace nit
 
