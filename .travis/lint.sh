@@ -7,3 +7,4 @@ CLANG_FORMAT="./run-clang-format/run-clang-format.py --clang-format-executable c
 
 ${CLANG_FORMAT} -r src/
 ${CLANG_FORMAT} -r tests/
+${CLANG_FORMAT} -r cli/

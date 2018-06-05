@@ -35,8 +35,7 @@ int runEval(int argc, char** argv) {
   try {
     po::store(po::parse_command_line(argc, argv, desc), vm);
   } catch (const std::exception& err) {
-    std::cerr << "Option error: " << err.what() << "\n\n"
-              << desc << std::endl;
+    std::cerr << "Option error: " << err.what() << "\n\n" << desc << std::endl;
     return 1;
   }
   po::notify(vm);
