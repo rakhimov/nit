@@ -4,10 +4,10 @@
 #ifndef NIT_UTIL_COMBINATIONS_H_
 #define NIT_UTIL_COMBINATIONS_H_
 
-#include <algorithm>
 #include <string>
 
 namespace nit {
+
 /**
  * Generates the set of all N choose K combinations of K
  * indices less than N.
@@ -102,46 +102,6 @@ class combinations {
   size_t n_;
   size_t k_;
   bool didnull_;
-};
-
-/**
- * Generates the set of all N choose K combinations of K indices less
- * than N.  Templated version, roughly 8% faster.
- */
-template <unsigned int N>
-class Combinations {
- public:
-  explicit Combinations(unsigned int k = 1) : K(k) {
-    for (unsigned int i = 0; i < K; ++i)
-      comb_[i] = i;
-  }
-
-  void reset() {
-    for (unsigned int i = 0; i < K; ++i)
-      comb_[i] = i;
-  }
-
-  void setK(int k) { K = k; }
-
-  bool next() {
-    int i = K - 1;
-    while (i >= 0 && comb_[i] + K + 1 > N + i)
-      i--;
-    if (i < 0)
-      return false;
-    comb_[i]++;
-    while (static_cast<unsigned int>(++i) < K)
-      comb_[i] = comb_[i - 1] + 1;
-    return true;
-  }
-
-  unsigned int operator[](size_t i) const { return comb_[i]; }
-
-  size_t size() const { return K; }
-
- private:
-  unsigned int K;
-  unsigned int comb_[N];
 };
 
 }  // namespace nit
