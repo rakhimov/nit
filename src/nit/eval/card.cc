@@ -3,8 +3,6 @@
  */
 #include "card.h"
 
-#include <iostream>
-
 #include "rank.h"
 #include "suit.h"
 

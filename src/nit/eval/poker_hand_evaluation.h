@@ -4,8 +4,6 @@
 #ifndef NIT_EVAL_POKER_HAND_EVALUATION_H_
 #define NIT_EVAL_POKER_HAND_EVALUATION_H_
 
-#include <iostream>
-
 #include <nit/error.h>
 
 #include "poker_evaluation.h"

@@ -6,10 +6,6 @@
 
 #include <climits>
 
-#include <iosfwd>
-
-#include <boost/operators.hpp>
-
 #include "rank.h"
 
 namespace nit {
@@ -111,7 +107,6 @@ class PokerEvaluation {
    */
   int kickerBits() const;
 
-  // boost/operators.hpp creates closure
   bool operator==(const PokerEvaluation& e) const {
     return m_evalcode == e.m_evalcode;
   }
@@ -196,14 +191,6 @@ class PokerEvaluation {
   int m_evalcode{0};
 };
 
-// typedef to support refactoring
-using Evaluation = PokerEvaluation;
-
 }  // namespace nit
-
-//
-// Extraction operators.
-//
-std::ostream& operator<<(std::ostream& sout, const nit::PokerEvaluation& e);
 
 #endif  // NIT_EVAL_POKER_EVALUATION_H_

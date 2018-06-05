@@ -477,8 +477,3 @@ void PokerEvaluation::generateBottomRankMask() {
 }
 
 }  // namespace nit
-
-std::ostream& operator<<(std::ostream& sout, const nit::PokerEvaluation& e) {
-  sout << e.str();
-  return sout;
-}

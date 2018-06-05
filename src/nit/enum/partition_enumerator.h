@@ -36,8 +36,6 @@ OutputIterator myset_difference(InputIterator1 first1, InputIterator1 last1,
   return copy(first1, last1, result);
 }
 
-using Combos = combinations;
-
 /**
  * this class enumerates over all partistions of a set of data
  * *given* the size of the partitions.
@@ -131,7 +129,7 @@ class PartitionEnumerator2 {
  private:
   size_t m_setSize;
   std::vector<size_t> m_parts;
-  std::vector<Combos> m_pcombos;
+  std::vector<combinations> m_pcombos;
   std::vector<std::vector<size_t>> m_subsets;
   mutable std::vector<uint64_t> m_masks;
 
