@@ -55,7 +55,7 @@ int runEval(int argc, char** argv) {
   bool quiet = vm.count("quiet") > 0;
 
   // allocate evaluator and create card distributions
-  std::shared_ptr<nit::PokerHandEvaluator> evaluator = nit::makeEvaluator(game);
+  std::unique_ptr<nit::PokerHandEvaluator> evaluator = nit::makeEvaluator(game);
   std::vector<nit::CardDistribution> handDists;
   for (const std::string& hand : hands) {
     handDists.emplace_back();
@@ -71,7 +71,7 @@ int runEval(int argc, char** argv) {
   // calculate the results and print them
   nit::ShowdownEnumerator showdown;
   std::vector<nit::EquityResult> results =
-      showdown.calculateEquity(handDists, nit::CardSet(board), evaluator);
+      showdown.calculateEquity(handDists, nit::CardSet(board), *evaluator);
 
   double total = 0.0;
   for (const nit::EquityResult& result : results) {

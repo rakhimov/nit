@@ -15,13 +15,11 @@ ShowdownEnumerator::ShowdownEnumerator() = default;
 
 std::vector<EquityResult> ShowdownEnumerator::calculateEquity(
     const std::vector<CardDistribution>& dists, const CardSet& board,
-    std::shared_ptr<PokerHandEvaluator> peval) const {
-  if (peval.get() == nullptr)
-    throw LogicError("ShowdownEnumerator, null evaluator");
+    const PokerHandEvaluator& peval) const {
   assert(dists.size() > 1);
   const size_t ndists = dists.size();
   std::vector<EquityResult> results(ndists, EquityResult());
-  size_t handsize = peval->handSize();
+  size_t handsize = peval.handSize();
 
   // the dsizes vector is a list of the sizes of the player hand
   // distributions
@@ -34,7 +32,7 @@ std::vector<EquityResult> ShowdownEnumerator::calculateEquity(
   // need to figure out the board stuff, we'll be rolling the board into
   // the partitions to make enumeration easier down the line.
   size_t nboards = 0;
-  size_t boardsize = peval->boardSize();
+  size_t boardsize = peval.boardSize();
   if (boardsize > 0)
     nboards++;
 
@@ -87,10 +85,10 @@ std::vector<EquityResult> ShowdownEnumerator::calculateEquity(
         // clause? A: need to rework tracking of whether a board is
         // needed
         if (nboards > 0)
-          peval->evaluateShowdown(ehands, ehands[ndists], evals, results,
-                                  weight);
+          peval.evaluateShowdown(ehands, ehands[ndists], evals, results,
+                                 weight);
         else
-          peval->evaluateShowdown(ehands, board, evals, results, weight);
+          peval.evaluateShowdown(ehands, board, evals, results, weight);
       } while (pe.next());
     }
   } while (o.next());

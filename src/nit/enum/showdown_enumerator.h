@@ -4,7 +4,6 @@
 #ifndef NIT_ENUM_SHOWDOWN_ENUMERATOR_H_
 #define NIT_ENUM_SHOWDOWN_ENUMERATOR_H_
 
-#include <memory>
 #include <vector>
 
 #include <nit/eval/poker_hand_evaluator.h>
@@ -22,7 +21,7 @@ class ShowdownEnumerator {
    */
   std::vector<EquityResult> calculateEquity(
       const std::vector<CardDistribution>& dists, const CardSet& board,
-      std::shared_ptr<PokerHandEvaluator> peval) const;
+      const PokerHandEvaluator& peval) const;
 };
 
 }  // namespace nit

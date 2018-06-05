@@ -19,46 +19,49 @@
 
 namespace nit {
 
-std::shared_ptr<PokerHandEvaluator> makeEvaluator(const std::string& strid) {
-  std::shared_ptr<PokerHandEvaluator> ret;
+namespace detail {
+
+template <class T, class... Ts>
+std::unique_ptr<T> make_unique(Ts&&... args) {
+  return std::unique_ptr<T>(new T(std::forward<Ts>(args)...));
+}
+
+}  // namespace detail
+
+std::unique_ptr<PokerHandEvaluator> makeEvaluator(const std::string& strid) {
   switch (strid[0]) {
     case 'h':  //     hold'em
     case 'H':  //     hold'em
       // ret = new UniversalHandEvaluator
       // (2,2,3,5,0,&CardSet::evaluateHigh, NULL);
-      ret.reset(new HoldemHandEvaluator);
-      break;
+      return detail::make_unique<HoldemHandEvaluator>();
 
     case 'k':  //     Kansas City lowball (2-7)
-      ret.reset(new UniversalHandEvaluator(1, 5, 0, 0, 0,
-                                           &CardSet::evaluateLow2to7, nullptr));
-      break;
+      return detail::make_unique<UniversalHandEvaluator>(
+          1, 5, 0, 0, 0, &CardSet::evaluateLow2to7, nullptr);
 
     case 'l':  //     lowball (A-5)
-      ret.reset(new UniversalHandEvaluator(1, 5, 0, 0, 0,
-                                           &CardSet::evaluateLowA5, nullptr));
-      break;
+      return detail::make_unique<UniversalHandEvaluator>(
+          1, 5, 0, 0, 0, &CardSet::evaluateLowA5, nullptr);
 
     case '3':  //     three card poker
-      ret.reset(new UniversalHandEvaluator(1, 3, 0, 0, 0, &CardSet::evaluate3CP,
-                                           nullptr));
-      break;
+      return detail::make_unique<UniversalHandEvaluator>(
+          1, 3, 0, 0, 0, &CardSet::evaluate3CP, nullptr);
 
     case 'O':  //     omaha high
       // ret.reset (new UniversalHandEvaluator
       // (4,4,3,5,2,&CardSet::evaluateHigh, NULL));
-      ret.reset(new OmahaHighHandEvaluator);
-      break;
+      return detail::make_unique<OmahaHighHandEvaluator>();
 
     case 'p':  //     pot limit
     case 'P':
       if (strid[2] == 'h' || strid[2] == 'H')  // plh/PLH
-        ret.reset(new HoldemHandEvaluator);
-      else if (strid[2] == 'o' || strid[2] == 'O')  // PLO
-        ret.reset(new OmahaHighHandEvaluator);
-      else
-        throw LogicError("no comatible pot limit game available");
-      break;
+        return detail::make_unique<HoldemHandEvaluator>();
+
+      if (strid[2] == 'o' || strid[2] == 'O')  // PLO
+        return detail::make_unique<OmahaHighHandEvaluator>();
+
+      throw LogicError("no compatible pot limit game available");
 
       //
       // For the draw games, we need to be able to evaluate 1 card to
@@ -67,58 +70,48 @@ std::shared_ptr<PokerHandEvaluator> makeEvaluator(const std::string& strid) {
     case 'r':  //     razz
       // ret.reset (new UniversalHandEvaluator
       // (1,7,0,0,0,&CardSet::evaluateLowA5, NULL));
-      ret.reset(new RazzHandEvaluator);
-      break;
+      return detail::make_unique<RazzHandEvaluator>();
 
     case 's':  //     stud
       // ret.reset (new UniversalHandEvaluator
       // (1,7,0,0,0,&CardSet::evaluateHigh, NULL));
-      ret.reset(new StudHandEvaluator);
-      break;
+      return detail::make_unique<StudHandEvaluator>();
 
     case 'q':  //     stud high/low no qualifier
-      ret.reset(new UniversalHandEvaluator(
-          1, 7, 0, 0, 0, &CardSet::evaluateHigh, &CardSet::evaluateLowA5));
-      break;
+      return detail::make_unique<UniversalHandEvaluator>(
+          1, 7, 0, 0, 0, &CardSet::evaluateHigh, &CardSet::evaluateLowA5);
 
     case 'd':  //     draw high
     case 'D':  //     draw high
       // ret.reset (new UniversalHandEvaluator
       // (1,5,0,0,0,&CardSet::evaluateHigh, NULL));
-      ret.reset(new DrawHighHandEvaluator);
-      break;
+      return detail::make_unique<DrawHighHandEvaluator>();
 
     case 't':  //     triple draw lowball (2-7)
       // ret.reset (new UniversalHandEvaluator
       // (1,5,0,0,0,&CardSet::evaluateLow2to7, NULL));
-      ret.reset(new DeuceToSevenHandEvaluator);
-      break;
+      return detail::make_unique<DeuceToSevenHandEvaluator>();
 
     case 'T':  //     triple draw lowball (A-5)
-      ret.reset(new UniversalHandEvaluator(1, 5, 0, 0, 0,
-                                           &CardSet::evaluateLowA5, nullptr));
-      break;
+      return detail::make_unique<UniversalHandEvaluator>(
+          1, 5, 0, 0, 0, &CardSet::evaluateLowA5, nullptr);
 
     case 'o':  //     omaha/high low
       // ret.reset (new UniversalHandEvaluator (4,4,3,5,2,
       // &CardSet::evaluateHigh, &CardSet::evaluate8LowA5));
-      ret.reset(new OmahaEightHandEvaluator);
-      break;
+      return detail::make_unique<OmahaEightHandEvaluator>();
 
     case 'e':  //     stud/8
       // ret.reset (new UniversalHandEvaluator
       // (1,7,0,0,0,&CardSet::evaluateHigh, &CardSet::evaluate8LowA5));
-      ret.reset(new StudEightHandEvaluator);
-      break;
+      return detail::make_unique<StudEightHandEvaluator>();
 
     case 'b':  //     badugi
       // ret.reset (new UniversalHandEvaluator
       // (0,52,0,0,0,&CardSet::evaluateBadugi,NULL));
-      ret.reset(new BadugiHandEvaluator);
-      break;
+      return detail::make_unique<BadugiHandEvaluator>();
   }
-
-  return ret;
+  throw LogicError("No evaluator for poker type.") << errinfo_value(strid);
 }
 
 }  // namespace nit

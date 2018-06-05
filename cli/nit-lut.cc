@@ -63,7 +63,7 @@ int runLut(int argc, char** argv) {
   std::set<nit::CardSet> pockets = nit::createCardSet(pocketCount, grouping);
   std::set<nit::CardSet> boards = nit::createCardSet(boardCount, grouping);
 
-  std::shared_ptr<nit::PokerHandEvaluator> evaluator = nit::makeEvaluator(game);
+  std::unique_ptr<nit::PokerHandEvaluator> evaluator = nit::makeEvaluator(game);
   for (const auto& pocket : pockets)
     for (const auto& board : boards) {
       if (ranks) {
