@@ -8,7 +8,7 @@ set(NIT_SRC
   eval/card_set_generators.cc
   eval/poker_evaluation.cc
   eval/poker_hand.cc
-  eval/poker_hand_evaluator_alloc.cc
+  eval/make_evaluator.cc
   eval/poker_hand_evaluator.cc
   eval/rank.cc
   eval/suit.cc

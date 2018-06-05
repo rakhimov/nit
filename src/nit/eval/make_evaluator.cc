@@ -1,6 +1,9 @@
 /**
  * Copyright (c) 2012 Andrew Prock. All rights reserved.
  */
+
+#include "make_evaluator.h"
+
 #include <nit/error.h>
 
 #include "badugi_hand_evaluator.h"
@@ -16,8 +19,7 @@
 
 namespace nit {
 
-std::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc(
-    const std::string& strid) {
+std::shared_ptr<PokerHandEvaluator> makeEvaluator(const std::string& strid) {
   std::shared_ptr<PokerHandEvaluator> ret;
   switch (strid[0]) {
     case 'h':  //     hold'em
@@ -115,8 +117,6 @@ std::shared_ptr<PokerHandEvaluator> PokerHandEvaluator::alloc(
       ret.reset(new BadugiHandEvaluator);
       break;
   }
-
-  ret->m_subclassID = strid;
 
   return ret;
 }

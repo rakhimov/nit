@@ -6,6 +6,7 @@
 #include <boost/program_options.hpp>
 
 #include <nit/enum/showdown_enumerator.h>
+#include <nit/eval/make_evaluator.h>
 
 #include "guard.h"
 
@@ -54,8 +55,7 @@ int runEval(int argc, char** argv) {
   bool quiet = vm.count("quiet") > 0;
 
   // allocate evaluator and create card distributions
-  std::shared_ptr<nit::PokerHandEvaluator> evaluator =
-      nit::PokerHandEvaluator::alloc(game);
+  std::shared_ptr<nit::PokerHandEvaluator> evaluator = nit::makeEvaluator(game);
   std::vector<nit::CardDistribution> handDists;
   for (const std::string& hand : hands) {
     handDists.emplace_back();

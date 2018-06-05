@@ -97,5 +97,5 @@ The UniversalHandEvaluator is a utility class that that supports parameterized
 game evaluation.  Most of the classic games can be constructed with this
 evaluator, though optimized versions are created to speed up specific games.
 
-The factory PokerHandEvaluator::alloc() can be used to construct the appropriate
+The factory function nit::makeEvaluator(string) can be used to construct the appropriate
 game evaluator based on the input string.
