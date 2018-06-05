@@ -7,9 +7,6 @@
 #include <algorithm>
 #include <string>
 
-#include <nit/util/lastbit.h>
-#include <nit/util/utypes.h>
-
 namespace nit {
 /**
  * Generates the set of all N choose K combinations of K

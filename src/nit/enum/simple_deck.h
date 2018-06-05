@@ -48,7 +48,7 @@ class SimpleDeck {
    */
   std::string str() const {
     std::string ret;
-    for (uint i = 0; i < STANDARD_DECK_SIZE; i++) {
+    for (size_t i = 0; i < STANDARD_DECK_SIZE; i++) {
       if (i == m_current)
         ret += "/";
       ret = ret + m_deck[i].str();
@@ -62,7 +62,7 @@ class SimpleDeck {
     // TODO: fix and test this code, edge cases clearly at risk here
     if (ncards == 0)
       return nit::CardSet();
-    m_current -= static_cast<uint>(ncards);
+    m_current -= ncards;
     CardSet* pcur = &m_deck[m_current];
     const CardSet* pend = pcur + ncards;
     CardSet cards(*pcur++);

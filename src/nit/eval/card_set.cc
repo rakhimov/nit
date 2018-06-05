@@ -13,6 +13,7 @@
 
 #include <nit/error.h>
 #include <nit/util/combinations.h>
+#include <nit/util/lastbit.h>
 
 #include "card.h"
 #include "poker_evaluation.h"
@@ -42,7 +43,7 @@ CardSet::CardSet() = default;
 
 CardSet::CardSet(const CardSet& /*cs*/) = default;
 
-CardSet::CardSet(const Card& c) : m_cardmask(ONE64 << c.m_card) {}
+CardSet::CardSet(const Card& c) : m_cardmask(1ull << c.m_card) {}
 
 CardSet::CardSet(const std::string& c) : m_cardmask(0) { fromString(c); }
 
@@ -61,7 +62,7 @@ std::string CardSet::str() const {
 std::string CardSet::rankstr() const {
   std::string out = "";
   for (size_t i = 0; i < STANDARD_DECK_SIZE; i++) {
-    uint64_t mask = ONE64 << i;
+    uint64_t mask = 1ull << i;
     if (m_cardmask & mask) {
       Card c(i);
       out += c.rank().str();
@@ -74,7 +75,7 @@ std::string CardSet::rankstr() const {
 std::string CardSet::toRankBitString() const {
   std::string out = "";
   for (size_t i = 0; i < STANDARD_DECK_SIZE; i++) {
-    if (m_cardmask & ONE64 << i)
+    if (m_cardmask & 1ull << i)
       out += "1";
     else
       out += ".";
@@ -122,7 +123,7 @@ void CardSet::fromString(const std::string& instr) {
     }
     int code = Rank::rank_code(instr[i]) +
                Suit::suit_code(instr[i + 1]) * Rank::NUM_RANK;
-    uint64_t mask = (ONE64 << code);
+    uint64_t mask = (1ull << code);
     if (m_cardmask & mask) {
       clear();  // card duplication is an error, no hand parsed
       return;
@@ -227,7 +228,7 @@ CardSet CardSet::canonizeRanks() const {
 }
 
 CardSet& CardSet::insert(const Card& c) {
-  m_cardmask |= (ONE64 << c.code());
+  m_cardmask |= (1ull << c.code());
   return *this;
 }
 
@@ -235,7 +236,7 @@ std::vector<Card> CardSet::cards() const {
   std::vector<Card> out(size());
   size_t n = 0;
   for (size_t i = 0; i < STANDARD_DECK_SIZE; i++)
-    if (m_cardmask & (ONE64 << i))
+    if (m_cardmask & (1ull << i))
       out[n++] = Card(i);
   return out;
 }
@@ -244,8 +245,8 @@ std::vector<CardSet> CardSet::cardSets() const {
   std::vector<CardSet> out(size());
   size_t n = 0;
   for (size_t i = 0; i < STANDARD_DECK_SIZE; i++)
-    if (m_cardmask & (ONE64 << i))
-      out[n++] = CardSet(ONE64 << i);
+    if (m_cardmask & (1ull << i))
+      out[n++] = CardSet(1ull << i);
   return out;
 }
 
@@ -255,7 +256,7 @@ CardSet& CardSet::remove(const CardSet& c) {
 }
 
 CardSet& CardSet::remove(const Card& c) {
-  m_cardmask ^= ONE64 << c.code();
+  m_cardmask ^= 1ull << c.code();
   return *this;
 }
 
@@ -264,7 +265,7 @@ bool CardSet::contains(const CardSet& c) const {
 }
 
 bool CardSet::contains(const Card& c) const {
-  uint64_t bit = ONE64 << c.code();
+  uint64_t bit = 1ull << c.code();
   return ((bit & m_cardmask) != 0);
 }
 
@@ -905,7 +906,7 @@ PokerEvaluation CardSet::evaluateLowA5() const {
     for (int i = 0; i < 4; i++) {
       // do the ace first
       if (rset[i] & (0x01 << Rank::AceVal())) {
-        chash |= (ONE64 << (Rank::AceVal() + Rank::NUM_RANK * i));
+        chash |= (1ull << (Rank::AceVal() + Rank::NUM_RANK * i));
         nc++;
       }
       if (nc == FULL_HAND_SIZE) {
@@ -915,7 +916,7 @@ PokerEvaluation CardSet::evaluateLowA5() const {
       // now the rest of the ranks
       for (int r = 0; r < 11; r++) {
         if (rset[i] & (0x01 << r)) {
-          chash |= (ONE64 << (r + Rank::NUM_RANK * i));
+          chash |= (1ull << (r + Rank::NUM_RANK * i));
           nc++;
         }
         if (nc == FULL_HAND_SIZE) {

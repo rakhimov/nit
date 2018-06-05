@@ -117,7 +117,7 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
     // there are more candidates, we just run through them updating
     // as we find better ones.
     eval[0] = ((eval_candidates[0]).*(m_evalA))();
-    for (uint i = 1; i < eval_candidates.size(); i++) {
+    for (size_t i = 1; i < eval_candidates.size(); i++) {
       PokerEvaluation e = ((eval_candidates[i]).*(m_evalA))();
       if (e > eval[0])
         eval[0] = e;
@@ -150,12 +150,11 @@ class UniversalHandEvaluator : public PokerHandEvaluator {
     }
 
     std::vector<Card> clist = cards.cards();
-    nit::combinations cc(static_cast<uint>(clist.size()),
-                         static_cast<uint>(subsetsize));
+    nit::combinations cc(clist.size(), subsetsize);
     do {
       CardSet cand;
       for (size_t i = 0; i < subsetsize; i++) {
-        cand.insert(clist[cc[static_cast<uint>(i)]]);
+        cand.insert(clist[cc[i]]);
       }
       candidates.push_back(cand);
     } while (cc.nextcomb());

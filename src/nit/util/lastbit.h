@@ -4,8 +4,6 @@
 #include <cassert>
 #include <cstdint>
 
-#include <nit/util/utypes.h>
-
 #ifdef _MSC_VER
 #include <intrin.h>
 #include <windows.h>
